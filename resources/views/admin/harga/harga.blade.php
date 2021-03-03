@@ -1,9 +1,15 @@
 @extends('layouts.app')
+@push('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
+@push('css')
 
+
+@endpush
 @section('title')
-<h4 class="page-title">Bahan</h4>
+<h4 class="page-title">Harga Bahan Di {{$pasar->nama}}</h4>
 <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Bahan</li>
+    <li class="breadcrumb-item active">Harga Bahan Pokok Pada Pasar</li>
 </ol>
 @endsection
 
@@ -15,7 +21,7 @@
                 <div class="col-md-10">
 
                 <div class="btn-group">
-                    <a href="/data/bahan/add" class="btn btn-primary waves-light waves-effect"><i class="mdi mdi-newspaper"></i> Tambah Bahan</a>
+                    <a href="/input/harga" class="btn btn-secondary waves-light waves-effect">    <i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
                 </div>
                 </div>
                 <div class="col-md-2">
@@ -31,34 +37,33 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Bahan</th>
-                        <th>Satuan</th>
-                        <th>Kelompok</th>
-                        <th>Aksi</th>
+                        <th class="text-center">{{$month->format('d M Y')}}</th>
+                        
                     </tr>
                     </thead>
                     @php
                         $no =1;
                     @endphp
                     <tbody>
-                        @foreach ($data as $item)
+                        
+                        @foreach ($data as $b)
                             <tr style="padding:5px 12px;">
                                 <td style="padding:5px 12px;">{{$no++}}</td>
-                                <td style="padding:5px 12px;">{{$item->nama}}</td>
-                                <td style="padding:5px 12px;">{{$item->satuan->nama}}</td>
-                                <td style="padding:5px 12px;">{{$item->kelompok->nama}}</td>
-                                <td style="padding:5px 12px;">
-                                    <a href="/data/bahan/edit/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-edit"></i></a>
-                                    <a href="/data/bahan/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Yakin menghapus data ini?');"><i class="fas fa-times"></i></a>
-                                </td>
+                                <td style="padding:5px 12px;">{{$b->nama}}</td>
+                                <td style="padding:5px 12px;">Rp. <a href="#" class="inline-username" data-type="text" data-pk="{{$b->id}}" data-pasar="{{$pasar->id}}" data-title="Enter username">{{$b->harga}}</a></td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="text-center">
-            {{$data->links()}}
+
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('js')
+
+@endpush

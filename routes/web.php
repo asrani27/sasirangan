@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontEndController@beranda');
 Route::get('/info-harga', 'FrontEndController@info_harga');
+Route::get('/info-harga/search', 'FrontEndController@info_harga_search');
 Route::get('/info-stok', 'FrontEndController@info_stok');
+Route::get('/info-stok/search', 'FrontEndController@info_stok_search');
 Route::get('/grafik', 'FrontEndController@grafik');
 Route::get('/login', 'FrontEndController@login')->name('login');
 Route::post('/login', 'LoginController@login');
@@ -60,6 +62,15 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/data/bahan/edit/{id}', 'BahanController@edit');
     Route::post('/data/bahan/edit/{id}', 'BahanController@update');
     Route::get('/data/bahan/delete/{id}', 'BahanController@delete');
+
+    
+    Route::get('/input/harga', 'HargaController@index');
+    Route::post('/input/harga/update', 'HargaController@updateService');
+    Route::get('/input/harga/{id}', 'HargaController@pasar');
+    
+    Route::get('/input/stok', 'StokController@index');
+    Route::post('/input/stok/update', 'StokController@updateService');
+    Route::get('/input/stok/{id}', 'StokController@pasar');
 
 }); 
 

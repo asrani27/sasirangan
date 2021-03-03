@@ -18,4 +18,19 @@ class Bahan extends Model
     {
         return $this->belongsTo(Satuan::class, 'satuan_id');
     }
+    
+    public function pasar()
+    {
+        return $this->belongsToMany(Pasar::class, 'bahan_pasar', 'bahan_id', 'pasar_id');
+    }
+
+    public function harga()
+    {
+        return $this->hasMany(Harga::class, 'bahan_id');
+    }
+    
+    public function stok()
+    {
+        return $this->hasMany(Stok::class, 'bahan_id');
+    }
 }

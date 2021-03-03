@@ -4,10 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Satuan extends Model
+class Stok extends Model
 {
-    protected $table = 'satuan';
+    protected $table = 'stok';
     protected $guarded = ['id'];
-    
-    public $timestamps = false;
 }

@@ -14,10 +14,74 @@ $(function () {
 
     //inline
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.update').editable({
 
-    $('#inline-username').editable({
-        type: 'text',
+           url: '/data/bahan/update',
+           type: 'text',
+           pk: 1,
+           name: 'username',
+           title: 'Enter name',
+           mode: 'inline',
+           dataType: 'JSON',
+           
+           params: function(params) {
+               
+            params.name = $(this).editable().data('name');
+            console.log(params);
+            return params;
+        }
+
+    });
+    
+    $('.inline-username').editable({
+        type: 'post',
+        url: '/input/harga/update',
         pk: 1,
+        name: 'username',
+        title: 'Enter username',
+        mode: 'inline',
+        inputclass: 'form-control-sm',
+        validate: function(value) {
+            if ($.isNumeric(value) == '') {
+                return 'Only numbers are allowed';
+            }
+        },
+        params: function(params) {
+               
+            params.pasar = $(this).editable().data('pasar');
+            
+            return params;
+        }
+    });
+    $('.inline-username2').editable({
+        type: 'post',
+        url: '/input/stok/update',
+        pk: 1,
+        name: 'username',
+        title: 'Enter username',
+        mode: 'inline',
+        inputclass: 'form-control-sm',
+        validate: function(value) {
+            if ($.isNumeric(value) == '') {
+                return 'Only numbers are allowed';
+            }
+        },
+        params: function(params) {
+               
+            params.pasar = $(this).editable().data('pasar');
+            
+            return params;
+        }
+    });
+    
+    $('#inline-username2').editable({
+        type: 'text',
+        pk: 2,
         name: 'username',
         title: 'Enter username',
         mode: 'inline',

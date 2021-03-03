@@ -35,7 +35,7 @@ class KategoriController extends Controller
     
     public function edit($id)
     {
-        $data = Kategori::paginate(10);
+        $data = Kategori::orderBy('id','DESC')->paginate(10);
         $edit = Kategori::find($id);
         return view('admin.kategori.edit',compact('data','edit'));
     }

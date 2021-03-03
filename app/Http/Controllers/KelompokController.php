@@ -35,7 +35,7 @@ class KelompokController extends Controller
     
     public function edit($id)
     {
-        $data = Kelompok::paginate(10);
+        $data = Kelompok::orderBy('id','DESC')->paginate(10);
         $edit = Kelompok::find($id);
         return view('admin.kelompok.edit',compact('data','edit'));
     }
@@ -53,8 +53,13 @@ class KelompokController extends Controller
 
     public function delete($id)
     {
-        Kelompok::find($id)->delete();
-        toastr()->success('Nama Kelompok Berhasil Di Hapus');
-        return redirect('/data/kelompok');
+        try{
+            Kelompok::find($id)->delete();
+            toastr()->success('Nama Kelompok Berhasil Di Hapus');
+            return redirect('/data/kelompok');
+        }catch(\Exception $e){
+            toastr()->error('Tidak bisa di hapus karena ada bahan yg mengacu pada data ini');
+            return back();
+        }
     }
 }

@@ -8,6 +8,7 @@
         <title>Sasirangan</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
+        @stack('meta')
         @include('layouts.css')
         @toastr_css
     </head>
