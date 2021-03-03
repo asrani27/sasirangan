@@ -6,4 +6,64 @@ Route::get('/', 'FrontEndController@beranda');
 Route::get('/info-harga', 'FrontEndController@info_harga');
 Route::get('/info-stok', 'FrontEndController@info_stok');
 Route::get('/grafik', 'FrontEndController@grafik');
-Route::get('/login', 'FrontEndController@login');
+Route::get('/login', 'FrontEndController@login')->name('login');
+Route::post('/login', 'LoginController@login');
+
+Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
+    Route::get('/home', 'HomeController@index');
+
+    Route::get('/informasi/kategori', 'KategoriController@index');
+    Route::get('/informasi/kategori/add', 'KategoriController@create');
+    Route::post('/informasi/kategori/add', 'KategoriController@store');
+    Route::get('/informasi/kategori/edit/{id}', 'KategoriController@edit');
+    Route::post('/informasi/kategori/edit/{id}', 'KategoriController@update');
+    Route::get('/informasi/kategori/delete/{id}', 'KategoriController@delete');
+    
+    Route::get('/informasi/berita', 'BeritaController@index');
+    Route::get('/informasi/berita/add', 'BeritaController@create');
+    Route::post('/informasi/berita/add', 'BeritaController@store');
+    Route::get('/informasi/berita/edit/{id}', 'BeritaController@edit');
+    Route::post('/informasi/berita/edit/{id}', 'BeritaController@update');
+    Route::get('/informasi/berita/delete/{id}', 'BeritaController@delete');
+    
+    Route::get('/data/pengguna', 'UserController@index');
+    Route::get('/data/pengguna/add', 'UserController@create');
+    Route::post('/data/pengguna/add', 'UserController@store');
+    Route::get('/data/pengguna/edit/{id}', 'UserController@edit');
+    Route::post('/data/pengguna/edit/{id}', 'UserController@update');
+    Route::get('/data/pengguna/delete/{id}', 'UserController@delete');
+    
+    Route::get('/data/satuan', 'SatuanController@index');
+    Route::get('/data/satuan/add', 'SatuanController@create');
+    Route::post('/data/satuan/add', 'SatuanController@store');
+    Route::get('/data/satuan/edit/{id}', 'SatuanController@edit');
+    Route::post('/data/satuan/edit/{id}', 'SatuanController@update');
+    Route::get('/data/satuan/delete/{id}', 'SatuanController@delete');
+    
+    Route::get('/data/kelompok', 'KelompokController@index');
+    Route::get('/data/kelompok/add', 'KelompokController@create');
+    Route::post('/data/kelompok/add', 'KelompokController@store');
+    Route::get('/data/kelompok/edit/{id}', 'KelompokController@edit');
+    Route::post('/data/kelompok/edit/{id}', 'KelompokController@update');
+    Route::get('/data/kelompok/delete/{id}', 'KelompokController@delete');
+    
+    Route::get('/data/pasar', 'PasarController@index');
+    Route::get('/data/pasar/add', 'PasarController@create');
+    Route::post('/data/pasar/add', 'PasarController@store');
+    Route::get('/data/pasar/edit/{id}', 'PasarController@edit');
+    Route::post('/data/pasar/edit/{id}', 'PasarController@update');
+    Route::get('/data/pasar/delete/{id}', 'PasarController@delete');
+    
+    Route::get('/data/bahan', 'BahanController@index');
+    Route::get('/data/bahan/add', 'BahanController@create');
+    Route::post('/data/bahan/add', 'BahanController@store');
+    Route::get('/data/bahan/edit/{id}', 'BahanController@edit');
+    Route::post('/data/bahan/edit/{id}', 'BahanController@update');
+    Route::get('/data/bahan/delete/{id}', 'BahanController@delete');
+
+}); 
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+});

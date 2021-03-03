@@ -9,6 +9,7 @@
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         @include('layouts.css')
+        @toastr_css
     </head>
 
     <body>
@@ -37,10 +38,8 @@
                                 </div>
                             </div>
                             
-                            <h4 class="page-title">Beranda</h4>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item active">SELAMAT DATA DI SARANA INFORMASI HARGA PANGAN KOTA BANJARMASIN</li>
-                            </ol>
+                            
+                            @yield('title')
 
                         </div>
                     </div>
@@ -58,5 +57,7 @@
 
         <!-- End Footer -->
         @include('layouts.js')        
+        @toastr_js
+        @toastr_render
     </body>
 </html>
