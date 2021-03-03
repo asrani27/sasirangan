@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Bahan;
 use Illuminate\Http\Request;
 
 class BahanController extends Controller
 {
     public function index()
     {
-        return view('admin.bahan.index');
+        $data = Bahan::orderBy('id')->paginate(10);
+        return view('admin.bahan.index',compact('data'));
     }
     
     public function create()

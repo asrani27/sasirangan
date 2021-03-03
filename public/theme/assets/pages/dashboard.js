@@ -67,9 +67,9 @@
 
         //creating donut chart
         var $donutData = [
-            {label: "Download Sales", value: 12},
-            {label: "In-Store Sales", value: 30},
-            {label: "Mail-Order Sales", value: 20}
+            {label: "Pasar Hanyar", value: 12},
+            {label: "Pasar Lama", value: 30},
+            {label: "Pasar Tungging", value: 20}
         ];
         this.createDonutChart('morris-donut-example', $donutData, ['#f0f1f4', '#1b82ec', '#f5b225']);
 
