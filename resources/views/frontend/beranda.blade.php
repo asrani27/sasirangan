@@ -10,149 +10,69 @@
 @section('content')
     
 <div class="row">
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-primary mini-stat position-relative">
+    <div class="col-lg-12">
+        <div class="card m-b-20">
             <div class="card-body">
-                <div class="mini-stat-desc">
-                    <h6 class="text-uppercase verti-label text-white-50">Orders</h6>
-                    <div class="text-white">
-                        <h6 class="text-uppercase mt-0 text-white-50">Orders</h6>
-                        <h3 class="mb-3 mt-0">1,587</h3>
-                        <div class="">
-                            <span class="badge badge-light text-info"> +11% </span> <span class="ml-2">From previous period</span>
+                <div id="carouselExampleCaption" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img src="/theme/assets/images/small/img-7.jpg" alt="..." width="100%" height="450px">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mini-stat-icon">
-                        <i class="mdi mdi-cube-outline display-2"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-primary mini-stat position-relative">
-            <div class="card-body">
-                <div class="mini-stat-desc">
-                    <h6 class="text-uppercase verti-label text-white-50">Revenue</h6>
-                    <div class="text-white">
-                        <h6 class="text-uppercase mt-0 text-white-50">Revenue</h6>
-                        <h3 class="mb-3 mt-0">$46,785</h3>
-                        <div class="">
-                            <span class="badge badge-light text-danger"> -29% </span> <span class="ml-2">From previous period</span>
+                        <div class="carousel-item">
+                            <img src="/theme/assets/images/small/img-5.jpg" alt="..." width="100%" height="450px">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mini-stat-icon">
-                        <i class="mdi mdi-buffer display-2"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-primary mini-stat position-relative">
-            <div class="card-body">
-                <div class="mini-stat-desc">
-                    <h6 class="text-uppercase verti-label text-white-50">Av. Price</h6>
-                    <div class="text-white">
-                        <h6 class="text-uppercase mt-0 text-white-50">Average Price</h6>
-                        <h3 class="mb-3 mt-0">15.9</h3>
-                        <div class="">
-                            <span class="badge badge-light text-primary"> 0% </span> <span class="ml-2">From previous period</span>
-                        </div>
-                    </div>
-                    <div class="mini-stat-icon">
-                        <i class="mdi mdi-tag-text-outline display-2"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-        <div class="card bg-primary mini-stat position-relative">
-            <div class="card-body">
-                <div class="mini-stat-desc">
-                    <h6 class="text-uppercase verti-label text-white-50">Pr. Sold</h6>
-                    <div class="text-white">
-                        <h6 class="text-uppercase mt-0 text-white-50">Product Sold</h6>
-                        <h3 class="mb-3 mt-0">1890</h3>
-                        <div class="">
-                            <span class="badge badge-light text-info"> +89% </span> <span class="ml-2">From previous period</span>
-                        </div>
-                    </div>
-                    <div class="mini-stat-icon">
-                        <i class="mdi mdi-briefcase-check display-2"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end row -->
-
-<div class="row">
-    <div class="col-xl-9">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xl-8 border-right">
-                        <h4 class="mt-0 header-title mb-4">Sales Report</h4>
-                        <div id="morris-area-example" class="dashboard-charts morris-charts"></div>
-                    </div>
-                    <div class="col-xl-4">
-                        <h4 class="header-title mb-4">Yearly Sales Report</h4>
-                        <div class="p-3">
-                            <ul class="nav nav-pills nav-justified mb-3" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">2015</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">2016</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third" aria-selected="false">2017</a>
-                                </li>
-                            </ul>
-                            
-                            <div class="tab-content">
-                                <div class="tab-pane show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
-                                    <div class="p-3">
-                                        <h2>$17562</h2>
-                                        <p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
-                                        <a href="#" class="text-primary">Read more...</a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
-                                    <div class="p-3">
-                                        <h2>$18614</h2>
-                                        <p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
-                                        <a href="#" class="text-primary">Read more...</a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
-                                    <div class="p-3">
-                                        <h2>$19752</h2>
-                                        <p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
-                                        <a href="#" class="text-primary">Read more...</a>
-                                    </div>
-                                </div>
+                        <div class="carousel-item">
+                            <img src="/theme/assets/images/small/img-4.jpg" alt="..." width="100%" height="450px">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
                         </div>
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaption" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaption" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <!-- end row -->
             </div>
         </div>
     </div>
-    <!-- end col -->
     
-    <div class="col-xl-3">
-        <div class="card">
+</div>
+<!-- end row -->
+
+<h4 class="m-t-20 m-b-30">Berita Terbaru</h4>
+<div class="row">
+    @foreach ($berita as $b)
+        
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="card m-b-30">
+            @if ($b->file == null)
+            <img class="card-img-top img-fluid" src="/theme/assets/images/small/img-1.jpg" alt="Card image cap">                
+            @else
+            <img class="card-img-top img-fluid" src="/storage/{{$b->file}}" alt="Card image cap" width="800px" height="533px">                
+            @endif
             <div class="card-body">
-                <h4 class="mt-0 header-title mb-4">Sales Analytics</h4>
-                <div id="morris-donut-example" class="dashboard-charts morris-charts"></div>
+                <h4 class="card-title font-16 mt-0">{{$b->judul}}</h4>
+                <p class="card-text">{{$b->isi}}</p>
+                <a href="#" class="btn btn-primary waves-effect waves-light">Selengkapnya...</a>
             </div>
         </div>
     </div>
+    @endforeach
+    
 </div>
 <!-- end row -->
 @endsection

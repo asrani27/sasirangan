@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Berita;
 use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
 {
     public function beranda()
     {
-        return view('frontend.beranda');
+        $berita = Berita::orderBy('id','DESC')->limit(4)->get();
+        return view('frontend.beranda',compact('berita'));
     }
 
     public function info_harga()
