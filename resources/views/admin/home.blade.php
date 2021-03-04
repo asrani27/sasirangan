@@ -38,22 +38,19 @@
                                 <div class="tab-pane show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                                     <div class="p-3">
                                         <h2>17.562</h2>
-                                        <p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
-                                        <a href="#" class="text-primary">Read more...</a>
+                                        
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
                                     <div class="p-3">
                                         <h2>18.614</h2>
-                                        <p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
-                                        <a href="#" class="text-primary">Read more...</a>
+                                        
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
                                     <div class="p-3">
                                         <h2>19.752</h2>
-                                        <p class="text-muted">Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
-                                        <a href="#" class="text-primary">Read more...</a>
+                                        
                                     </div>
                                 </div>
                             </div>

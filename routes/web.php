@@ -11,6 +11,7 @@ Route::get('/grafik', 'FrontEndController@grafik');
 Route::get('/grafik/harga', 'FrontEndController@grafik_harga');
 Route::get('/grafik/stok', 'FrontEndController@grafik_stok');
 Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');
+Route::get('/grafik/stok/search', 'FrontEndController@grafik_stok_search');
 Route::get('/login', 'FrontEndController@login')->name('login');
 Route::post('/login', 'LoginController@login');
 

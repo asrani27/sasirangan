@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<h4 class="page-title">Grafik Harga Bahan Pokok</h4>
+<h4 class="page-title">Grafik Stok Bahan Pokok</h4>
 <ol class="breadcrumb">
     <li class="breadcrumb-item active"></li>
 </ol>
@@ -15,9 +15,9 @@
     <div class="col-lg-12">
         <div class="card m-b-20">
             <div class="btn-toolbar p-3" role="toolbar">
-                <form method="get" action="/grafik/harga/search">
+                <form method="get" action="/grafik/stok/search">
                     <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="btn-group">
                             <select class="form-control" name="pasar_id" required>
                                 <option value="">--Pilih Pasar--</option>
@@ -27,26 +27,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="btn-group">
-                            <select class="form-control" name="bulan" required>
-                                <option value="">--Bulan--</option>
-                                <option value="01">Januari</option>
-                                <option value="02">Februari</option>
-                                <option value="03">Maret</option>
-                                <option value="04">April</option>
-                                <option value="05">Mei</option>
-                                <option value="06">Juni</option>
-                                <option value="07">Juli</option>
-                                <option value="08">Agustus</option>
-                                <option value="09">September</option>
-                                <option value="10">Oktober</option>
-                                <option value="11">November</option>
-                                <option value="12">Desember</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
+                    
+                    <div class="col-md-7">
                         <div class="btn-group">
                             <select class="form-control" name="tahun" required>
                                 <option value="">--Tahun--</option>
@@ -73,9 +55,9 @@
     <div class="col-lg-12">
         <div class="card m-b-20">
             <div class="btn-toolbar p-3" role="toolbar">
-                <form method="get" action="/grafik/harga/search">
+                <form method="get" action="/grafik/stok/search">
                     <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="btn-group">
                             <select class="form-control" name="pasar_id" required>
                                 <option value="">--Pilih Pasar--</option>
@@ -85,26 +67,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="btn-group">
-                            <select class="form-control" name="bulan" required>
-                                <option value="">--Bulan--</option>
-                                <option value="01" {{$bulan == '01' ? 'selected':''}}>Januari</option>
-                                <option value="02" {{$bulan == '02' ? 'selected':''}}>Februari</option>
-                                <option value="03" {{$bulan == '03' ? 'selected':''}}>Maret</option>
-                                <option value="04" {{$bulan == '04' ? 'selected':''}}>April</option>
-                                <option value="05" {{$bulan == '05' ? 'selected':''}}>Mei</option>
-                                <option value="06" {{$bulan == '06' ? 'selected':''}}>Juni</option>
-                                <option value="07" {{$bulan == '07' ? 'selected':''}}>Juli</option>
-                                <option value="08" {{$bulan == '08' ? 'selected':''}}>Agustus</option>
-                                <option value="09" {{$bulan == '09' ? 'selected':''}}>September</option>
-                                <option value="10" {{$bulan == '10' ? 'selected':''}}>Oktober</option>
-                                <option value="11" {{$bulan == '11' ? 'selected':''}}>November</option>
-                                <option value="12" {{$bulan == '12' ? 'selected':''}}>Desember</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
+                    
+                    <div class="col-md-7">
                         <div class="btn-group">
                             <select class="form-control" name="tahun" required>
                                 <option value="">--Tahun--</option>
@@ -137,12 +101,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
-    var dates = {!!json_encode($data['tanggal'])!!}
+    
     
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: dates,
+          labels: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
           datasets: [
             {
               label: 'Beras Banjar',

@@ -135,10 +135,9 @@ class FrontEndController extends Controller
         }
 
         $data['tanggal'] = $dates;
-        return $data;
-        dd($pasar_id, $bulan, $tahun, $data['tanggal']);
+        
         $pasar = Pasar::get();
-        return view('frontend.grafik_harga',compact('data','pasar','allDate'));
+        return view('frontend.grafik_harga',compact('data','pasar', 'pasar_id', 'bulan', 'tahun'));
     }
 
     public function grafik_stok()
@@ -146,6 +145,30 @@ class FrontEndController extends Controller
         $data = [];
         $pasar = Pasar::get();
         return view('frontend.grafik_stok',compact('data','pasar'));
+    }
+    
+    public function grafik_stok_search()
+    {
+        $pasar_id = request()->get('pasar_id');
+        //$bulan = request()->get('bulan');
+        $tahun = request()->get('tahun');
+        // $start = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->startOfMonth();
+        // $end = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
+        
+        // $date = CarbonPeriod::create($start, $end);
+        // $dates = [];
+        // foreach($date as $d){
+        //     $dates[] = $d->format('Y-m-d');
+        // }
+
+        // $data['tanggal'] = $dates;
+        
+        $pasar = Pasar::get();
+        $data = [
+            'name' => 'asrani',
+        ];
+        //dd($data);
+        return view('frontend.grafik_stok',compact('data','pasar', 'pasar_id', 'tahun'));
     }
 
     public function login()

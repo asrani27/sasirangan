@@ -57,6 +57,22 @@ class BeritaController extends Controller
     public function update(Request $req, $id)
     {
         $attr = $req->all();
+        $validator = Validator::make($attr, [
+            'file' => 'mimes:png,jpg,jpeg|max:2048'
+        ]);
+
+        if ($validator->fails()) {            
+            toastr()->error('File Harus Gambar Dan Max 2MB');
+            return back();
+        }
+        
+        if($req->hasFile('file'))
+        {
+            $filename = $req->file->getClientOriginalName();
+            $filename = date('d-m-Y-').rand(1,9999).$filename;
+            $req->file->storeAs('/public',$filename);
+            $attr['file'] = $filename;
+        }
         Berita::find($id)->update($attr);
         toastr()->success('Berita Berhasil Di Update');
         return redirect('/informasi/berita');
