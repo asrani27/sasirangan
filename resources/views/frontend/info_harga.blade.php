@@ -105,7 +105,16 @@
                             <td>@currency($item->harga_kemarin)</td>
                             <td>@currency($item->harga_terkini)</td>
                             <td>@currency($item->perubahan)</td>
-                            <td>-</td>
+                            <td>
+                                
+                                @if ($item->harga_kemarin == 0 AND $item->harga_terkini != 0) 
+                                    100 %
+                                @elseif($item->harga_terkini == 0 AND $item->harga_kemarin == 0)
+                                0 %
+                                @else
+                                {{($item->harga_terkini / $item->harga_kemarin) * 100 - 100}} %
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

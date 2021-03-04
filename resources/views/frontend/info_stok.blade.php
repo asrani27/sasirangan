@@ -105,7 +105,15 @@
                             <td class="text-center">{{$item->bulan_lalu}}</td>
                             <td class="text-center">{{$item->stok_terkini}}</td>
                             <td class="text-center">{{$item->perubahan}}</td>
-                            <td>-</td>
+                            <td>
+                                @if ($item->bulan_lalu == 0 AND $item->stok_terkini != 0) 
+                                    100 %
+                                @elseif($item->stok_terkini == 0 AND $item->bulan_lalu == 0)
+                                0 %
+                                @else
+                                {{($item->stok_terkini / $item->bulan_lalu) * 100 - 100}} %
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

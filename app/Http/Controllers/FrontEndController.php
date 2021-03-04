@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Pasar;
 use App\Berita;
+use App\Slider;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
@@ -12,7 +14,8 @@ class FrontEndController extends Controller
     public function beranda()
     {
         $berita = Berita::orderBy('id','DESC')->limit(4)->get();
-        return view('frontend.beranda',compact('berita'));
+        $slider = Slider::orderBy('id', 'DESC')->get();
+        return view('frontend.beranda',compact('berita','slider'));
     }
 
     public function info_harga()
@@ -95,16 +98,54 @@ class FrontEndController extends Controller
             }elseif($item->stok_terkini < $item->bulan_lalu){
                 $item->perubahan = $item->stok_terkini - $item->bulan_lalu;
             }
+            
+            // if($item->bulan_lalu == 0){
+            //     $item->persen = 100;
+            // }elseif($item->stok_terkini - $item->bulan_lalu == 0){
+            //     $item->persen = 0;
+            // }else{
+            //     ($item->terkini / $item->bulan_lalu) * 100 -100;
+            // }
             return $item;
         });
-        
+//        dd($data);
         $pasar = Pasar::get();
         return view('frontend.info_stok',compact('data','pasar','pasar_id', 'tanggal'));
     }
 
-    public function grafik()
+    public function grafik_harga()
     {
-        return view('frontend.grafik');
+        $data = [];
+        $pasar = Pasar::get();
+        return view('frontend.grafik_harga',compact('data','pasar'));
+    }
+    
+    public function grafik_harga_search()
+    {
+        $pasar_id = request()->get('pasar_id');
+        $bulan = request()->get('bulan');
+        $tahun = request()->get('tahun');
+        $start = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->startOfMonth();
+        $end = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
+        
+        $date = CarbonPeriod::create($start, $end);
+        $dates = [];
+        foreach($date as $d){
+            $dates[] = $d->format('Y-m-d');
+        }
+
+        $data['tanggal'] = $dates;
+        return $data;
+        dd($pasar_id, $bulan, $tahun, $data['tanggal']);
+        $pasar = Pasar::get();
+        return view('frontend.grafik_harga',compact('data','pasar','allDate'));
+    }
+
+    public function grafik_stok()
+    {
+        $data = [];
+        $pasar = Pasar::get();
+        return view('frontend.grafik_stok',compact('data','pasar'));
     }
 
     public function login()

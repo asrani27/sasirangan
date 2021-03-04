@@ -8,6 +8,9 @@ Route::get('/info-harga/search', 'FrontEndController@info_harga_search');
 Route::get('/info-stok', 'FrontEndController@info_stok');
 Route::get('/info-stok/search', 'FrontEndController@info_stok_search');
 Route::get('/grafik', 'FrontEndController@grafik');
+Route::get('/grafik/harga', 'FrontEndController@grafik_harga');
+Route::get('/grafik/stok', 'FrontEndController@grafik_stok');
+Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');
 Route::get('/login', 'FrontEndController@login')->name('login');
 Route::post('/login', 'LoginController@login');
 
@@ -72,6 +75,12 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/input/stok/update', 'StokController@updateService');
     Route::get('/input/stok/{id}', 'StokController@pasar');
 
+    Route::get('/informasi/slider', 'SliderController@index');
+    Route::get('/informasi/slider/add', 'SliderController@create');
+    Route::post('/informasi/slider/add', 'SliderController@store');
+    Route::get('/informasi/slider/edit/{id}', 'SliderController@edit');
+    Route::post('/informasi/slider/edit/{id}', 'SliderController@update');
+    Route::get('/informasi/slider/delete/{id}', 'SliderController@delete');
 }); 
 
 Route::get('/logout', function () {

@@ -5,25 +5,25 @@
         <!-- Logo container-->
         <div class="logo">
             
-            <a href="index.html" class="logo">
-                <img src="/theme/assets/images/logo-sm-light.png" alt="" class="logo-small">
-                <img src="/theme/assets/images/logo-light.png" alt="" class="logo-large">
+            <a href="#" class="logo" style="color:white;font-size=24px;">SASIRANGAN
+                {{-- <img src="/theme/assets/images/logo-sm-light.png" alt="" class="logo-small">
+                <img src="/theme/assets/images/logo-light.png" alt="" class="logo-large"> --}}
             </a>
 
         </div>
         <div class="menu-extras topbar-custom">
 
             <ul class="navbar-right d-flex list-inline float-right mb-0">
-                <li class="dropdown notification-list d-none d-sm-block">
+                {{-- <li class="dropdown notification-list d-none d-sm-block">
                     <form role="search" class="app-search">
                         <div class="form-group mb-0"> 
                             <input type="text" class="form-control" placeholder="Search..">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </form> 
-                </li>
+                </li> --}}
                 @if (Auth::check())
-                <li class="dropdown notification-list">
+                {{-- <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="mdi mdi-bell noti-icon"></i>
                         <span class="badge badge-pill badge-info noti-icon-badge">3</span>
@@ -65,7 +65,7 @@
                             View all <i class="fi-arrow-right"></i>
                         </a>
                     </div>        
-                </li>
+                </li> --}}
                 <li class="dropdown notification-list">
                     <div class="dropdown notification-list">
                         <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
