@@ -30,8 +30,14 @@
                     <a href="#"><i class="fas fa-database"></i>Input Data</a>
                     <ul class="submenu">
                         <li><a href="/input/harga">Harga</a></li>
-                        <li><a href="/input/harga/rata-rata">Harga Rata-Rata</a></li>
                         <li><a href="/input/stok">Stok</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#"><i class="fas fa-file"></i>Report</a>
+                    <ul class="submenu">
+                        <li><a href="/report/harga/rata-rata/harian">Harga Rata-Rata Harian</a></li>
+                        <li><a href="/report/harga/rata-rata/bulanan">Harga Rata-Rata Bulanan</a></li>
                     </ul>
                 </li>
             </ul>
