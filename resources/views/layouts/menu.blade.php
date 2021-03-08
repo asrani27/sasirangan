@@ -30,6 +30,7 @@
                     <a href="#"><i class="fas fa-database"></i>Input Data</a>
                     <ul class="submenu">
                         <li><a href="/input/harga">Harga</a></li>
+                        <li><a href="/input/harga/rata-rata">Harga Rata-Rata</a></li>
                         <li><a href="/input/stok">Stok</a></li>
                     </ul>
                 </li>
@@ -48,16 +49,15 @@
                     <a href="/"><i class="mdi mdi-home"></i>Beranda</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="/info-harga"><i class="fas fa-money-bill-wave"></i>Info Harga</a>
+                    <a href="/artikel"><i class="fas fa-archive"></i>Artikel </a>
                 </li>
                 <li class="has-submenu">
-                    <a href="/info-stok"><i class="fas fa-archive"></i>Info Stok</a>
+                    <a href="/info-harga"><i class="fas fa-money-bill-wave"></i>Info Harga</a>
                 </li>
                 <li class="has-submenu">
                     <a href="#"><i class="mdi mdi-finance"></i>Grafik</a>
                     <ul class="submenu">
                         <li><a href="/grafik/harga">Grafik Harga</a></li>
-                        <li><a href="/grafik/stok">Grafik Stok</a></li>
                     </ul>
                 
                 </li>

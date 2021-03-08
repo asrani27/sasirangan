@@ -54,6 +54,7 @@ $(function () {
         params: function(params) {
                
             params.pasar = $(this).editable().data('pasar');
+            params.tanggal = $(this).editable().data('tanggal');
             
             return params;
         }
@@ -71,10 +72,10 @@ $(function () {
                 return 'Only numbers are allowed';
             }
         },
-        params: function(params) {
-               
-            params.pasar = $(this).editable().data('pasar');
-            
+        params: function(params) {               
+            params.minggu = $(this).editable().data('minggu');
+            params.bulan = $(this).editable().data('bulan');
+            params.tahun = $(this).editable().data('tahun');
             return params;
         }
     });

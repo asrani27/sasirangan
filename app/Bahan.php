@@ -33,4 +33,9 @@ class Bahan extends Model
     {
         return $this->hasMany(Stok::class, 'bahan_id');
     }
+    
+    public function stok_kota()
+    {
+        return $this->hasMany(Stok_kota::class, 'bahan_id');
+    }
 }

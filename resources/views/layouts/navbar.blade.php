@@ -5,9 +5,10 @@
         <!-- Logo container-->
         <div class="logo">
             
-            <a href="#" class="logo" style="color:white;font-size=24px;">SASIRANGAN
-                {{-- <img src="/theme/assets/images/logo-sm-light.png" alt="" class="logo-small">
-                <img src="/theme/assets/images/logo-light.png" alt="" class="logo-large"> --}}
+            <a href="#" class="logo" style="color:white;font-size=24px;">
+                <img src="/theme/bjm.png" alt="" class="logo-small">
+                <img src="/theme/bjm.png" alt="" class="logo-large">
+                SASIRANGAN
             </a>
 
         </div>

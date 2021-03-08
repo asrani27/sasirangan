@@ -8,6 +8,7 @@ Route::get('/info-harga/search', 'FrontEndController@info_harga_search');
 Route::get('/info-stok', 'FrontEndController@info_stok');
 Route::get('/info-stok/search', 'FrontEndController@info_stok_search');
 Route::get('/grafik', 'FrontEndController@grafik');
+Route::get('/artikel', 'FrontEndController@artikel');
 Route::get('/grafik/harga', 'FrontEndController@grafik_harga');
 Route::get('/grafik/stok', 'FrontEndController@grafik_stok');
 Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');
@@ -70,6 +71,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     
     Route::get('/input/harga', 'HargaController@index');
     Route::post('/input/harga/update', 'HargaController@updateService');
+    Route::get('/input/harga/fulldate/{id}', 'HargaController@fullDate');
     Route::get('/input/harga/{id}', 'HargaController@pasar');
     
     Route::get('/input/stok', 'StokController@index');

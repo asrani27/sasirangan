@@ -175,4 +175,10 @@ class FrontEndController extends Controller
     {
         return view('frontend.login');
     }
+
+    public function artikel()
+    {
+        $berita = Berita::orderBy('id','DESC')->paginate(5);
+        return view('frontend.artikel',compact('berita'));
+    }
 }

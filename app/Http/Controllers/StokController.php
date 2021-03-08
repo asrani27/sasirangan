@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Stok;
+use App\Bahan;
 use App\Pasar;
+use App\Stok_kota;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -12,8 +14,15 @@ class StokController extends Controller
 {
     public function index()
     {
-        $pasar = Pasar::get();
-        return view('admin.stok.index',compact('pasar'));
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+        $data = Bahan::orderBy('id','DESC')->get()->map(function($item)use($month, $year){
+            $item->stok_kota = $item->stok_kota->where('bulan', $month)->where('tahun', $year);
+            return $item;
+        });
+        
+        
+        return view('admin.stok.stok',compact('data','month','year'));
     }
     
     public function pasar($id)
@@ -42,21 +51,36 @@ class StokController extends Controller
 
     public function updateService(Request $req)
     {
-        $pasar_id = $req->pasar;
-        $bahan_id = $req->pk;
-        $tgl = Carbon::today()->format('Y-m-d');
-        $find = Stok::where('tanggal', $tgl)->where('bahan_id', $bahan_id)->where('pasar_id', $pasar_id)->first();
-        if($find != null){
-            $find->stok = $req->value;
-            $find->save();
+        $check = Stok_kota::where('bahan_id',$req->pk)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->first();
+        if($check == null){
+            $s = new Stok_kota;
+            $s->bulan = $req->bulan;
+            $s->tahun = $req->tahun;
+            $s->bahan_id = $req->pk;
+            if($req->minggu == '1'){
+                $s->minggu_1 = $req->value;
+            }elseif($req->minggu == '2'){
+                $s->minggu_2 = $req->value;
+            }elseif($req->minggu == '3'){
+                $s->minggu_3 = $req->value;
+            }elseif($req->minggu == '4'){
+                $s->minggu_4 = $req->value;
+            }
+            $s->save();
+            return 'di simpan';
         }else{
-            $f = new Stok;
-            $f->tanggal = $tgl;
-            $f->stok = $req->value;
-            $f->pasar_id = $pasar_id;
-            $f->bahan_id = $bahan_id;
-            $f->save();
+            $s = $check;
+            if($req->minggu == '1'){
+                $s->minggu_1 = $req->value;
+            }elseif($req->minggu == '2'){
+                $s->minggu_2 = $req->value;
+            }elseif($req->minggu == '3'){
+                $s->minggu_3 = $req->value;
+            }elseif($req->minggu == '4'){
+                $s->minggu_4 = $req->value;
+            }
+            $s->save();
+            return 'di update';
         }
-        return 'ok';
     }
 }
