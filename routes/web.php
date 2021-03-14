@@ -85,6 +85,13 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/informasi/slider/edit/{id}', 'SliderController@edit');
     Route::post('/informasi/slider/edit/{id}', 'SliderController@update');
     Route::get('/informasi/slider/delete/{id}', 'SliderController@delete');
+
+    
+    Route::get('/report/harga/rata-rata/harian', 'ReportController@harian');
+    Route::get('/report/harga/rata-rata/harian/search', 'ReportController@searchHarian');
+    Route::get('/report/harga/rata-rata/bulanan', 'ReportController@bulanan');
+    Route::get('/report/harga/rata-rata/bulanan/search', 'ReportController@searchBulanan');
+    Route::get('/report/stok/bulanan', 'ReportController@stok');
 }); 
 
 Route::get('/logout', function () {

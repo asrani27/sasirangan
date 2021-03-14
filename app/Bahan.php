@@ -26,6 +26,7 @@ class Bahan extends Model
 
     public function harga()
     {
+        
         return $this->hasMany(Harga::class, 'bahan_id');
     }
     
