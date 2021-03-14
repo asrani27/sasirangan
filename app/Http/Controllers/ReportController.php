@@ -81,7 +81,28 @@ class ReportController extends Controller
     {
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
-        return view('admin.report.bulanan',compact('month', 'year'));
+        $week = Carbon::now()->weekOfMonth;
+        $bulanLalu = Carbon::createFromFormat('m-Y', $month.'-'.$year)->subMonth();
+        $bl = $bulanLalu->month;
+        $tl = $bulanLalu->year;
+        
+        $data = Bahan::get()->map(function($item)use($month, $year, $week, $bl, $tl){
+            $stok_terkini = $item->stok_kota->where('bulan', $month)->where('tahun', $year)->first();
+            $stok_bulanlalu = $item->stok_kota->where('bulan', $bl)->where('tahun', $tl)->first();
+            $item->stok_terkini = $stok_terkini == null ? 0 : $stok_terkini->toArray()['minggu_'.$week];
+            $item->stok_bulanlalu = $stok_bulanlalu == null ? 0 : $stok_bulanlalu->toArray()['minggu_4'];
+            
+            if($item->stok_bulanlalu == $item->stok_terkini){
+                $item->perubahan = 0;
+            }elseif($item->stok_bulanlalu > $item->stok_terkini){
+                $item->perubahan = $item->stok_terkini - $item->stok_bulanlalu;
+            }elseif($item->bulanLalu < $item->stok_terkini){
+                $item->perubahan = $item->stok_terkini - $item->stok_bulanlalu;
+            }
+            return $item;
+        });
+        //dd($data);
+        return view('admin.report.stokbulanan',compact('month', 'year','data'));
     }
 
     public function searchBulanan()
@@ -93,8 +114,6 @@ class ReportController extends Controller
             $bahan_id = $item->id;
             $item->pasar = $item->pasar->map(function($p) use ($bahan_id, $month, $year){
                 $subMonth = Carbon::createFromFormat('m/Y', $month.'/'.$year)->subMonth()->endOfMonth()->format('Y-m-d');
-
-
                 $thisMonth = Carbon::today()->format('m-Y');
                 if($thisMonth == $month.'-'.$year){
                     $today = Carbon::today()->format('Y-m-d');
@@ -122,4 +141,34 @@ class ReportController extends Controller
         
         return view('admin.report.bulanan',compact('month', 'year','data'));
     }
+    public function grafik_stok()
+    {
+        $data = [];
+        $pasar = Pasar::get();
+        return view('admin.report.grafik_stok',compact('data','pasar'));
+    }
+    public function search_grafik_stok()
+    {
+        $pasar_id = request()->get('pasar_id');
+        //$bulan = request()->get('bulan');
+        $tahun = request()->get('tahun');
+        // $start = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->startOfMonth();
+        // $end = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
+        
+        // $date = CarbonPeriod::create($start, $end);
+        // $dates = [];
+        // foreach($date as $d){
+        //     $dates[] = $d->format('Y-m-d');
+        // }
+
+        // $data['tanggal'] = $dates;
+        
+        $pasar = Pasar::get();
+        $data = [
+            'name' => 'asrani',
+        ];
+        //dd($data);
+        return view('admin.report.grafik_stok',compact('data','pasar', 'pasar_id', 'tahun'));
+    }
+
 }

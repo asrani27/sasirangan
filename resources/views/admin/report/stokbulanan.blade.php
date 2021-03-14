@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @push('meta')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @endpush
 @push('css')
 
 
 @endpush
 @section('title')
-<h4 class="page-title">Harga Rata-Rata Bulanan Bahan Pokok</h4>
+<h4 class="page-title">Stok Bulanan Bahan Pokok</h4>
 <ol class="breadcrumb">
     <li class="breadcrumb-item active"></li>
 </ol>
@@ -20,7 +20,7 @@
             
             <div class="btn-toolbar p-3" role="toolbar">
                 <div class="col-md-12">
-                <form method="get" action="/report/harga/rata-rata/bulanan/search">
+                <form method="get" action="/report/stok/bulanan/search">
                     @csrf
                     <div class="btn-group">
                         <select class="form-control" name="bulan" required>
@@ -60,10 +60,10 @@
                         <th>No</th>
                         <th>Nama Bahan</th>
                         <th>Satuan</th>    
-                        <th>Hrg. Bulan Lalu (Rp)<br>
+                        <th>Stok Bulan Lalu<br>
                             {{\Carbon\Carbon::createFromFormat('m-Y', $month.'-'.$year)->subMonth()->format('M Y')}}
                         </th>
-                        <th>Hrg. Bulan ini (Rp)<br>
+                        <th>Stok Terkini<br>
                             {{\Carbon\Carbon::createFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}
                         </th>
                         <th>Perubahan (Rp)</th>
@@ -79,17 +79,17 @@
                                 <td style="padding:5px 12px;">{{$no++}}</td>
                                 <td style="padding:5px 12px;">{{$b->nama}}</td>
                                 <td style="padding:5px 12px;">{{$b->satuan->nama}}</td>
-                                <td style="padding:5px 12px;">Rp. {{$b->bulanLalu}}</td>
-                                <td style="padding:5px 12px;">Rp. {{$b->bulanIni}}</td>
-                                <td style="padding:5px 12px;">Rp. {{$b->perubahan}}</td>
+                                <td style="padding:5px 12px;">{{$b->stok_bulanlalu}}</td>
+                                <td style="padding:5px 12px;">{{$b->stok_terkini}}</td>
+                                <td style="padding:5px 12px;">{{$b->perubahan}}</td>
                                 <td style="padding:5px 12px;">
                                 
-                                    @if ($b->bulanLalu == 0 AND $b->bulanIni != 0) 
+                                    @if ($b->stok_bulanlalu == 0 AND $b->stok_terkini != 0) 
                                         100 %
-                                    @elseif($b->bulanIni == 0 AND $b->bulanLalu == 0)
+                                    @elseif($b->stok_terkini == 0 AND $b->stok_bulanlalu == 0)
                                     0 %
                                     @else
-                                    {{($b->bulanIni / $b->bulanLalu) * 100 - 100}} %
+                                    {{($b->stok_terkini / $b->stok_bulanlalu) * 100 - 100}} %
                                     @endif
                                 </td>
                             </tr>

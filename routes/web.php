@@ -92,6 +92,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/report/harga/rata-rata/bulanan', 'ReportController@bulanan');
     Route::get('/report/harga/rata-rata/bulanan/search', 'ReportController@searchBulanan');
     Route::get('/report/stok/bulanan', 'ReportController@stok');
+    Route::get('/report/stok/grafik', 'ReportController@grafik_stok');
+    Route::get('/report/stok/grafik/search', 'ReportController@search_grafik_stok');
 }); 
 
 Route::get('/logout', function () {

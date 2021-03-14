@@ -39,6 +39,7 @@
                         <li><a href="/report/harga/rata-rata/harian">Harga Rata-Rata Harian</a></li>
                         <li><a href="/report/harga/rata-rata/bulanan">Harga Rata-Rata Bulanan</a></li>
                         <li><a href="/report/stok/bulanan">Stok Bulanan</a></li>
+                        <li><a href="/report/stok/grafik">Grafik Stok</a></li>
                     </ul>
                 </li>
             </ul>
