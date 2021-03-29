@@ -63,13 +63,20 @@
                         <th rowspan=2>No</th>
                         <th rowspan=2>Nama Bahan</th>
                         <th rowspan=2>Satuan</th>     
-                        <th colspan=4>Bulan {{\Carbon\Carbon::today()->format('M Y')}}</th>                        
+                        @if ($week == 5)
+                        <th colspan=5>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>  
+                        @else
+                        <th colspan=4>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>  
+                        @endif                         
                     </tr>
                     <tr class="text-center">
                         <th>Minggu Ke 1</th>
                         <th>Minggu Ke 2</th>
                         <th>Minggu Ke 3</th>
                         <th>Minggu Ke 4</th>
+                        @if ($week == 5)
+                        <th>Minggu Ke 5</th>
+                        @endif
                     </tr>
                     </thead>
                     @php
@@ -87,12 +94,20 @@
                                     <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="2" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
                                     <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="3" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
                                     <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="4" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
+                                    
+                                    @if ($week == 5)
+                                    <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="5" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
+                                    @endif
                                 @else    
                                     @foreach ($b->stok_kota as $sk)    
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="1" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_1 == null ? '0': $sk->minggu_1}}</a></td>
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="2" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_2 == null ? '0': $sk->minggu_2}}</a></td>
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="3" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_3 == null ? '0': $sk->minggu_3}}</a></td>
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="4" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_4 == null ? '0': $sk->minggu_4}}</a></td>
+                                        
+                                        @if ($week == 5)
+                                        <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="5" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_5 == null ? '0': $sk->minggu_5}}</a></td>
+                                        @endif
                                     @endforeach
                                 @endif
                                 {{-- <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-pasar="{{$pasar->id}}" data-title="Enter username">{{$b->stok}}</a></td> --}}
@@ -110,13 +125,21 @@
                         <th rowspan=2>No</th>
                         <th rowspan=2>Nama Bahan</th>
                         <th rowspan=2>Satuan</th>     
-                        <th colspan=4>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>                        
+                        
+                        @if ($week == 5)
+                        <th colspan=5>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>  
+                        @else
+                        <th colspan=4>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>  
+                        @endif                      
                     </tr>
                     <tr class="text-center">
                         <th>Minggu Ke 1</th>
                         <th>Minggu Ke 2</th>
                         <th>Minggu Ke 3</th>
                         <th>Minggu Ke 4</th>
+                        @if ($week == 5)
+                        <th>Minggu Ke 5</th>
+                        @endif
                     </tr>
                     </thead>
                     @php
@@ -134,12 +157,18 @@
                                     <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="2" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
                                     <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="3" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
                                     <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="4" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
+                                    @if ($week == 5)
+                                    <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="5" data-bulan="{{$month}}" data-tahun="{{$year}}">0</a></td>
+                                    @endif
                                 @else    
                                     @foreach ($b->stok_kota as $sk)    
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="1" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_1 == null ? '0': $sk->minggu_1}}</a></td>
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="2" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_2 == null ? '0': $sk->minggu_2}}</a></td>
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="3" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_3 == null ? '0': $sk->minggu_3}}</a></td>
                                         <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="4" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_4 == null ? '0': $sk->minggu_4}}</a></td>
+                                        @if ($week == 5)
+                                        <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-minggu="5" data-bulan="{{$month}}" data-tahun="{{$year}}">{{$sk->minggu_5 == null ? '0': $sk->minggu_5}}</a></td>
+                                        @endif
                                     @endforeach
                                 @endif
                                 {{-- <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text" data-pk="{{$b->id}}" data-pasar="{{$pasar->id}}" data-title="Enter username">{{$b->stok}}</a></td> --}}

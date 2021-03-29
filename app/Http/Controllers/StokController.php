@@ -15,14 +15,17 @@ class StokController extends Controller
     public function index()
     {
         $month = Carbon::now()->month;
-        $year = Carbon::now()->year;
+        $year = Carbon::now()->year;        
+        $week = Carbon::now()->weekOfMonth;
+
+
         $data = Bahan::orderBy('id','DESC')->get()->map(function($item)use($month, $year){
             $item->stok_kota = $item->stok_kota->where('bulan', $month)->where('tahun', $year);
             return $item;
         });
         
         $fullmonth = false;
-        return view('admin.stok.stok',compact('data','month','year','fullmonth'));
+        return view('admin.stok.stok',compact('data','month','year','fullmonth','week'));
     }
     
     public function pasar($id)
@@ -65,6 +68,8 @@ class StokController extends Controller
                 $s->minggu_3 = $req->value;
             }elseif($req->minggu == '4'){
                 $s->minggu_4 = $req->value;
+            }elseif($req->minggu == '5'){
+                $s->minggu_5 = $req->value;
             }
             $s->save();
             return 'di simpan';
@@ -78,6 +83,8 @@ class StokController extends Controller
                 $s->minggu_3 = $req->value;
             }elseif($req->minggu == '4'){
                 $s->minggu_4 = $req->value;
+            }elseif($req->minggu == '5'){
+                $s->minggu_5 = $req->value;
             }
             $s->save();
             return 'di update';
@@ -85,20 +92,23 @@ class StokController extends Controller
     }
     public function month()
     {
-        $month = request()->get('bulan');
-        $year = request()->get('tahun');
+        $month     = request()->get('bulan');
+        $year      = request()->get('tahun');
+        $daysCount = Carbon::parse($month.'/01/'.$year)->daysInMonth;
+        $week      =  Carbon::parse($month.'/'.$daysCount.'/'.$year)->weekOfMonth;
         
         $data = Bahan::orderBy('id','DESC')->get()->map(function($item)use($month, $year){
             $item->stok_kota = $item->stok_kota->where('bulan', $month)->where('tahun', $year);
             return $item;
         });
+        
         //dd($data);
         // $data = Stok_kota::where('bulan', (int)$month)->where('tahun', $year)->get()->map(function($item)use($month, $year){
         //     $item->stok_kota = $item->stok_kota->where('bulan', $month)->where('tahun', $year);
         //     return $item;
         // });
         $fullmonth = true;
-        return view('admin.stok.stok',compact('data','month','year','fullmonth'));
+        return view('admin.stok.stok',compact('data','month','year','fullmonth','week'));
         
     }
 }
