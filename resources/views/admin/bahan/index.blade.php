@@ -48,7 +48,7 @@
                                 <td style="padding:5px 12px;">{{$item->kelompok->nama}}</td>
                                 <td style="padding:5px 12px;">
                                     <a href="/data/bahan/edit/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-edit"></i></a>
-                                    <a href="/data/bahan/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Yakin menghapus data ini?');"><i class="fas fa-times"></i></a>
+                                    <a href="/data/bahan/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Riwayat Stok Dan Harga Akan Terhapus Juga, Yakin?');"><i class="fas fa-times"></i></a>
                                 </td>
                             </tr>
                         @endforeach

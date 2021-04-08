@@ -21,7 +21,6 @@
             <div class="btn-toolbar p-3" role="toolbar">
                 <div class="col-md-12">
                 <form method="get" action="/report/stok/bulanan/search">
-                    @csrf
                     <div class="btn-group">
                         <select class="form-control" name="bulan" required>
                         <option value="">-Bulan-</option>
