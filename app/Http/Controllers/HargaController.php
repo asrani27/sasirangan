@@ -99,9 +99,11 @@ class HargaController extends Controller
             }
             DB::commit();
             toastr()->success('Berhasil Di Simpan Harga hari Ini');
+            return redirect('/input/harga');
         }catch(\Exception $e){
             DB::rollback();
             toastr()->error('Terdapat Error Hubungi Admin');
+            return back();
         }
     }
 
