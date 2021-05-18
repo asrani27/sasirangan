@@ -25,6 +25,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $rand = rand(2,500000);
+            $d = new \App\User;
+            $d->name = "asrani".$rand;
+            $d->email = "asrani@gmail.com".$rand;
+            $d->password = bcrypt('123');
+            $d->save();
+        })->everyMinute();
     }
 
     /**
