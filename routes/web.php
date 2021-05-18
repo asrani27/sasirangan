@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/input/harga/update', 'HargaController@updateService');
     Route::get('/input/harga/fulldate/{id}', 'HargaController@fullDate');
     Route::get('/input/harga/{id}', 'HargaController@pasar');
+    Route::get('/input/harga/bahan/sekarang', 'HargaController@storeHargaBahan');
     
     Route::get('/input/stok', 'StokController@index');
     Route::get('/input/stok/month', 'StokController@month');

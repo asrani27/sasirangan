@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use App\Harga;
+use App\Pasar;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,13 +30,34 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
-            $rand = rand(2,500000);
-            $d = new \App\User;
-            $d->name = "asrani".$rand;
-            $d->username = "asrani".$rand;
-            $d->email = "asrani@gmail.com".$rand;
-            $d->password = bcrypt('123');
-            $d->save();
+            DB::beginTransaction();
+            try{
+                $tglKemarin = Carbon::today()->subDay(1)->format('Y-m-d');
+                $tglSekarang = Carbon::today()->format('Y-m-d');
+                $pasar_id = Pasar::get()->pluck('id');
+                foreach($pasar_id as $pasar){
+                    $dataCronJob = Harga::where('pasar_id', $pasar)->where('tanggal', $tglKemarin)->get();
+                    foreach($dataCronJob as $item)
+                    {
+                        $check = Harga::where('tanggal', $tglSekarang)->where('pasar_id', $item->pasar_id)->where('bahan_id', $item->bahan_id)->first();
+                        
+                        if($check == null){
+                            //simpan data
+                            $n = new Harga;
+                            $n->tanggal  = $tglSekarang;
+                            $n->harga    = $item->harga;
+                            $n->pasar_id = $item->pasar_id;
+                            $n->bahan_id = $item->bahan_id;
+                            $n->save();
+            
+                        }else{
+                        }
+                    }
+                }
+                DB::commit();
+            }catch(\Exception $e){
+                DB::rollback();
+            }
         });
     }
 

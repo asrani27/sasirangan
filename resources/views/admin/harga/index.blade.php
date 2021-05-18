@@ -31,4 +31,9 @@
         </div>
     @endforeach
 </div>
+<div class="row">
+    <div class="col-md-12">
+    <a href="/input/harga/bahan/sekarang" class="btn btn-primary btn-block"><strong>STORE HARGA BAHAN HARI INI</strong></a>
+    </div>
+</div>
 @endsection

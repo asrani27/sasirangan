@@ -8,6 +8,7 @@ use App\Pasar;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HargaController extends Controller
 {
@@ -65,7 +66,41 @@ class HargaController extends Controller
         
         $fulldate = false;
         
+        
+        
         return view('admin.harga.harga',compact('data', 'pasar','date', 'month', 'fulldate'));
+    }
+
+    public function storeHargaBahan()
+    {
+        DB::beginTransaction();
+        try{
+            $tglKemarin = Carbon::today()->subDay(1)->format('Y-m-d');
+            $tglSekarang = Carbon::today()->format('Y-m-d');
+            $pasar_id = Pasar::get()->pluck('id');
+            foreach($pasar_id as $pasar){
+                $dataCronJob = Harga::where('pasar_id', $pasar)->where('tanggal', $tglKemarin)->get();
+                foreach($dataCronJob as $item)
+                {
+                    $check = Harga::where('tanggal', $tglSekarang)->where('pasar_id', $item->pasar_id)->where('bahan_id', $item->bahan_id)->first();
+                    
+                    if($check == null){
+                        //simpan data
+                        $n = new Harga;
+                        $n->tanggal  = $tglSekarang;
+                        $n->harga    = $item->harga;
+                        $n->pasar_id = $item->pasar_id;
+                        $n->bahan_id = $item->bahan_id;
+                        $n->save();
+        
+                    }else{
+                    }
+                }
+            }
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
     }
 
     public function updateService(Request $req)
