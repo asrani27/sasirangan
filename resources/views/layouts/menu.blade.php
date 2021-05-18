@@ -23,7 +23,11 @@
                         <li><a href="/data/bahan">Bahan Pokok</a></li>
                         <li><a href="/data/satuan">Satuan</a></li>
                         <li><a href="/data/pasar">Pasar</a></li>
-                        <li><a href="/data/pengguna">Pengguna</a></li>
+                        @if (Auth::user()->name = 'superadmin')
+                        <li><a href="/data/gantipassword">Ganti Password</a></li>                            
+                        @else
+                        <li><a href="/data/pengguna">Pengguna</a></li>                            
+                        @endif
                     </ul>
                 </li>
                 <li class="has-submenu">

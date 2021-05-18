@@ -68,6 +68,9 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/data/bahan/edit/{id}', 'BahanController@update');
     Route::get('/data/bahan/delete/{id}', 'BahanController@delete');
 
+    Route::get('/data/gantipassword', 'GantiPassController@index');
+    Route::post('/data/gantipassword', 'GantiPassController@change');
+
     
     Route::get('/input/harga', 'HargaController@index');
     Route::post('/input/harga/update', 'HargaController@updateService');
