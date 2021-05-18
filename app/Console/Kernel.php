@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
             $d->email = "asrani@gmail.com".$rand;
             $d->password = bcrypt('123');
             $d->save();
-        })->everyMinute();
+        });
     }
 
     /**
