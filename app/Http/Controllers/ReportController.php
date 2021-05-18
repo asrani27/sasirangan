@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bahan;
+use App\Harga;
 use App\Pasar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,14 +33,25 @@ class ReportController extends Controller
     {
         $tanggal = request()->get('tanggal');
         
+        // $data = Bahan::get()->map(function($item)use($tanggal){
+        //     $bahan_id = $item->id;
+        //     $item->pasar = $item->pasar->map(function($p) use ($bahan_id, $tanggal){
+        //         $p->hargaToday = $p->hargaToday->where('bahan_id', $bahan_id)->where('tanggal', $tanggal)->first();
+        //         return $p;
+        //     });
+        //     return $item;
+        // });
+
         $data = Bahan::get()->map(function($item)use($tanggal){
             $bahan_id = $item->id;
             $item->pasar = $item->pasar->map(function($p) use ($bahan_id, $tanggal){
-                $p->hargaToday = $p->hargaToday->where('bahan_id', $bahan_id)->where('tanggal', $tanggal)->first();
+                $harga = Harga::where('pasar_id', $p->id)->where('tanggal', $tanggal)->where('bahan_id', $bahan_id)->first();
+                $p->hargaToday = $harga == null ? 0 : $harga->harga;
                 return $p;
             });
             return $item;
         });
+        
         
         $pasar = Pasar::get();
         toastr()->success('Data Tanggal '.Carbon::parse($tanggal)->format('d M Y').' ditampilkan');
