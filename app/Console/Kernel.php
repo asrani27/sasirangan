@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
             $rand = rand(2,500000);
             $d = new \App\User;
             $d->name = "asrani".$rand;
+            $d->username = "asrani".$rand;
             $d->email = "asrani@gmail.com".$rand;
             $d->password = bcrypt('123');
             $d->save();
