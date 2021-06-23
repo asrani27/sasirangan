@@ -17,27 +17,21 @@
             <div class="btn-toolbar p-3" role="toolbar">
                 <form method="get" action="/report/stok/grafik/search">
                     <div class="row">
-                    <div class="col-md-5">
-                        <div class="btn-group">
-                            <select class="form-control" name="pasar_id" required>
-                                <option value="">--Pilih Pasar--</option>
-                                @foreach ($pasar as $item)                                    
-                                <option value="{{$item->id}}">{{$item->nama}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="col-md-6">
+                            <input type="text"  class="form-control" value="STOK BANJARMASIN KOTA" readonly>
                     </div>
                     
-                    <div class="col-md-7">
-                        <div class="btn-group">
+                    <div class="col-md-5">
                             <select class="form-control" name="tahun" required>
                                 <option value="">--Tahun--</option>
                                 <option value="2021">2021</option>
                                 <option value="2022">2022</option>
                                 <option value="2023">2023</option>
-                            </select>&nbsp;
-                            <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
-                        </div>
+                            </select>
+                        
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
                     </div>
                     </div>
                 </form>
@@ -55,30 +49,24 @@
     <div class="col-lg-12">
         <div class="card m-b-20">
             <div class="btn-toolbar p-3" role="toolbar">
-                <form method="get" action="/grafik/stok/search">
+                <form method="get" action="/report/stok/grafik/search">
                     <div class="row">
-                    <div class="col-md-5">
-                        <div class="btn-group">
-                            <select class="form-control" name="pasar_id" required>
-                                <option value="">--Pilih Pasar--</option>
-                                @foreach ($pasar as $item)                                    
-                                <option value="{{$item->id}}" {{$pasar_id == $item->id ? 'selected':''}}>{{$item->nama}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6">
+                                <input type="text"  class="form-control" value="STOK BANJARMASIN KOTA" readonly>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-7">
-                        <div class="btn-group">
-                            <select class="form-control" name="tahun" required>
-                                <option value="">--Tahun--</option>
-                                <option value="2021" {{$tahun == '2021' ? 'selected':''}}>2021</option>
-                                <option value="2022" {{$tahun == '2022' ? 'selected':''}}>2022</option>
-                                <option value="2023" {{$tahun == '2023' ? 'selected':''}}>2023</option>
-                            </select>&nbsp;
+                        
+                        <div class="col-md-5">
+                                <select class="form-control" name="tahun" required>
+                                    <option value="">--Tahun--</option>
+                                    <option value="2021" {{old('tahun') == '2021' ? 'selected':''}}>2021</option>
+                                    <option value="2022" {{old('tahun') == '2022' ? 'selected':''}}>2022</option>
+                                    <option value="2023" {{old('tahun') == '2023' ? 'selected':''}}>2023</option>
+                                </select>
+                            
+                        </div>
+                        <div class="col-md-1">
                             <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
                         </div>
-                    </div>
                     </div>
                 </form>
             </div>
@@ -100,14 +88,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script>
+    
+    console.log(1);
     var ctx = document.getElementById('myChart').getContext('2d');
     
-    
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
-          datasets: [
+    sembako = [
             {
               label: 'Beras Banjar',
               fill: false,
@@ -116,9 +101,14 @@
                   'rgba(26, 193, 185, 1)'
               ],
               borderWidth: 2
-            },
-          
-          ]
+            }];
+    data = {!!json_encode($data)!!}
+    console.log(sembako, data);
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
+          datasets: data,
       },
       options: {
           scales: {

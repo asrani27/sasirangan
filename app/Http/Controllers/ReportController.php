@@ -166,7 +166,7 @@ class ReportController extends Controller
         $tahun = request()->get('tahun');
         // $start = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->startOfMonth();
         // $end = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
-        
+        //dd($pasar_id, $tahun);
         // $date = CarbonPeriod::create($start, $end);
         // $dates = [];
         // foreach($date as $d){
@@ -175,12 +175,41 @@ class ReportController extends Controller
 
         // $data['tanggal'] = $dates;
         
-        $pasar = Pasar::get();
-        $data = [
-            'name' => 'asrani',
-        ];
-        //dd($data);
-        return view('admin.report.grafik_stok',compact('data','pasar', 'pasar_id', 'tahun'));
+        $bahan = Bahan::get();
+        
+
+        //dd($rgbColor);
+        // $data = [
+        //     [
+        //       'label' => 'Beras jawa',
+        //       'fill'  => false,
+        //       'data'  => [3,432,543,65,75,65,456,345,23],
+        //       'borderColor' => [
+        //           'rgba(255, 255, 146, 1)'
+        //       ],
+        //       'borderWidth' => 2
+        //     ]
+        // ];
+
+
+        foreach($bahan as $item){
+            $rgbColor = array();
+            foreach(array('r', 'g', 'b') as $color){
+                $rgbColor[$color] = mt_rand(0, 255);
+            }
+            
+            $data[] = [
+                'label' => $item->nama,
+                'fill' => false,
+                'data' => $item->stok->pluck('minggu_1')->toArray(),
+                'borderColor' => [
+                    'rgba('.$rgbColor['r'].', '.$rgbColor['g'].', '.$rgbColor['b'].')'
+                ],
+            ];
+        }
+        request()->flash();
+        //dd($data, $d);
+        return view('admin.report.grafik_stok',compact('data', 'pasar_id', 'tahun'));
     }
 
 }
