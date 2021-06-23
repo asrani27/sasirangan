@@ -77,6 +77,59 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-20">
+            <div class="btn-toolbar p-3" role="toolbar">
+                <strong>DATA STOK TAHUN {{old('tahun')}} <br/>
+                Data di bawah ini merupakan hasil rata-rata dalam 1 bulan</strong>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped table-bordered mb-0">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Bahan</th>
+                        <th>Jan</th>
+                        <th>Feb</th>
+                        <th>Mar</th>
+                        <th>Apr</th>
+                        <th>May</th>
+                        <th>Jun</th>
+                        <th>Jul</th>
+                        <th>Aug</th>
+                        <th>Sept</th>
+                        <th>Okt</th>
+                        <th>Nov</th>
+                        <th>Des</th>
+                    </tr>
+                    @php
+                        $no=1;
+                    @endphp
+                    @foreach ($data as $item)
+                        <tr>
+                            <td>{{$no++}}</td>
+                            <td>{{$item['label']}}</td>
+                            <td>{{$item['data'][0]}}</td>
+                            <td>{{$item['data'][1]}}</td>
+                            <td>{{$item['data'][2]}}</td>
+                            <td>{{$item['data'][3]}}</td>
+                            <td>{{$item['data'][4]}}</td>
+                            <td>{{$item['data'][5]}}</td>
+                            <td>{{$item['data'][6]}}</td>
+                            <td>{{$item['data'][7]}}</td>
+                            <td>{{$item['data'][8]}}</td>
+                            <td>{{$item['data'][9]}}</td>
+                            <td>{{$item['data'][10]}}</td>
+                            <td>{{$item['data'][11]}}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
 @endif
 @endsection
 

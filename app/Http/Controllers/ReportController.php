@@ -222,7 +222,7 @@ class ReportController extends Controller
         }
         
         request()->flash();
-        //dd($data, $d);
+        
         return view('admin.report.grafik_stok',compact('data', 'pasar_id', 'tahun'));
     }
 
