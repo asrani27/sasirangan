@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bahan;
+use App\Harga;
 use App\Pasar;
 use App\Berita;
 use App\Slider;
@@ -132,16 +133,39 @@ class FrontEndController extends Controller
         $end        = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
         
         $date = CarbonPeriod::create($start, $end);
-        $dates = [];
+        
         foreach($date as $d){
             $dates[] = $d->format('Y-m-d');
         }
 
         $data['tanggal'] = $dates;
+
+        $graph = Harga::where('pasar_id', $pasar_id)->where('bahan_id', $bahan_id)
+        ->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+
+        $rgbColor = array();
+            foreach(array('r', 'g', 'b') as $color){
+                $rgbColor[$color] = mt_rand(0, 255);
+            }
+        
+        foreach($dates as $item){
+            $dataAngka[] = $graph->where('tanggal', $item)->first() == null ? 0:$graph->where('tanggal', $item)->first()->harga;
+        }
+
+        $dataset[] = [
+            'label' => Bahan::find($bahan_id)->nama,
+            'fill' => false,
+            'data' => $dataAngka,
+            'borderColor' => [
+                'rgba('.$rgbColor['r'].', '.$rgbColor['g'].', '.$rgbColor['b'].')'
+            ],
+            'borderWidth'=> 2,
+        ];
+        
         $bahan = Bahan::get();
         
         $pasar = Pasar::get();
-        return view('frontend.grafik_harga',compact('data','pasar', 'pasar_id', 'bulan', 'tahun','bahan','bahan_id'));
+        return view('frontend.grafik_harga',compact('data','pasar', 'pasar_id', 'bulan', 'tahun','bahan','bahan_id','dataset'));
     }
 
     public function grafik_stok()

@@ -218,6 +218,7 @@ class ReportController extends Controller
                 'borderColor' => [
                     'rgba('.$rgbColor['r'].', '.$rgbColor['g'].', '.$rgbColor['b'].')'
                 ],
+                'borderWidth'=> 2,
             ];
         }
         

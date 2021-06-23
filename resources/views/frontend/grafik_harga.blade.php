@@ -151,9 +151,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
-    var data = {!!json_encode($data)!!}
-    var datasets = $data;
-    
+    var dates = {!!json_encode($data['tanggal'])!!}
+    var datasets = {!!json_encode($dataset)!!}
+    console.log(datasets);
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
