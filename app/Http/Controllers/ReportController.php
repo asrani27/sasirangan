@@ -179,34 +179,48 @@ class ReportController extends Controller
         
 
         //dd($rgbColor);
-        // $data = [
-        //     [
-        //       'label' => 'Beras jawa',
-        //       'fill'  => false,
-        //       'data'  => [3,432,543,65,75,65,456,345,23],
-        //       'borderColor' => [
-        //           'rgba(255, 255, 146, 1)'
-        //       ],
-        //       'borderWidth' => 2
-        //     ]
-        // ];
+        $datacontoh = [
+            [
+              'label' => 'Beras jawa',
+              'fill'  => false,
+              'data'  => [3,432,543,65,75,65,456,345,23],
+              'borderColor' => [
+                  'rgba(255, 255, 146, 1)'
+              ],
+              'borderWidth' => 2
+            ]
+        ];
 
 
+        
         foreach($bahan as $item){
             $rgbColor = array();
             foreach(array('r', 'g', 'b') as $color){
                 $rgbColor[$color] = mt_rand(0, 255);
             }
-            
+            $stok = $item->stok->where('tahun', $tahun);
+            $stokBulan[0]  = $stok->where('bulan',1)->first() == null ? 0:$stok->where('bulan',1)->first()->minggu_1;
+            $stokBulan[1]  = $stok->where('bulan',2)->first() == null ? 0:$stok->where('bulan',2)->first()->minggu_1;
+            $stokBulan[2]  = $stok->where('bulan',3)->first() == null ? 0:$stok->where('bulan',3)->first()->minggu_1;
+            $stokBulan[3]  = $stok->where('bulan',4)->first() == null ? 0:$stok->where('bulan',4)->first()->minggu_1;
+            $stokBulan[4]  = $stok->where('bulan',5)->first() == null ? 0:$stok->where('bulan',5)->first()->minggu_1;
+            $stokBulan[5]  = $stok->where('bulan',6)->first() == null ? 0:$stok->where('bulan',6)->first()->minggu_1;
+            $stokBulan[6]  = $stok->where('bulan',7)->first() == null ? 0:$stok->where('bulan',7)->first()->minggu_1;
+            $stokBulan[7]  = $stok->where('bulan',8)->first() == null ? 0:$stok->where('bulan',8)->first()->minggu_1;
+            $stokBulan[8] = $stok->where('bulan',9)->first() == null ? 0:$stok->where('bulan',9)->first()->minggu_1;
+            $stokBulan[9]  = $stok->where('bulan',10)->first() == null ? 0:$stok->where('bulan',10)->first()->minggu_1;
+            $stokBulan[10]  = $stok->where('bulan',11)->first() == null ? 0:$stok->where('bulan',11)->first()->minggu_1;
+            $stokBulan[11]  = $stok->where('bulan',12)->first() == null ? 0:$stok->where('bulan',12)->first()->minggu_1;
             $data[] = [
                 'label' => $item->nama,
                 'fill' => false,
-                'data' => $item->stok->pluck('minggu_1')->toArray(),
+                'data' => $stokBulan,
                 'borderColor' => [
                     'rgba('.$rgbColor['r'].', '.$rgbColor['g'].', '.$rgbColor['b'].')'
                 ],
             ];
         }
+        
         request()->flash();
         //dd($data, $d);
         return view('admin.report.grafik_stok',compact('data', 'pasar_id', 'tahun'));
