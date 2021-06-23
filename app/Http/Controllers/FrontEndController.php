@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bahan;
 use App\Pasar;
 use App\Berita;
 use App\Slider;
@@ -117,16 +118,18 @@ class FrontEndController extends Controller
     {
         $data = [];
         $pasar = Pasar::get();
-        return view('frontend.grafik_harga',compact('data','pasar'));
+        $bahan = Bahan::get();
+        return view('frontend.grafik_harga',compact('data','pasar','bahan'));
     }
     
     public function grafik_harga_search()
     {
-        $pasar_id = request()->get('pasar_id');
-        $bulan = request()->get('bulan');
-        $tahun = request()->get('tahun');
-        $start = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->startOfMonth();
-        $end = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
+        $pasar_id   = request()->get('pasar_id');
+        $bulan      = request()->get('bulan');
+        $tahun      = request()->get('tahun');
+        $bahan_id   = request()->get('bahan_id');
+        $start      = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->startOfMonth();
+        $end        = Carbon::createFromFormat('m-Y', $bulan.'-'.$tahun)->endOfMonth();
         
         $date = CarbonPeriod::create($start, $end);
         $dates = [];
@@ -135,9 +138,10 @@ class FrontEndController extends Controller
         }
 
         $data['tanggal'] = $dates;
+        $bahan = Bahan::get();
         
         $pasar = Pasar::get();
-        return view('frontend.grafik_harga',compact('data','pasar', 'pasar_id', 'bulan', 'tahun'));
+        return view('frontend.grafik_harga',compact('data','pasar', 'pasar_id', 'bulan', 'tahun','bahan','bahan_id'));
     }
 
     public function grafik_stok()

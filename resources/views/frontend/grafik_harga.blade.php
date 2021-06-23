@@ -54,8 +54,11 @@
                             </select>
                     </div>
                     <div class="col-md-3">
-                            <select class="form-control" name="bahan">
+                            <select class="form-control" name="bahan_id">
                                 <option value="">--Bahan--</option>
+                                @foreach ($bahan as $item)
+                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                @endforeach
                             </select>
                     </div>
                     <div class="col-md-1">
@@ -110,11 +113,11 @@
                             </select>
                     </div>
                     <div class="col-md-3">
-                            <select class="form-control" name="tahun" required>
+                            <select class="form-control" name="bahan_id" required>
                                 <option value="">--Bahan--</option>
-                                <option value="2021" {{$tahun == '2021' ? 'selected':''}}>2021</option>
-                                <option value="2022" {{$tahun == '2022' ? 'selected':''}}>2022</option>
-                                <option value="2023" {{$tahun == '2023' ? 'selected':''}}>2023</option>
+                                @foreach ($bahan as $item)
+                                <option value="{{$item->id}}" {{$bahan_id == $item->id ? 'selected':''}}>{{$item->nama}}</option>
+                                @endforeach
                             </select>
                     </div>
                     <div class="col-md-1">
@@ -148,19 +151,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
-    var dates = {!!json_encode($data['tanggal'])!!}
-    var datasets = [
-            {
-              label: 'Beras Banjar',
-              fill: false,
-              data: [3,432,543,65,75,65,456,345,23],
-              borderColor: [
-                  'rgba(26, 193, 185, 1)'
-              ],
-              borderWidth: 2
-            },
-          
-          ];
+    var data = {!!json_encode($data)!!}
+    var datasets = $data;
     
     var myChart = new Chart(ctx, {
       type: 'line',

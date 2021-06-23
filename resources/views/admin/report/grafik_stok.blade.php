@@ -145,18 +145,8 @@
     console.log(1);
     var ctx = document.getElementById('myChart').getContext('2d');
     
-    sembako = [
-            {
-              label: 'Beras Banjar',
-              fill: false,
-              data: [3,432,543,65,75,65,456,345,23],
-              borderColor: [
-                  'rgba(26, 193, 185, 1)'
-              ],
-              borderWidth: 2
-            }];
     data = {!!json_encode($data)!!}
-    console.log(sembako, data);
+    
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
