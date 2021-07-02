@@ -16,12 +16,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-xl-8 border-right">
-                        <h4 class="mt-0 header-title mb-4">Statistik Visitor</h4>
-                        <div id="morris-area-example" class="dashboard-charts morris-charts"></div>
+                        <h4 class="mt-0 header-title mb-4">Statistik Visitor. Dalam Pengembangan.</h4>
+                        {{-- <div id="morris-area-example" class="dashboard-charts morris-charts"></div> --}}
                     </div>
                     <div class="col-xl-4">
-                        <h4 class="header-title mb-4">Report Visitor Tahunan</h4>
-                        <div class="p-3">
+                        <h4 class="header-title mb-4">Dalam Pengembangan.</h4>
+                        {{-- <div class="p-3">
                             <ul class="nav nav-pills nav-justified mb-3" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">2015</a>
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!-- end row -->
@@ -66,8 +66,8 @@
     <div class="col-xl-3">
         <div class="card">
             <div class="card-body">
-                <h4 class="mt-0 header-title mb-4">Analisis Pasar</h4>
-                <div id="morris-donut-example" class="dashboard-charts morris-charts"></div>
+                <h4 class="mt-0 header-title mb-4">Grafik Chart</h4>
+                {{-- <div id="morris-donut-example" class="dashboard-charts morris-charts"></div> --}}
             </div>
         </div>
     </div>
