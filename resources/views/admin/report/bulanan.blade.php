@@ -87,7 +87,7 @@
                                     @if ($b->bulanLalu == 0 AND $b->bulanIni != 0) 
                                         100 %
                                     @elseif($b->bulanIni == 0 AND $b->bulanLalu == 0)
-                                     0 %
+                                     \0 %
                                     @else
                                     {{round(($b->bulanIni / $b->bulanLalu) * 100 - 100, 2)}} %
                                     @endif
