@@ -25,7 +25,7 @@
                     <div class="btn-group">
                         <input type="date" class="form-control" name="tanggal" value="{{$tanggal}}">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>&nbsp;
-                        <a href="/report/harga/rata-rata/harian/tanggal/{{$tanggal}}" class="btn btn-danger">Export <i class="fas fa-file-pdf"></i></a>
+                        {{-- <a href="/report/harga/rata-rata/harian/tanggal/{{$tanggal}}" class="btn btn-danger">Export <i class="fas fa-file-pdf"></i></a> --}}
                     </div>
                 </form>
                 </div>
@@ -43,7 +43,7 @@
                         <th>{{$p->nama}} (Rp)</th>
                             
                         @endforeach 
-                        <th>Rata-Rata</th>   
+                        <th>Rata-Rata (Rp)</th>   
                     </tr>
                     </thead>
                     @php
@@ -57,9 +57,9 @@
                                 <td style="padding:5px 12px;">{{$b->satuan->nama}}</td>
                                 @foreach ($b->pasar as $ht)
                             
-                                <td style="padding:5px 12px;">Rp. {{$ht->hargaToday == 0 ? 0 : $ht->hargaToday}}</td>
+                                <td style="padding:5px 12px;">{{$ht->hargaToday == 0 ? 0 : number_format($ht->hargaToday)}}</td>
                                 @endforeach
-                                <td style="padding:5px 12px;">Rp. {{ceil($b->pasar->sum('hargaToday') / count($pasar))}}</td>
+                                <td style="padding:5px 12px;">{{number_format(ceil($b->pasar->sum('hargaToday') / count($pasar)))}}</td>
                             </tr>
                         @endforeach
                     </tbody>
