@@ -56,7 +56,6 @@
                                 <td style="padding:5px 12px;">{{$b->nama}}</td>
                                 <td style="padding:5px 12px;">{{$b->satuan->nama}}</td>
                                 @foreach ($b->pasar as $ht)
-                            
                                 <td style="padding:5px 12px;">{{$ht->hargaToday == 0 ? 0 : number_format($ht->hargaToday)}}</td>
                                 @endforeach
                                 <td style="padding:5px 12px;">{{number_format(ceil($b->pasar->sum('hargaToday') / count($pasar)))}}</td>

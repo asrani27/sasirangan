@@ -79,9 +79,9 @@
                                 <td style="padding:5px 12px;">{{$no++}}</td>
                                 <td style="padding:5px 12px;">{{$b->nama}}</td>
                                 <td style="padding:5px 12px;">{{$b->satuan->nama}}</td>
-                                <td style="padding:5px 12px;">Rp. {{$b->bulanLalu}}</td>
-                                <td style="padding:5px 12px;">Rp. {{$b->bulanIni}}</td>
-                                <td style="padding:5px 12px;">Rp. {{$b->perubahan}}</td>
+                                <td style="padding:5px 12px;">Rp. {{number_format($b->bulanLalu)}}</td>
+                                <td style="padding:5px 12px;">Rp. {{number_format($b->bulanIni)}}</td>
+                                <td style="padding:5px 12px;">Rp. {{number_format($b->perubahan)}}</td>
                                 <td style="padding:5px 12px;">
                                 
                                     @if ($b->bulanLalu == 0 AND $b->bulanIni != 0) 
@@ -89,7 +89,7 @@
                                     @elseif($b->bulanIni == 0 AND $b->bulanLalu == 0)
                                     0 %
                                     @else
-                                    {{($b->bulanIni / $b->bulanLalu) * 100 - 100}} %
+                                    {{round(($b->bulanIni / $b->bulanLalu) * 100 - 100, 2)}} %
                                     @endif
                                 </td>
                             </tr>

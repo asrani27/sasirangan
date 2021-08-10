@@ -13,10 +13,15 @@ class ReportController extends Controller
     public function harian()
     {
         $today = Carbon::today()->format('Y-m-d');
+        // $bahan = Bahan::with('pasar')->get();
+        // $bahan->map(function($item)use ($today){
+        //     return $item;
+        // });
+        
         $data = Bahan::get()->map(function($item)use($today){
             $bahan_id = $item->id;
             $item->pasar = $item->pasar->map(function($p) use ($bahan_id, $today){
-                $hargaToday = $p->hargaToday->where('bahan_id', $bahan_id)->where('tanggal', $today)->first();
+                $hargaToday = Harga::where('bahan_id', $bahan_id)->where('tanggal', $today)->where('pasar_id', $p->id)->first();
                 $p->hargaToday = $hargaToday == null ? 0 : $hargaToday->harga;
                 return $p;
             });
@@ -33,15 +38,6 @@ class ReportController extends Controller
     {
         $tanggal = request()->get('tanggal');
         
-        // $data = Bahan::get()->map(function($item)use($tanggal){
-        //     $bahan_id = $item->id;
-        //     $item->pasar = $item->pasar->map(function($p) use ($bahan_id, $tanggal){
-        //         $p->hargaToday = $p->hargaToday->where('bahan_id', $bahan_id)->where('tanggal', $tanggal)->first();
-        //         return $p;
-        //     });
-        //     return $item;
-        // });
-
         $data = Bahan::get()->map(function($item)use($tanggal){
             $bahan_id = $item->id;
             $item->pasar = $item->pasar->map(function($p) use ($bahan_id, $tanggal){
@@ -68,12 +64,15 @@ class ReportController extends Controller
             $item->pasar = $item->pasar->map(function($p) use ($bahan_id){
                 $subMonth = Carbon::today()->subMonth()->endOfMonth()->format('Y-m-d');
                 $today = Carbon::today()->format('Y-m-d');
-                $hargaLalu = $p->bulanLalu->where('bahan_id', $bahan_id)->where('tanggal', $subMonth)->first();
-                $hargaKini = $p->hargaToday->where('bahan_id', $bahan_id)->where('tanggal', $today)->first();
+                //dd($subMonth, $today);
+                $hargaLalu = Harga::where('bahan_id', $bahan_id)->where('tanggal', $subMonth)->first();
+                $hargaKini = Harga::where('bahan_id', $bahan_id)->where('tanggal', $today)->first();
+                //dd($hargaKini, $hargaLalu);
                 $p->bulanLalu = $hargaLalu == null ? 0 : $hargaLalu->harga;
                 $p->bulanIni = $hargaKini == null ? 0 : $hargaKini->harga;
                 return $p;
             });
+            
             $item->bulanLalu = ceil($item->pasar->sum('bulanLalu') / count($item->pasar));
             $item->bulanIni = ceil($item->pasar->sum('bulanIni') / count($item->pasar));
             if($item->bulanLalu == $item->bulanIni){
@@ -133,8 +132,9 @@ class ReportController extends Controller
                     $today =Carbon::createFromFormat('m/Y', $month.'/'.$year)->endOfMonth()->format('Y-m-d');
                 }
                 
-                $hargaLalu = $p->bulanLalu->where('bahan_id', $bahan_id)->where('tanggal', $subMonth)->first();
-                $hargaKini = $p->hargaToday->where('bahan_id', $bahan_id)->where('tanggal', $today)->first();
+                $hargaLalu = Harga::where('bahan_id', $bahan_id)->where('tanggal', $subMonth)->first();
+                $hargaKini = Harga::where('bahan_id', $bahan_id)->where('tanggal', $today)->first();
+                
                 $p->bulanLalu = $hargaLalu == null ? 0 : $hargaLalu->harga;
                 $p->bulanIni = $hargaKini == null ? 0 : $hargaKini->harga;
                 return $p;
