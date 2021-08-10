@@ -62,7 +62,7 @@
             @endif
             <div class="card-body">
                 <h4 class="card-title font-16 mt-0">{{$b->judul}}</h4>
-                <p class="card-text">{{$b->isi}}</p>
+                <p class="card-text">{{Str::limit($b->isi,250)}}</p>
                 <a href="#" class="btn btn-primary waves-effect waves-light">Selengkapnya...</a>
             </div>
         </div>
