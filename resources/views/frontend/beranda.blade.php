@@ -15,16 +15,8 @@
             <div class="card-body">
                 <div id="carouselExampleCaption" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img src="/theme/assets/images/small/img-5.jpg" alt="..." width="100%" height="450px">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                        </div>
-                        @foreach ($slider as $item)
-                            
-                        <div class="carousel-item">
+                        @foreach ($slider as $key => $item)
+                        <div class="carousel-item {{$key == 0 ? 'active':''}}">
                             <img src="/storage/{{$item->file}}" alt="..." width="100%" height="450px">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{$item->judul}}</h5>
