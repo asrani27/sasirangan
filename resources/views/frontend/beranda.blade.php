@@ -17,7 +17,13 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach ($slider as $key => $item)
                         <div class="carousel-item {{$key == 0 ? 'active':''}}">
+                            @if ($item->file == null)
+                            <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="..." width="100%" height="450px">
+                            @else
+                                
                             <img src="/storage/{{$item->file}}" alt="..." width="100%" height="450px">
+                            @endif
+                            
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>{{$item->judul}}</h5>
                             </div>
