@@ -17,6 +17,7 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach ($slider as $key => $item)
                         <div class="carousel-item {{$key == 0 ? 'active':''}}">
+                        
                             @if ($item->file == null)
                             <img src="https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg" alt="..." width="100%" height="450px">
                             @else
@@ -61,7 +62,7 @@
             <div class="card-body">
                 <h4 class="card-title font-16 mt-0">{{$b->judul}}</h4>
                 <p class="card-text">{{Str::limit($b->isi,250)}}</p>
-                <a href="#" class="btn btn-primary waves-effect waves-light">Selengkapnya...</a>
+                <a href="/artikel/{{$b->id}}" class="btn btn-primary waves-effect waves-light">Selengkapnya...</a>
             </div>
         </div>
     </div>

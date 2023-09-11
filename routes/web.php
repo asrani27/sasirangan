@@ -9,6 +9,7 @@ Route::get('/info-stok', 'FrontEndController@info_stok');
 Route::get('/info-stok/search', 'FrontEndController@info_stok_search');
 Route::get('/grafik', 'FrontEndController@grafik');
 Route::get('/artikel', 'FrontEndController@artikel');
+Route::get('/artikel/{id}', 'FrontEndController@detailArtikel');
 Route::get('/grafik/harga', 'FrontEndController@grafik_harga');
 Route::get('/grafik/stok', 'FrontEndController@grafik_stok');
 Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');

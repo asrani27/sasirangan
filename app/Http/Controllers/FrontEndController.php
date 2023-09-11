@@ -20,6 +20,11 @@ class FrontEndController extends Controller
         return view('frontend.beranda', compact('berita', 'slider'));
     }
 
+    public function detailArtikel($id)
+    {
+        $berita = Berita::find($id);
+        return view('frontend.detail', compact('berita'));
+    }
     public function info_harga()
     {
         $data = [];
