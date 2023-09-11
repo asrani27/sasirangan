@@ -15,76 +15,78 @@ class HargaController extends Controller
     public function index()
     {
         $pasar = Pasar::get();
-        return view('admin.harga.index',compact('pasar'));
+        return view('admin.harga.index', compact('pasar'));
     }
-    
+
     public function fullDate($id)
     {
         $pasar = Pasar::find($id);
         $bulan = request()->get('bulan');
         $tahun = request()->get('tahun');
-        $start = Carbon::CreateFromFormat('d-m-Y', '01-'.$bulan.'-'.$tahun)->startOfMonth();
-        $end = Carbon::CreateFromFormat('d-m-Y', '01-'.$bulan.'-'.$tahun)->endOfMonth();
+        $start = Carbon::CreateFromFormat('d-m-Y', '01-' . $bulan . '-' . $tahun)->startOfMonth();
+        $end = Carbon::CreateFromFormat('d-m-Y', '01-' . $bulan . '-' . $tahun)->endOfMonth();
         $date = CarbonPeriod::create($start, $end)->toArray();
-        $hargaMonth = Harga::where('tanggal', 'like', '%'.$tahun.'-'.$bulan.'%')->get();
-        $data = Bahan::get()->map(function($item)use($date, $hargaMonth, $id){
-            $item->tanggal = collect($date)->map(function($d)use($hargaMonth, $id, $item){
-                    $check = $hargaMonth->where('tanggal', $d->format('Y-m-d'))->where('bahan_id', $item->id)->where('pasar_id', $id)->first();
-                    if($check == null){
-                        $h = 0;
-                    }else{
-                        $h = $check->harga;
-                    }
-                    return $h;
-                });         
+        //$hargaMonth = Harga::where('tanggal', 'like', '%' . $tahun . '-' . $bulan . '%')->get();
+        $bahan = Bahan::get();
+        //dd($date, $bahan);
+        $data = Bahan::get()->map(function ($item) use ($date, $id) {
+            $item->tanggal = collect($date)->map(function ($d) use ($id, $item) {
+                $check = Harga::where('tanggal', $d->format('Y-m-d'))->where('bahan_id', $item->id)->where('pasar_id', $id)->first();
+                if ($check == null) {
+                    $h = 0;
+                } else {
+                    $h = $check->harga;
+                }
+                return $h;
+            });
             return $item;
         });
         $fulldate = true;
-        
-        return view('admin.harga.harga',compact('data', 'pasar','date', 'month','fulldate','bulan','tahun','start'));
+
+        toastr()->success('Berhasil Di Tampilkan');
+        return view('admin.harga.harga', compact('data', 'pasar', 'date', 'fulldate', 'bulan', 'tahun', 'start'));
     }
 
     public function pasar($id)
     {
         $pasar = Pasar::find($id);
         $bahan = $pasar->bahan;
-        
+
         $month = Carbon::today();
         $start = Carbon::parse($month)->startOfMonth();
         $end = Carbon::parse($month)->endOfMonth();
         $date = CarbonPeriod::create($start, $end)->toArray();
 
-        $data = $bahan->map(function($item)use($month,$id){
+        $data = $bahan->map(function ($item) use ($month, $id) {
             $check = Harga::where('tanggal', $month->format('Y-m-d'))->where('bahan_id', $item->id)->where('pasar_id', $id)->first();
-            if($check == null){
+            if ($check == null) {
                 $item->harga = 0;
-            }else{
+            } else {
                 $item->harga = $check->harga;
             }
             return $item;
         });
-        
+
         $fulldate = false;
-        
-        
-        
-        return view('admin.harga.harga',compact('data', 'pasar','date', 'month', 'fulldate'));
+
+
+
+        return view('admin.harga.harga', compact('data', 'pasar', 'date', 'month', 'fulldate'));
     }
 
     public function storeHargaBahan()
     {
         DB::beginTransaction();
-        try{
+        try {
             $tglKemarin = Carbon::today()->subDay(1)->format('Y-m-d');
             $tglSekarang = Carbon::today()->format('Y-m-d');
             $pasar_id = Pasar::get()->pluck('id');
-            foreach($pasar_id as $pasar){
+            foreach ($pasar_id as $pasar) {
                 $dataCronJob = Harga::where('pasar_id', $pasar)->where('tanggal', $tglKemarin)->get();
-                foreach($dataCronJob as $item)
-                {
+                foreach ($dataCronJob as $item) {
                     $check = Harga::where('tanggal', $tglSekarang)->where('pasar_id', $item->pasar_id)->where('bahan_id', $item->bahan_id)->first();
-                    
-                    if($check == null){
+
+                    if ($check == null) {
                         //simpan data
                         $n = new Harga;
                         $n->tanggal  = $tglSekarang;
@@ -92,15 +94,14 @@ class HargaController extends Controller
                         $n->pasar_id = $item->pasar_id;
                         $n->bahan_id = $item->bahan_id;
                         $n->save();
-        
-                    }else{
+                    } else {
                     }
                 }
             }
             DB::commit();
             toastr()->success('Berhasil Di Simpan Harga hari Ini');
             return redirect('/input/harga');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             toastr()->error('Terdapat Error Hubungi Admin');
             return back();
@@ -113,10 +114,10 @@ class HargaController extends Controller
         $bahan_id = $req->pk;
         $tgl = $req->tanggal;
         $find = Harga::where('tanggal', $tgl)->where('bahan_id', $bahan_id)->where('pasar_id', $pasar_id)->first();
-        if($find != null){
+        if ($find != null) {
             $find->harga = $req->value;
             $find->save();
-        }else{
+        } else {
             $f = new Harga;
             $f->tanggal = $tgl;
             $f->harga = $req->value;
