@@ -1,22 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//Route::middleware('visit')->group(function() {
-Route::get('/', 'FrontEndController@beranda');
-Route::get('/info-harga', 'FrontEndController@info_harga');
-Route::get('/info-harga/search', 'FrontEndController@info_harga_search');
-Route::get('/info-stok', 'FrontEndController@info_stok');
-Route::get('/info-stok/search', 'FrontEndController@info_stok_search');
-Route::get('/grafik', 'FrontEndController@grafik');
-Route::get('/artikel', 'FrontEndController@artikel');
-Route::get('/artikel/{id}', 'FrontEndController@detailArtikel');
-Route::get('/grafik/harga', 'FrontEndController@grafik_harga');
-Route::get('/grafik/stok', 'FrontEndController@grafik_stok');
-Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');
-Route::get('/grafik/stok/search', 'FrontEndController@grafik_stok_search');
-Route::get('/login', 'FrontEndController@login')->name('login');
-Route::post('/login', 'LoginController@login');
-//});
+
+Route::middleware('visit')->group(function () {
+    Route::get('/', 'FrontEndController@beranda');
+    Route::get('/info-harga', 'FrontEndController@info_harga');
+    Route::get('/info-harga/search', 'FrontEndController@info_harga_search');
+    Route::get('/info-stok', 'FrontEndController@info_stok');
+    Route::get('/info-stok/search', 'FrontEndController@info_stok_search');
+    Route::get('/grafik', 'FrontEndController@grafik');
+    Route::get('/artikel', 'FrontEndController@artikel');
+    Route::get('/artikel/{id}', 'FrontEndController@detailArtikel');
+    Route::get('/grafik/harga', 'FrontEndController@grafik_harga');
+    Route::get('/grafik/stok', 'FrontEndController@grafik_stok');
+    Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');
+    Route::get('/grafik/stok/search', 'FrontEndController@grafik_stok_search');
+    Route::get('/login', 'FrontEndController@login')->name('login');
+    Route::post('/login', 'LoginController@login');
+});
 
 Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/home', 'HomeController@index');

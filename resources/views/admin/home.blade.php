@@ -15,48 +15,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-xl-8 border-right">
+                    <div class="col-xl-12 border-right">
                         <h4 class="mt-0 header-title mb-4">Statistik Visitor.</h4>
                         <div id="myfirstchart" style="height: 250px;"></div>
                         {{-- <div id="morris-area-example" class="dashboard-charts morris-charts"></div> --}}
                     </div>
-                    <div class="col-xl-4">
-                        <h4 class="header-title mb-4"></h4>
-                        <div class="p-3">
-                            <ul class="nav nav-pills nav-justified mb-3" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">2021</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-second-tab" data-toggle="pill" href="#pills-second" role="tab" aria-controls="pills-second" aria-selected="false">2022</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third" aria-selected="false">2023</a>
-                                </li>
-                            </ul>
-                            
-                            <div class="tab-content">
-                                <div class="tab-pane show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
-                                    <div class="p-3">
-                                        <h2>{{$tahun2021}} Pengunjung</h2>
-                                        
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="pills-second" role="tabpanel" aria-labelledby="pills-second-tab">
-                                    <div class="p-3">
-                                        <h2>0 Pengunjung</h2>
-                                        
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
-                                    <div class="p-3">
-                                        <h2>0 Pengunjung</h2>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
+                    
                 </div>
                 <!-- end row -->
             </div>
