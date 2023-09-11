@@ -102,7 +102,4 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/report/stok/grafik/search', 'ReportController@search_grafik_stok');
 });
 
-Route::get('/logout', function () {
-    Auth::logout();
-    return redirect('/');
-});
+Route::get('/logout', 'LoginController@logout');
