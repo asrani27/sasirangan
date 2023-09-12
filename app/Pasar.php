@@ -9,7 +9,7 @@ class Pasar extends Model
 {
     protected $table = 'pasar';
     protected $guarded = ['id'];
-    
+
     public $timestamps = false;
 
     public function bahan()
@@ -21,11 +21,15 @@ class Pasar extends Model
     {
         return $this->hasMany(Harga::class, 'pasar_id');
     }
-    
+
     public function bulanLalu()
     {
-        
+
         return $this->hasMany(Harga::class, 'pasar_id');
     }
-    
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'pasar_users');
+    }
 }

@@ -60,5 +60,6 @@
         @include('layouts.js')        
         @toastr_js
         @toastr_render
+        @stack('js')
     </body>
 </html>

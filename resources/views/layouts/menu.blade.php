@@ -9,6 +9,9 @@
                     <a href="/home"><i class="mdi mdi-home"></i>Home</a>
                 </li>
                 <li class="has-submenu">
+                    <a href="/data/user"><i class="mdi mdi-account-multiple"></i>User</a>
+                </li>
+                <li class="has-submenu">
                     <a href="#"><i class="mdi mdi-newspaper"></i>Informasi</a>
                     <ul class="submenu">
                         <li><a href="/informasi/berita">Berita</a></li>

@@ -36,12 +36,13 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/informasi/berita/edit/{id}', 'BeritaController@update');
     Route::get('/informasi/berita/delete/{id}', 'BeritaController@delete');
 
-    Route::get('/data/pengguna', 'UserController@index');
-    Route::get('/data/pengguna/add', 'UserController@create');
-    Route::post('/data/pengguna/add', 'UserController@store');
-    Route::get('/data/pengguna/edit/{id}', 'UserController@edit');
-    Route::post('/data/pengguna/edit/{id}', 'UserController@update');
-    Route::get('/data/pengguna/delete/{id}', 'UserController@delete');
+    Route::get('/data/user', 'UserController@index');
+    Route::get('/data/user/add', 'UserController@create');
+    Route::post('/data/user/add', 'UserController@store');
+    Route::get('/data/user/edit/{id}', 'UserController@edit');
+    Route::get('/data/user/reset/{id}', 'UserController@reset');
+    Route::post('/data/user/edit/{id}', 'UserController@update');
+    Route::get('/data/user/delete/{id}', 'UserController@delete');
 
     Route::get('/data/satuan', 'SatuanController@index');
     Route::get('/data/satuan/add', 'SatuanController@create');
@@ -57,6 +58,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/data/kelompok/edit/{id}', 'KelompokController@update');
     Route::get('/data/kelompok/delete/{id}', 'KelompokController@delete');
 
+    Route::post('/data/pasar/petugas', 'PasarController@petugas');
+    Route::get('/data/pasar/{id}/hapus-petugas', 'PasarController@hapusPetugas');
     Route::get('/data/pasar', 'PasarController@index');
     Route::get('/data/pasar/add', 'PasarController@create');
     Route::post('/data/pasar/add', 'PasarController@store');
