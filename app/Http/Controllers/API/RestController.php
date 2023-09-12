@@ -36,9 +36,14 @@ class RestController extends Controller
     public function updateKomoditi(Request $req)
     {
         //menampilkan data bahan pokok berdasarkan pasar_id dan tanggal
-        $harga = Harga::find($req->harga_id)->update([
+        Harga::find($req->harga_id)->update([
             'harga' => $req->harga,
         ]);
+        $harga = Harga::where('pasar_id', $req->pasar_id)->where('tanggal', $req->tanggal)->get()->map(function ($item) {
+            $item->komoditi = Bahan::find($item->bahan_id)->nama;
+            $item->harga = number_format($item->harga);
+            return $item;
+        });
         $data['message']        = 'Data Ditemukan';
         $data['data']           = $harga;
 
