@@ -24,6 +24,7 @@ class RestController extends Controller
         //menampilkan data bahan pokok berdasarkan pasar_id dan tanggal
         $harga = Harga::where('pasar_id', $req->pasar_id)->where('tanggal', $req->tanggal)->get()->map(function ($item) {
             $item->komoditi = Bahan::find($item->bahan_id)->nama;
+            $item->harga = number_format($item->harga);
             return $item;
         });
         $data['message']        = 'Data Ditemukan';
@@ -43,7 +44,6 @@ class RestController extends Controller
             }
             $data['message']       = 'Data Ditemukan';
             $data['data']          = Auth::user();
-            $data['pasar']         = Auth::user();
             $data['api_token']     = $token;
             return response()->json($data);
         } else {
