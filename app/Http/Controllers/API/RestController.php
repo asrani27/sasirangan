@@ -45,7 +45,7 @@ class RestController extends Controller
             return $item;
         });
         $data['message']        = 'Data Ditemukan';
-        $data['data']           = $req->all();
+        $data['data']           = $databahan;
 
         return response()->json($data);
     }
