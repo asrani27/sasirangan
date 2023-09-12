@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Bahan;
+use App\Harga;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,11 +12,25 @@ class RestController extends Controller
 {
     public function user()
     {
-        $data['message']       = 'Data Ditemukan';
-        $data['data']          = Auth::user();
+        $data['message']        = 'Data Ditemukan';
+        $data['nama']           = Auth::user()->name;
+        $data['username']       = Auth::user()->username;
+        $data['pasar']          = Auth::user()->pasar;
+
         return response()->json($data);
     }
+    public function komoditi(Request $req)
+    {
+        //menampilkan data bahan pokok berdasarkan pasar_id dan tanggal
+        $harga = Harga::where('pasar_id', $req->pasar_id)->where('tanggal', $req->tanggal)->get()->map(function ($item) {
+            $item->komoditi = Bahan::find($item->bahan_id)->nama;
+            return $item;
+        });
+        $data['message']        = 'Data Ditemukan';
+        $data['data']           = $harga;
 
+        return response()->json($data);
+    }
     public function login(Request $req)
     {
         if (Auth::attempt(['username' => $req->username, 'password' => $req->password])) {
