@@ -15,9 +15,13 @@ class FrontEndController extends Controller
 {
     public function beranda()
     {
-        $berita = Berita::orderBy('id', 'DESC')->limit(4)->get();
-        $slider = Slider::orderBy('id', 'DESC')->get();
-        return view('frontend.beranda', compact('berita', 'slider'));
+        if (Auth::check()) {
+            return redirect('/home');
+        } else {
+            $berita = Berita::orderBy('id', 'DESC')->limit(4)->get();
+            $slider = Slider::orderBy('id', 'DESC')->get();
+            return view('frontend.beranda', compact('berita', 'slider'));
+        }
     }
 
     public function detailArtikel($id)
