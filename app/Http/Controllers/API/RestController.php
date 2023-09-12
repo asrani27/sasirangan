@@ -32,6 +32,18 @@ class RestController extends Controller
 
         return response()->json($data);
     }
+
+    public function updateKomoditi(Request $req)
+    {
+        //menampilkan data bahan pokok berdasarkan pasar_id dan tanggal
+        $harga = Harga::find($req->harga_id)->update([
+            'harga' => $req->harga,
+        ]);
+        $data['message']        = 'Data Ditemukan';
+        $data['data']           = $harga;
+
+        return response()->json($data);
+    }
     public function login(Request $req)
     {
         if (Auth::attempt(['username' => $req->username, 'password' => $req->password])) {
