@@ -39,13 +39,13 @@ class RestController extends Controller
         Harga::find($req->harga_id)->update([
             'harga' => $req->harga,
         ]);
-        $data = Harga::where('pasar_id', $req->pasar_id)->where('tanggal', $req->tanggal)->get()->map(function ($item) {
+        $databahan = Harga::where('pasar_id', $req->pasar_id)->where('tanggal', $req->tanggal)->get()->map(function ($item) {
             $item->komoditi = Bahan::find($item->bahan_id)->nama;
             $item->harga = number_format($item->harga);
             return $item;
         });
         $data['message']        = 'Data Ditemukan';
-        $data['data']           = $data;
+        $data['data']           = $databahan;
 
         return response()->json($data);
     }
