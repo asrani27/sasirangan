@@ -17,8 +17,7 @@
                 <div class="row">
                     <div class="col-xl-12 border-right">
                         <h4 class="mt-0 header-title mb-4">Statistik Visitor.</h4>
-                        <div id="myfirstchart" style="height: 250px;"></div>
-                        {{-- <div id="morris-area-example" class="dashboard-charts morris-charts"></div> --}}
+                        <div id="myfirstchart" style="height: 150px;"></div>
                     </div>
                    
                     

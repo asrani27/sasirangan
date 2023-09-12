@@ -27,6 +27,7 @@ class RestController extends Controller
             }
             $data['message']       = 'Data Ditemukan';
             $data['data']          = Auth::user();
+            $data['pasar']         = Auth::user();
             $data['api_token']     = $token;
             return response()->json($data);
         } else {
