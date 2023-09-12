@@ -13,17 +13,33 @@
 <div class="row">
     <div class="col-xl-9">
         <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xl-12 border-right">
-                        <h4 class="mt-0 header-title mb-4">Statistik Visitor.</h4>
-                        <div id="myfirstchart" style="height: 250px;"></div>
-                    </div>
-                   
+            <div class="card-body table-responsive">
+
+                <div class="col-xl-12 border-right">
+                    <h4 class="mt-0 header-title mb-2">Early Warning system (EWS) Formula</h4>
+                    <h4 class="mt-0 header-title mb-2">Tanggal Hari ini : {{\Carbon\Carbon::now()->format('d-m-Y')}}</h4>
                     
                 </div>
-                <!-- end row -->
+                <table class="table table-striped table-bordered mb-0">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Pasar</th>
+                        <th>Komoditi</th>
+                        <th>Harga Acuan</th>
+                        <th>Batas Kenaikan Toleransi</th>
+                        <th>H+1</th>
+                        <th>H+2</th>
+                        <th>H+3</th>
+                        <th>H+4</th>
+                        <th>Kesimpulan</th>
+                    </tr>
+                    </thead>
+                                     
+                    
+                </table>
             </div>
+            
         </div>
     </div>
     <!-- end col -->
@@ -31,9 +47,19 @@
     <div class="col-xl-3">
         <div class="card">
             <div class="card-body text-center">
-                <h4 class="mt-0 header-title mb-4">Jumlah Pasar</h4>
-                <div class="p-3 "><h2>{{$pasar}}</h2></div>
+                <h4 class="mt-0 header-title mb-2">Jumlah Pasar</h4>
+                <div class="p-0"><h2>{{$pasar}}</h2></div>
                 {{-- <div id="morris-donut-example" class="dashboard-charts morris-charts"></div> --}}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="mt-0 header-title mb-2">Pengunjung Hari Ini</h4>
+                <div class="p-0"><h2>{{$pengunjungHariIni}}</h2></div>
+            </div>
+            <div class="card-body text-center">
+                <h4 class="mt-0 header-title mb-2">Total Pengunjung </h4>
+                <div class="p-0"><h2>{{$totalPengunjung}}</h2></div>
             </div>
         </div>
     </div>

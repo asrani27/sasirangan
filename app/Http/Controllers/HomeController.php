@@ -26,6 +26,8 @@ class HomeController extends Controller
         $tahun2021 = Traffic::whereYear('tanggal', 2021)->get()->count();
         $tahun2022 = Traffic::whereYear('tanggal', 2022)->get()->count();
         $tahun2023 = Traffic::whereYear('tanggal', 2023)->get()->count();
-        return view('admin.home', compact('data', 'pasar', 'tahun2021', 'tahun2022', 'tahun2023'));
+        $totalPengunjung = Traffic::count();
+        $pengunjungHariIni = Traffic::where('tanggal', Carbon::now()->format('Y-m-d'))->count();
+        return view('admin.home', compact('data', 'pasar', 'tahun2021', 'pengunjungHariIni', 'totalPengunjung'));
     }
 }
