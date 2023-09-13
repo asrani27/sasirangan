@@ -45,13 +45,13 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Harga Acuan</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="acuan" id="example-text-input" required>
+                        <input class="form-control" type="text" name="acuan" id="example-text-input" required onkeypress="return hanyaAngka(event)"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Batas Kenaikan</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="batas" id="example-text-input" required>
+                        <input class="form-control" type="text" name="batas" id="example-text-input" required onkeypress="return hanyaAngka(event)"/>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -72,3 +72,15 @@
     </div> <!-- end col -->
 </div>
 @endsection
+
+@push('js')
+<script>
+    function hanyaAngka(evt) {
+      var charCode = (evt.which) ? evt.which : event.keyCode
+       if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+        return false;
+      return true;
+    }
+</script>
+@endpush
