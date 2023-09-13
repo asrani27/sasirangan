@@ -19,6 +19,18 @@ class RestController extends Controller
 
         return response()->json($data);
     }
+
+    public function gantipassword(Request $req)
+    {
+        $resp = Auth::user()->update([
+            'password' => bcrypt($req->password),
+        ]);
+
+        $data['message']        = 'Password Berhasil Diganti';
+        $data['data']           = $resp;
+
+        return response()->json($data);
+    }
     public function komoditi(Request $req)
     {
         //menampilkan data bahan pokok berdasarkan pasar_id dan tanggal

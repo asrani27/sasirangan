@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', [RestController::class, 'user']);
+    Route::post('/gantipassword', [RestController::class, 'gantipassword']);
     Route::post('/komoditi', [RestController::class, 'komoditi']);
     Route::post('/komoditi/update', [RestController::class, 'updateKomoditi']);
 });
