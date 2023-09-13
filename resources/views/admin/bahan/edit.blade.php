@@ -43,6 +43,18 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">Harga Acuan</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="acuan" value="{{$data->acuan}}" id="example-text-input" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">Batas Kenaikan</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="batas" value="{{$data->batas}}" id="example-text-input" required>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="example-text-input-lg" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary waves-effect waves-light">

@@ -33,6 +33,8 @@
                         <th>Nama Bahan</th>
                         <th>Satuan</th>
                         <th>Kelompok</th>
+                        <th>Acuan Harga</th>
+                        <th>Batas Kenaikan</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -46,6 +48,8 @@
                                 <td style="padding:5px 12px;">{{$item->nama}}</td>
                                 <td style="padding:5px 12px;">{{$item->satuan->nama}}</td>
                                 <td style="padding:5px 12px;">{{$item->kelompok->nama}}</td>
+                                <td style="padding:5px 12px;">{{number_format($item->acuan)}}</td>
+                                <td style="padding:5px 12px;">{{number_format($item->batas)}}</td>
                                 <td style="padding:5px 12px;">
                                     <a href="/data/bahan/edit/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-edit"></i></a>
                                     <a href="/data/bahan/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Riwayat Stok Dan Harga Akan Terhapus Juga, Yakin?');"><i class="fas fa-times"></i></a>
