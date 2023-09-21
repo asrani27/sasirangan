@@ -8,7 +8,7 @@
             <a href="#" class="logo" style="color:white;font-size=24px;">
                 <img src="/theme/bjm.png" alt="" class="logo-small">
                 <img src="/theme/bjm.png" alt="" class="logo-large">
-                SI BAPOK
+                DEDIKASI BAIMAN
             </a>
 
         </div>
