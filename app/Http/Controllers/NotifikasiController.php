@@ -27,8 +27,11 @@ class NotifikasiController extends Controller
 
         $pesan = implode(" ", $bapok);
         $number = Notifikasi::get();
+        if ($number->count() == 0) {
+            toastr()->error('Tidak ada nomor, silahkan masukkan nomor di list notifikasi');
+            return back();
+        }
         foreach ($number as $n) {
-
             $data = [
                 "phoneNumber" => $n->nomor,
                 "content" => [
