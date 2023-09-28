@@ -20,6 +20,10 @@
                     <h4 class="mt-0 header-title mb-2">Tanggal Hari ini : {{\Carbon\Carbon::now()->format('d-m-Y')}}</h4>
                     
                 </div>
+                <div class="col-xl-12 border-left">
+                    <a href="/home/wa-notifikasi" class='btn btn-sm btn-success' onclick="return confirm('Yakin ingin mengirimkan notifikasi ke nomor yang terdaftar?');">WA NOTIFIKASI</a>
+                    <a href="/home/ews" class='btn btn-sm btn-danger' onclick="return confirm('harap menunggu proses EWS setelah klik OK');">Early Warning system </a><br/><br/>
+                </div>
                 <table class="table table-striped table-bordered mb-0">
                     <thead>
                     <tr>
@@ -35,7 +39,24 @@
                         <th>Kesimpulan</th>
                     </tr>
                     </thead>
-                                     
+                    @php
+                        $no=1;
+                    @endphp
+                    @foreach ($ews as $item)
+                        <tr>
+                            <td>{{$no++}}</td>
+                            <td>{{$item->pasar->nama}}</td>
+                            <td>{{$item->bahan->nama}}</td>
+                            <td>{{number_format($item->acuan)}}</td>
+                            <td>{{number_format($item->batas)}}</td>
+                            <td>{{number_format($item->h1)}}</td>
+                            <td>{{number_format($item->h2)}}</td>
+                            <td>{{number_format($item->h3)}}</td>
+                            <td>{{number_format($item->h4)}}</td>
+                            <td><button type="button" class="btn btn-sm btn-danger">NAIK</button></td>
+
+                        </tr>
+                    @endforeach             
                     
                 </table>
             </div>

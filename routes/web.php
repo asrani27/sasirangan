@@ -60,12 +60,23 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
 
     Route::post('/data/pasar/petugas', 'PasarController@petugas');
     Route::get('/data/pasar/{id}/hapus-petugas', 'PasarController@hapusPetugas');
+
     Route::get('/data/pasar', 'PasarController@index');
     Route::get('/data/pasar/add', 'PasarController@create');
     Route::post('/data/pasar/add', 'PasarController@store');
     Route::get('/data/pasar/edit/{id}', 'PasarController@edit');
     Route::post('/data/pasar/edit/{id}', 'PasarController@update');
     Route::get('/data/pasar/delete/{id}', 'PasarController@delete');
+
+    Route::get('/home/ews', 'EWSController@ews');
+
+    Route::get('/home/wa-notifikasi', 'NotifikasiController@kirimNotif');
+    Route::get('/data/notifikasi', 'NotifikasiController@index');
+    Route::get('/data/notifikasi/add', 'NotifikasiController@create');
+    Route::post('/data/notifikasi/add', 'NotifikasiController@store');
+    Route::get('/data/notifikasi/edit/{id}', 'NotifikasiController@edit');
+    Route::post('/data/notifikasi/edit/{id}', 'NotifikasiController@update');
+    Route::get('/data/notifikasi/delete/{id}', 'NotifikasiController@delete');
 
     Route::get('/data/bahan', 'BahanController@index');
     Route::get('/data/bahan/add', 'BahanController@create');
