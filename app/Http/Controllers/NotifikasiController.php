@@ -26,23 +26,26 @@ class NotifikasiController extends Controller
         }
 
         $pesan = implode(" ", $bapok);
-        $data = [
-            "phoneNumber" => "087715996555",
-            "content" => [
-                "text" => Carbon::now()->translatedFormat('d F Y') .
-                    "
-Early Warning system (EWS),
-Harga Bahan Pokok Yang mengalami Kenaikan : "
-                    . $pesan,
-            ]
-        ];
+        $number = Notifikasi::get();
+        foreach ($number as $n) {
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUzODVmODJiLWI5ZmMtNDdlYy05MWEwLWJkZDkzYzQ5Njc2NyIsImlhdCI6MTY5NTYxODU0M30.ks-dSXCKtB-aeigPwFZVPJ4b9gP_QculLQmw25Ypey4',
-        ])
-            ->withBody(json_encode($data), 'application/json')
-            ->post('https://api.wa.banjarmasinkota.go.id/whatsapp/e385f82b-b9fc-47ec-91a0-bdd93c496767/messages');
+            $data = [
+                "phoneNumber" => $n->nomor,
+                "content" => [
+                    "text" => Carbon::now()->translatedFormat('d F Y') .
+                        "
+    Early Warning system (EWS),
+    Harga Bahan Pokok Yang mengalami Kenaikan : "
+                        . $pesan,
+                ]
+            ];
 
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUzODVmODJiLWI5ZmMtNDdlYy05MWEwLWJkZDkzYzQ5Njc2NyIsImlhdCI6MTY5NTYxODU0M30.ks-dSXCKtB-aeigPwFZVPJ4b9gP_QculLQmw25Ypey4',
+            ])
+                ->withBody(json_encode($data), 'application/json')
+                ->post('https://api.wa.banjarmasinkota.go.id/whatsapp/e385f82b-b9fc-47ec-91a0-bdd93c496767/messages');
+        }
         toastr()->success(' Berhasil Di Kirim');
         return back();
     }
