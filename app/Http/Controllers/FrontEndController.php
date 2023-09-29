@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EWS;
 use App\Bahan;
 use App\Harga;
 use App\Pasar;
@@ -25,6 +26,11 @@ class FrontEndController extends Controller
         }
     }
 
+    public function kenaikan()
+    {
+        $ews = EWS::where('tanggal', Carbon::now()->format('Y-m-d'))->get();
+        return view('frontend.kenaikan', compact('ews'));
+    }
     public function detailArtikel($id)
     {
         $berita = Berita::find($id);

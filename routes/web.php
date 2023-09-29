@@ -16,6 +16,7 @@ Route::middleware('visit')->group(function () {
     Route::get('/grafik/harga/search', 'FrontEndController@grafik_harga_search');
     Route::get('/grafik/stok/search', 'FrontEndController@grafik_stok_search');
     Route::get('/login', 'FrontEndController@login')->name('login');
+    Route::get('/kenaikan', 'FrontEndController@kenaikan');
     Route::post('/login', 'LoginController@login');
 });
 
