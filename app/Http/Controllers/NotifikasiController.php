@@ -22,7 +22,7 @@ class NotifikasiController extends Controller
         $bapok = array();
         foreach ($bapokNaik as $bp) {
             //dd($bp, $bapok);
-            array_push($bapok, $bp['nama_bahan'] . ' (' . $bp['nama_pasar'] . ')%0a');
+            array_push($bapok, $bp['nama_bahan'] . ' (' . $bp['nama_pasar'] . ') \n');
         }
 
         $pesan = implode(" ", $bapok);
@@ -38,7 +38,7 @@ class NotifikasiController extends Controller
                     "text" => Carbon::now()->translatedFormat('d F Y') .
                         "
     Early Warning system (EWS),
-    Harga Bahan Pokok Yang mengalami Kenaikan : %0a"
+    Harga Bahan Pokok Yang mengalami Kenaikan : "
                         . $pesan,
                 ]
             ];
