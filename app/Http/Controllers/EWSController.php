@@ -62,9 +62,6 @@ class EWSController extends Controller
 
                 return $item->only(['pasar', 'nama', 'batas', 'acuan', 'tanggal', 'kenaikan']);
             });
-
-
-            dd($bahan);
         }
         toastr()->success(' Berhasil Di Hitung');
         return back();
