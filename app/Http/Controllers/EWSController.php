@@ -18,15 +18,19 @@ class EWSController extends Controller
         $pasar = Pasar::get()->map->only(['id', 'nama']);
 
         foreach ($pasar as $key => $ps) {
+
             $bahan = Bahan::get()->map(function ($item) use ($to, $from, $ps) {
                 $item->pasar = $ps['nama'];
                 $item->batas = $item->batas;
                 $item->acuan = $item->acuan;
                 $item->tanggal = Harga::where('bahan_id', $item->id)->where('pasar_id', $ps['id'])->whereBetween('tanggal', [$from, $to])->get()->map->only(['tanggal', 'harga']);
-                //dd($item->tanggal[0]['tanggal']);
+                // //dd($item->tanggal[0]['tanggal']);
                 $item->kenaikan = $item->tanggal->where('harga', '<', $item->batas)->count() != 0 ? 'T' : 'Y';
+
+                // //dd($item->kenaikan);
                 if ($item->kenaikan == 'Y') {
                     $checkEWS = EWS::where('tanggal', $to)->where('pasar_id', $ps['id'])->where('bahan_id', $item->id)->first();
+                    //dd($item->tanggal);
                     if ($checkEWS == null) {
                         //save
                         $n = new EWS;
@@ -54,8 +58,13 @@ class EWSController extends Controller
                         $n->save();
                     }
                 }
+
+
                 return $item->only(['pasar', 'nama', 'batas', 'acuan', 'tanggal', 'kenaikan']);
             });
+
+
+            dd($bahan);
         }
         toastr()->success(' Berhasil Di Hitung');
         return back();

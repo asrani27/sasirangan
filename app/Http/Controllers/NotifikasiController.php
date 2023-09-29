@@ -22,7 +22,7 @@ class NotifikasiController extends Controller
         $bapok = array();
         foreach ($bapokNaik as $bp) {
             //dd($bp, $bapok);
-            array_push($bapok, $bp['nama_bahan'] . ' (' . $bp['nama_pasar'] . ')');
+            array_push($bapok, $bp['nama_bahan'] . ' (' . $bp['nama_pasar'] . ')\n');
         }
 
         $pesan = implode(" ", $bapok);
