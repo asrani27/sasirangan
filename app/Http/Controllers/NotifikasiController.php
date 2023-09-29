@@ -20,9 +20,9 @@ class NotifikasiController extends Controller
         });
 
         $bapok = array();
-        foreach ($bapokNaik as $bp) {
+        foreach ($bapokNaik as $key => $bp) {
             //dd($bp, $bapok);
-            array_push($bapok, $bp['nama_bahan'] . ' (' . $bp['nama_pasar'] . ") \n");
+            array_push($bapok, $key+1.'. '.$bp['nama_bahan'] . ' (' . $bp['nama_pasar'] . ") \n");
         }
 
         $pesan = implode(" ", $bapok);
@@ -36,9 +36,7 @@ class NotifikasiController extends Controller
                 "phoneNumber" => $n->nomor,
                 "content" => [
                     "text" => Carbon::now()->translatedFormat('d F Y') .
-                        "
-    Early Warning system (EWS),
-    Harga Bahan Pokok Yang mengalami Kenaikan : "
+                        "Early Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n"
                         . $pesan,
                 ]
             ];
