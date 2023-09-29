@@ -36,7 +36,8 @@ class NotifikasiController extends Controller
                 "phoneNumber" => $n->nomor,
                 "content" => [
                     "text" => Carbon::now()->translatedFormat('d F Y') .
-                        "Early Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n"
+                        " \nEarly Warning system (EWS), \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n
+                        Harga Bahan Pokok Yang mengalami Kenaikan : \n"
                         . $pesan,
                 ]
             ];
