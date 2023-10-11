@@ -11,6 +11,26 @@ use Illuminate\Support\Facades\Http;
 class NotifikasiController extends Controller
 {
 
+    public function sendNotif($id)
+    {
+        $nomor = Notifikasi::find($id)->nomor;
+        $pesan = [
+            "phoneNumber" => $nomor,
+            "content" => [
+                "text" => Carbon::now()->translatedFormat('d F Y') .
+                    " \nEarly Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n",
+            ]
+        ];
+
+        //$botId = "8e1186e3-bde1-48eb-9301-65dd932367b6";
+        //$apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlMTE4NmUzLWJkZTEtNDhlYi05MzAxLTY1ZGQ5MzIzNjdiNiIsImlhdCI6MTY4NjI3MjY3M30.KvyD0cCvAQNFC8V4e0ZsZ3eR4M6nKZeC5JCov_yhHXI";
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlMTE4NmUzLWJkZTEtNDhlYi05MzAxLTY1ZGQ5MzIzNjdiNiIsImlhdCI6MTY4NjI3MjY3M30.KvyD0cCvAQNFC8V4e0ZsZ3eR4M6nKZeC5JCov_yhHXI',
+        ])->withBody(json_encode($pesan), 'application/json')->post('https://api.wa.banjarmasinkota.go.id/whatsapp/8e1186e3-bde1-48eb-9301-65dd932367b6/messages');
+
+        toastr()->success(' Berhasil Di Kirim');
+        return back();
+    }
     public function kirimNotif()
     {
         $bapokNaik = EWS::where('tanggal', Carbon::now()->format('Y-m-d'))->get()->map(function ($item) {
@@ -36,9 +56,7 @@ class NotifikasiController extends Controller
                 "phoneNumber" => $n->nomor,
                 "content" => [
                     "text" => Carbon::now()->translatedFormat('d F Y') .
-                        " \nEarly Warning system (EWS), \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n
-                        Harga Bahan Pokok Yang mengalami Kenaikan : \n"
-                        . $pesan,
+                        " \nEarly Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n",
                 ]
             ];
 

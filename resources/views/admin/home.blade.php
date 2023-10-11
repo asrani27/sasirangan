@@ -21,7 +21,7 @@
                     
                 </div>
                 <div class="col-xl-12 border-left">
-                    <a href="/home/wa-notifikasi" class='btn btn-sm btn-success' onclick="return confirm('Yakin ingin mengirimkan notifikasi ke nomor yang terdaftar?');">WA NOTIFIKASI</a>
+                    {{-- <a href="/home/wa-notifikasi" class='btn btn-sm btn-success' onclick="return confirm('Yakin ingin mengirimkan notifikasi ke nomor yang terdaftar?');">WA NOTIFIKASI</a> --}}
                     <a href="/home/ews" class='btn btn-sm btn-danger' onclick="return confirm('harap menunggu proses EWS setelah klik OK');">Early Warning system </a><br/><br/>
                 </div>
                 <table class="table table-striped table-bordered mb-0">

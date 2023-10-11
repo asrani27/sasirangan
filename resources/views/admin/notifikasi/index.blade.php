@@ -50,6 +50,7 @@
                                 <td style="padding:5px 12px;">{{$no++}}</td>
                                 <td style="padding:5px 12px;">{{$item->nomor}}</td>
                                 <td style="padding:5px 12px;">
+                                    <a href="/data/notifikasi/kirim/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-comment"></i> Kirim Notif</a>
                                     <a href="/data/notifikasi/edit/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-edit"></i></a>
                                     <a href="/data/notifikasi/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Yakin ingin menghapus data ini?');"><i class="fas fa-times"></i></a>
                                 </td>

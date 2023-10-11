@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/home/ews', 'EWSController@ews');
 
     Route::get('/home/wa-notifikasi', 'NotifikasiController@kirimNotif');
+    Route::get('/data/notifikasi/kirim/{id}', 'NotifikasiController@sendNotif');
     Route::get('/data/notifikasi', 'NotifikasiController@index');
     Route::get('/data/notifikasi/add', 'NotifikasiController@create');
     Route::post('/data/notifikasi/add', 'NotifikasiController@store');
