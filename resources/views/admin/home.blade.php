@@ -7,22 +7,68 @@
 </ol>
 @endsection
 
+@push('css')
+    <style>
+.btn-floating {
+    position: fixed;
+    right: 25px;
+    overflow: hidden;
+    width: 100px;
+    height: 50px;
+    border-radius: 100px;
+    border: 0;
+    z-index: 9999;
+    color: white;
+    transition: .2s;
+}
+
+.btn-floating:hover {
+    width: auto;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.btn-floating span {
+    font-size: 16px;
+    margin-left: 5px;
+    transition: .2s;
+    line-height: 0px;
+    display: none;
+}
+
+.btn-floating:hover span {
+    display: inline-block;
+}
+
+.btn-floating:hover img {
+    margin-bottom: -3px;
+}
+
+.btn-floating.whatsapp {
+    bottom: 25px;
+    background-color: #34af23;
+    border: 2px solid #fff;
+}
+
+.btn-floating.whatsapp:hover {
+    background-color: #1f7a12;
+}
+    </style>
+@endpush
 @section('content')
-
-
 <div class="row">
     <div class="col-xl-9">
         <div class="card">
             <div class="card-body table-responsive">
 
                 <div class="col-xl-12 border-right">
-                    <h4 class="mt-0 header-title mb-2">Early Warning system (EWS) Formula</h4>
+                    <h4 class="mt-0 header-title mb-2">DEDIKASI BAIMAN</h4>
                     <h4 class="mt-0 header-title mb-2">Tanggal Hari ini : {{\Carbon\Carbon::now()->format('d-m-Y')}}</h4>
                     
                 </div>
                 <div class="col-xl-12 border-left">
                     {{-- <a href="/home/wa-notifikasi" class='btn btn-sm btn-success' onclick="return confirm('Yakin ingin mengirimkan notifikasi ke nomor yang terdaftar?');">WA NOTIFIKASI</a> --}}
-                    <a href="/home/ews" class='btn btn-sm btn-danger' onclick="return confirm('harap menunggu proses EWS setelah klik OK');">Early Warning system </a><br/><br/>
+                    <a href="/home/ews" class='btn btn-sm btn-danger' onclick="return confirm('harap menunggu proses DEDIKASI BAIMAN setelah klik OK');">DEDIKASI BAIMAN </a><br/><br/>
                 </div>
                 <table class="table table-striped table-bordered mb-0">
                     <thead>
@@ -30,12 +76,8 @@
                         <th>No</th>
                         <th>Pasar</th>
                         <th>Komoditi</th>
-                        <th>Harga Acuan</th>
-                        <th>Batas Kenaikan Toleransi</th>
-                        <th>H+1</th>
-                        <th>H+2</th>
-                        <th>H+3</th>
-                        <th>H+4</th>
+                        <th>Harga Acuan (awal bulan)</th>
+                        <th>Batas Kenaikan Toleransi (5%)</th>
                         <th>Kesimpulan</th>
                     </tr>
                     </thead>
@@ -48,11 +90,6 @@
                             <td>{{$item->pasar->nama}}</td>
                             <td>{{$item->bahan->nama}}</td>
                             <td>{{number_format($item->acuan)}}</td>
-                            <td>{{number_format($item->batas)}}</td>
-                            <td>{{number_format($item->h1)}}</td>
-                            <td>{{number_format($item->h2)}}</td>
-                            <td>{{number_format($item->h3)}}</td>
-                            <td>{{number_format($item->h4)}}</td>
                             <td><button type="button" class="btn btn-sm btn-danger">NAIK</button></td>
 
                         </tr>
@@ -86,6 +123,13 @@
     </div>
 </div>
 <!-- end row -->
+
+<a href="https://api.whatsapp.com/send?phone=12341234" target="_blank">
+    <button class="btn-floating whatsapp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/WhatsApp_icon.png/598px-WhatsApp_icon.png" width="30px" alt="whatsApp">ADUAN
+        <span>(00) 1234-1234</span>
+    </button>
+</a>
 @endsection
 
 @push('js')

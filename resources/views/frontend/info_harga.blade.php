@@ -7,6 +7,9 @@
 </ol>
 @endsection
 
+@push('css')
+@include('frontend.cssaduan')
+@endpush
 @section('content')
 @if (count($data) == 0)
     
@@ -125,4 +128,5 @@
     </div>
 </div>
 @endif
+@include('frontend.aduan')
 @endsection

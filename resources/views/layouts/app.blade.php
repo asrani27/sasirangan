@@ -11,6 +11,8 @@
         @stack('meta')
         @include('layouts.css')
         @toastr_css
+
+        @stack('css')
     </head>
 
     <body>

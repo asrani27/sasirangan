@@ -6,7 +6,9 @@
     <li class="breadcrumb-item active">SELAMAT DATANG DI SARANA INFORMASI HARGA PANGAN KOTA BANJARMASIN</li>
 </ol>
 @endsection
-
+@push('css')
+@include('frontend.cssaduan')
+@endpush
 @section('content')
     
 <div class="row">
@@ -70,4 +72,6 @@
     
 </div>
 <!-- end row -->
+
+@include('frontend.aduan')
 @endsection

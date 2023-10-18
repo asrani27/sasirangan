@@ -62,12 +62,17 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/data/pasar/petugas', 'PasarController@petugas');
     Route::get('/data/pasar/{id}/hapus-petugas', 'PasarController@hapusPetugas');
 
+    Route::get('/data/nomoraduan', 'AduanController@index');
+    Route::post('/data/nomoraduan', 'AduanController@update');
+
     Route::get('/data/pasar', 'PasarController@index');
     Route::get('/data/pasar/add', 'PasarController@create');
     Route::post('/data/pasar/add', 'PasarController@store');
     Route::get('/data/pasar/edit/{id}', 'PasarController@edit');
     Route::post('/data/pasar/edit/{id}', 'PasarController@update');
     Route::get('/data/pasar/delete/{id}', 'PasarController@delete');
+    Route::get('/data/pasar/lokasi/{id}', 'PasarController@lokasi');
+    Route::post('/data/pasar/lokasi/{id}', 'PasarController@updateLokasi');
 
     Route::get('/home/ews', 'EWSController@ews');
 

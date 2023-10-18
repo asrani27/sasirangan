@@ -5,6 +5,9 @@
 
 @endsection
 
+@push('css')
+@include('frontend.cssaduan')
+@endpush
 @section('content')
 <div class="row">
     <div class="col-xl-12">
@@ -57,4 +60,5 @@
         </div>
     </div>
 </div>
+@include('frontend.aduan')
 @endsection

@@ -64,6 +64,29 @@ class PasarController extends Controller
         return view('admin.pasar.edit', compact('data', 'edit'));
     }
 
+    public function lokasi($id)
+    {
+        $edit = Pasar::find($id);
+        if ($edit->lat == null) {
+            $latlong = [
+                'lat' => -3.327653847548605,
+                'lng' => 114.5884147286779,
+            ];
+        } else {
+            $latlong = [
+                'lat' => $edit->lat,
+                'lng' => $edit->long,
+            ];
+        }
+
+        if ($edit->radius == null) {
+            $radius = 100;
+        } else {
+            $radius = $edit->radius;
+        }
+        return view('admin.pasar.lokasi', compact('edit', 'latlong', 'radius'));
+    }
+
     public function update(Request $req, $id)
     {
         $attr = $req->all();
@@ -74,6 +97,17 @@ class PasarController extends Controller
         return redirect('/data/pasar');
     }
 
+    public function updateLokasi(Request $req, $id)
+    {
+
+        $data = Pasar::find($id);
+        $data->lat = $req->lat;
+        $data->long = $req->long;
+        $data->radius = $req->radius;
+        $data->save();
+        toastr()->success('Nama Pasar Berhasil Di Update');
+        return back();
+    }
     public function delete($id)
     {
         $bahan_id = Bahan::get()->pluck('id');

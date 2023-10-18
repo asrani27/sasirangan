@@ -27,6 +27,7 @@
                         <li><a href="/data/satuan">Satuan</a></li>
                         <li><a href="/data/pasar">Pasar</a></li>
                         <li><a href="/data/notifikasi">List Nomor Notifikasi</a></li>
+                        <li><a href="/data/nomoraduan">Nomor Aduan</a></li>
                         @if (Auth::user()->name = 'superadmin')
                         <li><a href="/data/gantipassword">Ganti Password</a></li>                            
                         @else

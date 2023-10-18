@@ -7,6 +7,9 @@
 </ol>
 @endsection
 
+@push('css')
+@include('frontend.cssaduan')
+@endpush
 @section('content')    
 <div class="row">
     <div class="col-lg-12">
@@ -40,4 +43,5 @@
         </div>
     </div> <!-- end col -->
 </div>
+@include('frontend.aduan')
 @endsection

@@ -7,6 +7,7 @@ use App\Bahan;
 use App\Harga;
 use App\Pasar;
 use App\Berita;
+use App\NomorAduan;
 use App\Slider;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -22,25 +23,29 @@ class FrontEndController extends Controller
         } else {
             $berita = Berita::orderBy('id', 'DESC')->limit(4)->get();
             $slider = Slider::orderBy('id', 'DESC')->get();
-            return view('frontend.beranda', compact('berita', 'slider'));
+            $aduan = NomorAduan::first();
+            return view('frontend.beranda', compact('berita', 'slider', 'aduan'));
         }
     }
 
     public function kenaikan()
     {
         $ews = EWS::where('tanggal', Carbon::now()->format('Y-m-d'))->get();
-        return view('frontend.kenaikan', compact('ews'));
+        $aduan = NomorAduan::first();
+        return view('frontend.kenaikan', compact('ews', 'aduan'));
     }
     public function detailArtikel($id)
     {
         $berita = Berita::find($id);
-        return view('frontend.detail', compact('berita'));
+        $aduan = NomorAduan::first();
+        return view('frontend.detail', compact('berita', 'aduan'));
     }
     public function info_harga()
     {
         $data = [];
         $pasar = Pasar::get();
-        return view('frontend.info_harga', compact('data', 'pasar'));
+        $aduan = NomorAduan::first();
+        return view('frontend.info_harga', compact('data', 'aduan', 'pasar'));
     }
 
     public function info_harga_search()
@@ -77,14 +82,16 @@ class FrontEndController extends Controller
         });
 
         $pasar = Pasar::get();
-        return view('frontend.info_harga', compact('data', 'pasar', 'pasar_id', 'tanggal'));
+        $aduan = NomorAduan::first();
+        return view('frontend.info_harga', compact('data', 'pasar', 'aduan', 'pasar_id', 'tanggal'));
     }
 
     public function info_stok()
     {
         $data = [];
         $pasar = Pasar::get();
-        return view('frontend.info_stok', compact('data', 'pasar'));
+        $aduan = NomorAduan::first();
+        return view('frontend.info_stok', compact('data', 'aduan', 'pasar'));
     }
 
     public function info_stok_search()
@@ -129,7 +136,8 @@ class FrontEndController extends Controller
         });
         //        dd($data);
         $pasar = Pasar::get();
-        return view('frontend.info_stok', compact('data', 'pasar', 'pasar_id', 'tanggal'));
+        $aduan = NomorAduan::first();
+        return view('frontend.info_stok', compact('data', 'pasar', 'aduan', 'pasar_id', 'tanggal'));
     }
 
     public function grafik_harga()
@@ -137,7 +145,8 @@ class FrontEndController extends Controller
         $data = [];
         $pasar = Pasar::get();
         $bahan = Bahan::get();
-        return view('frontend.grafik_harga', compact('data', 'pasar', 'bahan'));
+        $aduan = NomorAduan::first();
+        return view('frontend.grafik_harga', compact('data', 'pasar', 'aduan', 'bahan'));
     }
 
     public function grafik_harga_search()
@@ -182,14 +191,16 @@ class FrontEndController extends Controller
         $bahan = Bahan::get();
 
         $pasar = Pasar::get();
-        return view('frontend.grafik_harga', compact('data', 'pasar', 'pasar_id', 'bulan', 'tahun', 'bahan', 'bahan_id', 'dataset'));
+        $aduan = NomorAduan::first();
+        return view('frontend.grafik_harga', compact('data', 'pasar', 'aduan', 'pasar_id', 'bulan', 'tahun', 'bahan', 'bahan_id', 'dataset'));
     }
 
     public function grafik_stok()
     {
         $data = [];
         $pasar = Pasar::get();
-        return view('frontend.grafik_stok', compact('data', 'pasar'));
+        $aduan = NomorAduan::first();
+        return view('frontend.grafik_stok', compact('data', 'pasar', 'aduan'));
     }
 
     public function grafik_stok_search()
@@ -212,18 +223,20 @@ class FrontEndController extends Controller
         $data = [
             'name' => 'asrani',
         ];
-        //dd($data);
-        return view('frontend.grafik_stok', compact('data', 'pasar', 'pasar_id', 'tahun'));
+        $aduan = NomorAduan::first();
+        return view('frontend.grafik_stok', compact('data', 'pasar', 'pasar_id', 'tahun', 'aduan'));
     }
 
     public function login()
     {
-        return view('frontend.login');
+        $aduan = NomorAduan::first();
+        return view('frontend.login', compact('aduan'));
     }
 
     public function artikel()
     {
+        $aduan = NomorAduan::first();
         $berita = Berita::orderBy('id', 'DESC')->paginate(5);
-        return view('frontend.artikel', compact('berita'));
+        return view('frontend.artikel', compact('berita', 'aduan'));
     }
 }
