@@ -65,6 +65,13 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/data/nomoraduan', 'AduanController@index');
     Route::post('/data/nomoraduan', 'AduanController@update');
 
+    Route::get('/data/hargaacuan', 'HargaAcuanController@index');
+    Route::get('/data/hargaacuan/add', 'HargaAcuanController@create');
+    Route::post('/data/hargaacuan/add', 'HargaAcuanController@store');
+    Route::get('/data/hargaacuan/bapok/{id}', 'HargaAcuanController@hargaacuan');
+    Route::post('/data/hargaacuan/bapok/{id}', 'HargaAcuanController@storeHargaAcuan');
+    Route::get('/data/hargaacuan/delete/{id}', 'HargaAcuanController@delete');
+
     Route::get('/data/pasar', 'PasarController@index');
     Route::get('/data/pasar/add', 'PasarController@create');
     Route::post('/data/pasar/add', 'PasarController@store');

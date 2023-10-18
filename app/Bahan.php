@@ -13,12 +13,12 @@ class Bahan extends Model
     {
         return $this->belongsTo(Kelompok::class, 'kelompok_id');
     }
-    
+
     public function satuan()
     {
         return $this->belongsTo(Satuan::class, 'satuan_id');
     }
-    
+
     public function pasar()
     {
         return $this->belongsToMany(Pasar::class, 'bahan_pasar', 'bahan_id', 'pasar_id');
@@ -26,15 +26,14 @@ class Bahan extends Model
 
     public function harga()
     {
-        
         return $this->hasMany(Harga::class, 'bahan_id');
     }
-    
+
     public function stok()
     {
         return $this->hasMany(Stok_kota::class, 'bahan_id');
     }
-    
+
     public function stok_kota()
     {
         return $this->hasMany(Stok_kota::class, 'bahan_id');
