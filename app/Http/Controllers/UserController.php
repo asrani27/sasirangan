@@ -56,7 +56,10 @@ class UserController extends Controller
     {
     }
 
-    public function delete()
+    public function delete($id)
     {
+        User::find($id)->delete();
+        toastr()->success('Berhasil di hapus');
+        return back();
     }
 }

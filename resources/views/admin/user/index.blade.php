@@ -60,7 +60,8 @@
                                 <td style="padding:5px 12px;">{{$no++}}</td>
                                 <td style="padding:5px 12px;">{{$item->username}}</td>
                                 <td style="padding:5px 12px;">
-                                    <a href="/data/user/reset/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-key"></i>Reset Password</a>
+                                    <a href="/data/user/reset/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-key"></i> Reset Password</a>
+                                    <a href="/data/user/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Yakin ingin menghapus data ini?');"><i class="fas fa-trash"></i> </a>
 
 
                                 </td>
