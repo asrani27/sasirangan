@@ -60,6 +60,7 @@
                                 </td>
                                 <td style="padding:5px 12px;">
                                     <a href="/data/pasar/lokasi/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-map-marker"></i> Lokasi</a>
+                                    <a href="/data/pasar/bapok/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-list"></i> Bapok</a>
                                     <a href="/data/pasar/edit/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-edit"></i></a>
                                     <a href="/data/pasar/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Yakin ingin menghapus data ini?');"><i class="fas fa-times"></i></a>
                                 </td>

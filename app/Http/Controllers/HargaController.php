@@ -29,7 +29,7 @@ class HargaController extends Controller
         //$hargaMonth = Harga::where('tanggal', 'like', '%' . $tahun . '-' . $bulan . '%')->get();
         $bahan = Bahan::get();
         //dd($date, $bahan);
-        $data = Bahan::get()->map(function ($item) use ($date, $id) {
+        $data = Pasar::find($id)->bahan->map(function ($item) use ($date, $id) {
             $item->tanggal = collect($date)->map(function ($d) use ($id, $item) {
                 $check = Harga::where('tanggal', $d->format('Y-m-d'))->where('bahan_id', $item->id)->where('pasar_id', $id)->first();
                 if ($check == null) {

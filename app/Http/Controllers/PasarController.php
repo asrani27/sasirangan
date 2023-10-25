@@ -64,6 +64,21 @@ class PasarController extends Controller
         return view('admin.pasar.edit', compact('data', 'edit'));
     }
 
+    public function bapok($id)
+    {
+        $data = Pasar::find($id);
+        $bahanku = Pasar::find($id)->bahan->pluck('id')->toArray();
+        $bapok = Bahan::get();
+        return view('admin.pasar.bapok', compact('data', 'bapok', 'bahanku'));
+    }
+
+    public function updateBapok(Request $req, $id)
+    {
+        $data = Pasar::find($id)->bahan()->sync($req->bahan_id);
+
+        toastr()->success('Berhasil Di Update');
+        return back();
+    }
     public function lokasi($id)
     {
         $edit = Pasar::find($id);

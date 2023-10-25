@@ -13,40 +13,39 @@ class BahanController extends Controller
     public function index()
     {
         $data = Bahan::orderBy('id')->paginate(10);
-        return view('admin.bahan.index',compact('data'));
+        return view('admin.bahan.index', compact('data'));
     }
-    
+
     public function create()
     {
         $satuan = Satuan::get();
         $kelompok = Kelompok::get();
-        return view('admin.bahan.add',compact('satuan','kelompok'));
+        return view('admin.bahan.add', compact('satuan', 'kelompok'));
     }
-    
+
     public function store(Request $req)
     {
         $pasar_id = Pasar::get()->pluck('id');
         $attr = $req->all();
         $check = Bahan::where('nama', $req->nama)->first();
-        if($check != null){
+        if ($check != null) {
             toastr()->error('Nama Bahan Sudah Ada');
             return back();
-        }else{
-            
+        } else {
+
             $b = Bahan::create($attr);
-            $b->pasar()->attach($pasar_id);
+            //$b->pasar()->attach($pasar_id);
             toastr()->success('Nama Bahan Berhasil Di Simpan');
             return redirect('/data/bahan');
         }
     }
-    
+
     public function edit($id)
     {
         $data = Bahan::find($id);
         $satuan = Satuan::get();
         $kelompok = Kelompok::get();
-        return view('admin.bahan.edit',compact('satuan','kelompok','data'));
-        
+        return view('admin.bahan.edit', compact('satuan', 'kelompok', 'data'));
     }
 
     public function update(Request $req, $id)
@@ -67,13 +66,13 @@ class BahanController extends Controller
         return back();
     }
 
-    
+
     public function updateUser(Request $request)
     {
         $data = Bahan::find($request->pk);
         $data->nama = $request->value;
         $data->save();
-        
-        return response()->json(['success'=>'done']);
+
+        return response()->json(['success' => 'done']);
     }
 }

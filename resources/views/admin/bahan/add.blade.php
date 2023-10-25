@@ -42,7 +42,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="example-text-input" class="col-sm-2 col-form-label">Harga Acuan</label>
                     <div class="col-sm-10">
                         <input class="form-control" type="text" name="acuan" id="example-text-input" required onkeypress="return hanyaAngka(event)"/>
@@ -53,7 +53,7 @@
                     <div class="col-sm-10">
                         <input class="form-control" type="text" name="batas" id="example-text-input" required onkeypress="return hanyaAngka(event)"/>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group row">
                     <label for="example-text-input-lg" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
