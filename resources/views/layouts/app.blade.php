@@ -64,5 +64,10 @@
         @toastr_js
         @toastr_render
         @stack('js')
+        <script>
+            if (typeof navigator.serviceWorker !== 'undefined') {
+              navigator.serviceWorker.register('sw.js')
+            }
+        </script>
     </body>
 </html>
