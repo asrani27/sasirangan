@@ -9,7 +9,9 @@
   "short_name": "Dedikasi Baiman",
   "start_url": "/",
   "theme_color": "#e867d4",
-  "categories": [],
+  "categories": [
+    "utilities"
+  ],
   "screenshots": [],
   "icons": [
     {
