@@ -39,6 +39,7 @@ class RestController extends Controller
             $item->harga = number_format($item->harga);
             return $item;
         });
+
         $data['message']        = 'Data Ditemukan';
         $data['data']           = $harga;
 
