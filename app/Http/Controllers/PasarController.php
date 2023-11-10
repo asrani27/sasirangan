@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Bahan;
+use App\Harga;
 use App\Pasar;
 use App\PasarUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PasarController extends Controller
@@ -17,6 +19,30 @@ class PasarController extends Controller
         return view('admin.pasar.index', compact('data', 'user'));
     }
 
+    public function generateHarga()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        $pasar = Pasar::get()->map(function ($item) use ($today) {
+            $item->bahan = $item->bahan->map(function ($item2) use ($item, $today) {
+
+                $checkToday = Harga::where('tanggal', $today)->where('pasar_id', $item->id)->where('bahan_id', $item2->id)->first();
+                if ($checkToday == null) {
+                    //simpan baru
+                    $n = new Harga;
+                    $n->tanggal = $today;
+                    $n->pasar_id = $item->id;
+                    $n->bahan_id = $item2->id;
+                    $n->harga = 0;
+                    $n->save();
+                }
+
+                return $item2;
+            });
+            return $item;
+        })->toArray();
+        toastr()->success('Berhasil digenerate');
+        return back();
+    }
     public function petugas(Request $req)
     {
         $check = PasarUser::where('pasar_id', $req->pasar_id)->where('user_id', $req->user_id)->first();

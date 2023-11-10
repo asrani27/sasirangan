@@ -33,6 +33,7 @@
     <div class="col-lg-6">
         <div class="card m-b-20">
             <div class="card-body">
+                <a href="/data/pasar/generateharga" class="btn btn-md btn-danger waves-effect waves-light"  onclick="return confirm('Yakin ingin menggenerate data harga hari ini ini?');"><i class="fas fa-recycle"></i> Generate Harga Bapok hari ini</a><br/><br/>
                 <table class="table table-striped table-bordered mb-0">
                     <thead>
                     <tr>

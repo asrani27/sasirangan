@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::get('/data/pasar/add', 'PasarController@create');
     Route::post('/data/pasar/add', 'PasarController@store');
     Route::get('/data/pasar/bapok/{id}', 'PasarController@bapok');
+    Route::get('/data/pasar/generateharga', 'PasarController@generateHarga');
     Route::post('/data/pasar/bapok/{id}', 'PasarController@updateBapok');
     Route::get('/data/pasar/edit/{id}', 'PasarController@edit');
     Route::post('/data/pasar/edit/{id}', 'PasarController@update');
