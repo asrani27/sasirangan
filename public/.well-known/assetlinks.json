@@ -3,6 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "id.go.banjarmasinkota.dedikasibaiman.twa",
-    "sha256_cert_fingerprints": ["25:B9:99:E2:54:89:34:5A:67:6D:97:64:AB:12:2B:C1:30:3A:A4:FA:85:6A:E7:3F:4D:AD:05:D6:E2:D6:5C:15"]
+    "sha256_cert_fingerprints": ["1A:0F:62:5C:E9:BA:01:7A:B5:45:3F:1C:E2:B2:75:7D:D5:51:3F:DF:B0:0C:E0:03:38:79:F5:63:21:4F:4D:D3"]
   }
 }]
