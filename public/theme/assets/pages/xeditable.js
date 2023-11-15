@@ -72,12 +72,11 @@ $(function () {
                 return 'Only numbers are allowed';
             }
         },
-
         params: function(params) {               
+            params.pasar_id = $(this).editable().data('pasar_id');
             params.minggu = $(this).editable().data('minggu');
             params.bulan = $(this).editable().data('bulan');
             params.tahun = $(this).editable().data('tahun');
-            params.pasar_id = $(this).editable().data('pasar_id');
             return params;
         }
     });
