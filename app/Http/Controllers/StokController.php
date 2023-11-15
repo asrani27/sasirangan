@@ -69,7 +69,7 @@ class StokController extends Controller
         return view('admin.stok.stok', compact('data', 'pasar', 'date', 'month', 'year', 'fullmonth', 'week', 'id'));
     }
 
-    public function updateService(Request $req)
+    public function updateService(Request $req, $id)
     {
         $check = Stok_kota::where('bahan_id', $req->pk)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->where('pasar_id', $req->pasar_id)->first();
         if ($check == null) {
@@ -77,7 +77,7 @@ class StokController extends Controller
             $s->bulan = $req->bulan;
             $s->tahun = $req->tahun;
             $s->bahan_id = $req->pk;
-            $s->pasar_id = $req->pasar_id;
+            $s->pasar_id = $id;
             if ($req->minggu == '1') {
                 $s->minggu_1 = $req->value;
             } elseif ($req->minggu == '2') {
