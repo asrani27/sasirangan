@@ -40,7 +40,7 @@ $(function () {
     
     $('.inline-username').editable({
         type: 'post',
-        url: '/input/harga/updat',
+        url: '/input/harga/update',
         pk: 1,
         name: 'username',
         title: 'Enter username',
@@ -61,7 +61,7 @@ $(function () {
     });
     $('.inline-username2').editable({
         type: 'post',
-        url: '/input/stok/update',
+        url: '/input/stok/updatee',
         pk: 1,
         name: $(this).editable().data('pasar_id'),
         title: 'Enter username',
