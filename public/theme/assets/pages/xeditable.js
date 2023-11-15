@@ -63,7 +63,7 @@ $(function () {
         type: 'post',
         url: '/input/stok/update',
         pk: 1,
-        name: $(this).editable().data('pasar_id'),
+        name: 'username',
         title: 'Enter username',
         mode: 'inline',
         inputclass: 'form-control-sm',
