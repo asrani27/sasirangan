@@ -69,7 +69,7 @@ class StokController extends Controller
         return view('admin.stok.stok', compact('data', 'pasar', 'date', 'month', 'year', 'fullmonth', 'week', 'id'));
     }
 
-    public function updateService(Request $req, $id)
+    public function updateService(Request $req)
     {
         return $req->all();
         $check = Stok_kota::where('bahan_id', $req->pk)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->where('pasar_id', $req->pasar_id)->first();
