@@ -71,8 +71,6 @@ class StokController extends Controller
 
     public function updateService(Request $req)
     {
-
-        //return $req->all();
         $check = Stok_kota::where('bahan_id', $req->pk)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->where('pasar_id', $req->pasar_id)->first();
         if ($check == null) {
             $s = new Stok_kota;
