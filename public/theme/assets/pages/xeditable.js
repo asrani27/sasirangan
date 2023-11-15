@@ -40,7 +40,7 @@ $(function () {
     
     $('.inline-username').editable({
         type: 'post',
-        url: '/input/harga/update',
+        url: '/input/harga/updat',
         pk: 1,
         name: 'username',
         title: 'Enter username',
