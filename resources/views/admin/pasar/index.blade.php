@@ -40,6 +40,7 @@
                         <th>No</th>
                         <th>Nama Pasar</th>
                         <th>Petugas</th>
+                        <th>Tampilkan Di Stok</th>
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -59,6 +60,9 @@
                                     <a href="#" class="btn btn-sm btn-success waves-effect waves-light petugas" data-pasar_id="{{$item->id}}"><i class="fas fa-user-plus"></i></a>
                                     <a href="/data/pasar/{{$item->id}}/hapus-petugas" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('semua petugas di pasar ini akan di hapus, yakin?');"><i class="fas fa-trash"></i></a>
                                 </td>
+                                <td style="padding:5px 12px;">
+                                    
+                                    {{$item->tampil_stok}}</td>
                                 <td style="padding:5px 12px;">
                                     <a href="/data/pasar/lokasi/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-map-marker"></i> Lokasi</a>
                                     <a href="/data/pasar/bapok/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-list"></i> Bapok</a>

@@ -20,6 +20,14 @@
                     </div>
                     
                     <div class="form-group">
+                        <label>Tampilkan Di Stok</label>
+                        <select name="tampil_stok" class="form-control">
+                            <option value="Y" {{$edit->tampil_stok == 'Y' ? 'selected':''}}>Ya</option>
+                            <option value="T" {{$edit->tampil_stok == 'T' ? 'selected':''}}>Tidak</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
                         <div>
                             <button type="submit" class="btn btn-primary waves-effect waves-light">
                                 <i class="fas fa-save"></i> Update

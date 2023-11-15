@@ -15,7 +15,7 @@ class StokController extends Controller
 
     public function index()
     {
-        $pasar = Pasar::get();
+        $pasar = Pasar::where('tampil_stok', 'Y')->get();
         return view('admin.stok.index', compact('pasar'));
     }
     public function index2()
@@ -71,7 +71,7 @@ class StokController extends Controller
 
     public function updateService(Request $req)
     {
-        //return $req->all();
+
         $check = Stok_kota::where('bahan_id', $req->pk)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->where('pasar_id', $req->pasar_id)->first();
         if ($check == null) {
             $s = new Stok_kota;

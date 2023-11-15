@@ -133,6 +133,7 @@ class PasarController extends Controller
         $attr = $req->all();
         $data = Pasar::find($id);
         $data->nama = $req->nama;
+        $data->tampil_stok = $req->tampil_stok;
         $data->save();
         toastr()->success('Nama Pasar Berhasil Di Update');
         return redirect('/data/pasar');
