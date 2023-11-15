@@ -61,7 +61,7 @@ $(function () {
     });
     $('.inline-username2').editable({
         type: 'post',
-        url: '/input/stok/updatee',
+        url: '/input/stok/update',
         pk: 1,
         name: $(this).editable().data('pasar_id'),
         title: 'Enter username',
