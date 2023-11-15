@@ -71,13 +71,14 @@ class StokController extends Controller
 
     public function updateService(Request $req, $id)
     {
+        return $req->all();
         $check = Stok_kota::where('bahan_id', $req->pk)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->where('pasar_id', $req->pasar_id)->first();
         if ($check == null) {
             $s = new Stok_kota;
             $s->bulan = $req->bulan;
             $s->tahun = $req->tahun;
             $s->bahan_id = $req->pk;
-            $s->pasar_id = $id;
+            $s->pasar_id = $req->pasar_id;
             if ($req->minggu == '1') {
                 $s->minggu_1 = $req->value;
             } elseif ($req->minggu == '2') {
