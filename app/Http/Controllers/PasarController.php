@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Bahan;
+use App\BulanTahun;
 use App\Harga;
+use App\HargaAcuan;
 use App\Pasar;
 use App\PasarUser;
 use Carbon\Carbon;
@@ -128,6 +130,74 @@ class PasarController extends Controller
         return view('admin.pasar.lokasi', compact('edit', 'latlong', 'radius'));
     }
 
+    public function harga($id)
+    {
+        $pasar = Pasar::find($id);
+        $bulantahun = BulanTahun::where('pasar_id', $id)->orderBy('bulan', 'DESC')->get();
+        return view('admin.pasar.harga', compact('pasar', 'bulantahun'));
+    }
+    public function acuan($id, $bulan_id)
+    {
+        $pasar = Pasar::find($id);
+        $bulantahun = BulanTahun::find($bulan_id);
+        $bahan = Pasar::find($id)->bahan->map(function ($item) use ($id, $bulan_id) {
+            $check = HargaAcuan::where('bulan_tahun_id', $bulan_id)->where('bahan_id', $item->id)->where('pasar_id', $id)->first();
+            if ($check == null) {
+                $item->harga = 0;
+            } else {
+                $item->harga = $check->harga;
+            }
+            return $item;
+        });
+
+        return view('admin.pasar.acuan', compact('bulantahun', 'id', 'bulan_id', 'bahan', 'pasar'));
+    }
+
+    public function storeAcuan(Request $req, $id, $bulan_id)
+    {
+
+        foreach ($req->bapok_id as $key => $item) {
+            $check = HargaAcuan::where('bulan_tahun_id', $bulan_id)->where('bahan_id', $item)->where('pasar_id', $id)->first();
+            if ($check == null) {
+                //simpan
+                $n = new HargaAcuan;
+                $n->bulan_tahun_id = $bulan_id;
+                $n->bahan_id = $item;
+                $n->harga = $req->harga[$key];
+                $n->pasar_id = $id;
+                $n->save();
+            } else {
+                //update
+                $check->update([
+                    'harga' => $req->harga[$key],
+                ]);
+            }
+        }
+        toastr()->success(' Berhasil Di Update');
+        return back();
+    }
+    public function deleteBulanTahun($id, $bulan_id)
+    {
+        BulanTahun::find($bulan_id)->delete();
+        toastr()->success('Berhasil Di Hapus');
+        return back();
+    }
+    public function bulanTahun(Request $req, $id)
+    {
+        $check = BulanTahun::where('pasar_id', $id)->where('bulan', $req->bulan)->where('tahun', $req->tahun)->first();
+        if ($check == null) {
+            $n = new BulanTahun;
+            $n->bulan = $req->bulan;
+            $n->tahun = $req->tahun;
+            $n->pasar_id = $id;
+            $n->save();
+            toastr()->success('berhasil Disimpan');
+            return redirect('/data/pasar/harga/' . $id);
+        } else {
+            toastr()->error('Sudah ada');
+            return back();
+        }
+    }
     public function update(Request $req, $id)
     {
         $attr = $req->all();

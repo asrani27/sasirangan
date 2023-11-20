@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<h4 class="page-title">Harga Acuan Bahan Pokok Bulan {{\Carbon\Carbon::createFromFormat('d/m','01/'.$bulantahun->bulan)->translatedFormat('F')}} {{$bulantahun->tahun}}</h4>
+<h4 class="page-title">Harga Acuan Bahan Pokok Bulan {{\Carbon\Carbon::createFromFormat('d/m','01/'.$bulantahun->bulan)->translatedFormat('F')}} {{$bulantahun->tahun}}, {{$pasar->nama}}</h4>
 <ol class="breadcrumb">
     <li class="breadcrumb-item active">Edit harga acuan</li>
 </ol>
@@ -13,7 +13,7 @@
         <div class="card m-b-20">
             <div class="card-body">
 
-            <form class="" action="/data/hargaacuan/bapok/{{$id}}" method="POST">
+            <form class="" action="/data/pasar/harga/{{$id}}/acuan/{{$bulan_id}}" method="POST">
                 @csrf
                 <table class="table table-striped table-bordered mb-0">
                     <thead>
@@ -44,7 +44,7 @@
                     <button type="submit" class="btn btn-primary waves-effect waves-light">
                         <i class="fas fa-save"></i> Update
                     </button>
-                    <a href="/data/hargaacuan" class="btn btn-secondary waves-effect waves-light">
+                    <a href="/data/pasar/harga/{{$id}}" class="btn btn-secondary waves-effect waves-light">
                         <i class="fas fa-arrow-alt-circle-left"></i> Kembali
                     </a>
                 </div>

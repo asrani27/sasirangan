@@ -24,7 +24,7 @@
                     <ul class="submenu">
                         <li><a href="/data/kelompok">Kelompok Bahan</a></li>
                         <li><a href="/data/bahan">Bahan Pokok</a></li>
-                        <li><a href="/data/hargaacuan">Harga Acuan</a></li>
+                        {{-- <li><a href="/data/hargaacuan">Harga Acuan</a></li> --}}
                         <li><a href="/data/satuan">Satuan</a></li>
                         <li><a href="/data/pasar">Pasar</a></li>
                         <li><a href="/data/notifikasi">List Nomor Notifikasi</a></li>

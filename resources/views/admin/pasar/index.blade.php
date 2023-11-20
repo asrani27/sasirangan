@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <div class="card m-b-20">
             <div class="card-body">
                 <form class="" action="/data/pasar/add" method="POST">
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         <div class="card m-b-20">
             <div class="card-body">
                 <a href="/data/pasar/generateharga" class="btn btn-md btn-danger waves-effect waves-light"  onclick="return confirm('Yakin ingin menggenerate data harga hari ini ini?');"><i class="fas fa-recycle"></i> Generate Harga Bapok hari ini</a><br/><br/>
@@ -65,6 +65,7 @@
                                     {{$item->tampil_stok}}</td>
                                 <td style="padding:5px 12px;">
                                     <a href="/data/pasar/lokasi/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-map-marker"></i> Lokasi</a>
+                                    <a href="/data/pasar/harga/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-money-bill"></i> Harga Acuan</a>
                                     <a href="/data/pasar/bapok/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-list"></i> Bapok</a>
                                     <a href="/data/pasar/edit/{{$item->id}}" class="btn btn-sm btn-success waves-effect waves-light"><i class="fas fa-edit"></i></a>
                                     <a href="/data/pasar/delete/{{$item->id}}" class="btn btn-sm btn-danger waves-effect waves-light" onclick="return confirm('Yakin ingin menghapus data ini?');"><i class="fas fa-times"></i></a>

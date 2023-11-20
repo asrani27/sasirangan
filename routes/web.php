@@ -82,6 +82,12 @@ Route::group(['middleware' => ['auth', 'role:superadmin|admin']], function () {
     Route::post('/data/pasar/edit/{id}', 'PasarController@update');
     Route::get('/data/pasar/delete/{id}', 'PasarController@delete');
     Route::get('/data/pasar/lokasi/{id}', 'PasarController@lokasi');
+    Route::get('/data/pasar/harga/{id}', 'PasarController@harga');
+    Route::post('/data/pasar/harga/{id}/tahunbulan', 'PasarController@bulanTahun');
+    Route::get('/data/pasar/harga/{id}/delete/{bulan_id}', 'PasarController@deleteBulanTahun');
+    Route::get('/data/pasar/harga/{id}/acuan/{bulan_id}', 'PasarController@acuan');
+    Route::post('/data/pasar/harga/{id}/acuan/{bulan_id}', 'PasarController@storeAcuan');
+
     Route::post('/data/pasar/lokasi/{id}', 'PasarController@updateLokasi');
 
     Route::get('/home/ews', 'EWSController@ews');
