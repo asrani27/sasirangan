@@ -72,9 +72,6 @@ class EWSController extends Controller
             return $item;
         });
 
-
-
-
         toastr()->success(' Berhasil Digenerate');
         return back();
     }

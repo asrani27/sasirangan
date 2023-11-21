@@ -45,6 +45,20 @@ class EWSCommand extends Command
      */
     public function handle()
     {
+        // $nomor = [
+        //     [
+        //         'nomor' => '081294252730',
+        //     ],
+        //     [
+        //         'nomor' => '087715996555',
+        //     ],
+        // ];
+
+
+        // foreach (collect($nomor) as $key => $item) {
+        //     dd($item['nomor']);
+        // }
+
         $year = Carbon::now()->year;
         $month = Carbon::now()->month;
 
@@ -100,10 +114,19 @@ class EWSCommand extends Command
         $n->save();
 
         if (Kenaikan::where('tanggal', Carbon::now()->format('Y-m-d'))->count() != 0) {
-            $nomor = Notifikasi::get();
-            foreach ($nomor as $key => $item) {
+            $nomor = [
+                [
+                    'nomor' => '081294252730',
+                ],
+                [
+                    'nomor' => '087715996555',
+                ],
+            ];
+            //dd($nomor);
+            //$nomor = Notifikasi::get();
+            foreach (collect($nomor) as $key => $item) {
                 $pesan = [
-                    "phoneNumber" => $item->nomor,
+                    "phoneNumber" => $item['nomor'],
                     "content" => [
                         "text" => Carbon::now()->translatedFormat('d F Y') .
                             " \nEarly Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n",
