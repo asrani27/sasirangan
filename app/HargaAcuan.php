@@ -11,4 +11,8 @@ class HargaAcuan extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+    public function pasar()
+    {
+        return $this->belongsTo(Pasar::class, 'pasar_id');
+    }
 }
