@@ -92,7 +92,7 @@
                             <td>{{$item->bahan->nama}}</td>
                             <td>{{number_format($item->acuan)}}</td>
                             <td>{{number_format($item->harga)}}</td>
-                            <td>{{$item->kenaikan}} %</td>
+                            <td>{{number_format($item->kenaikan,2)}} %</td>
                             <td><button type="button" class="btn btn-sm btn-danger">NAIK</button></td>
 
                         </tr>
