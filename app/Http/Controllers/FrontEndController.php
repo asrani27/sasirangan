@@ -7,9 +7,10 @@ use App\Bahan;
 use App\Harga;
 use App\Pasar;
 use App\Berita;
-use App\NomorAduan;
 use App\Slider;
+use App\Kenaikan;
 use Carbon\Carbon;
+use App\NomorAduan;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class FrontEndController extends Controller
 
     public function kenaikan()
     {
-        $ews = EWS::where('tanggal', Carbon::now()->format('Y-m-d'))->get();
+        $ews = Kenaikan::where('tanggal', Carbon::now()->format('Y-m-d'))->get();
         $aduan = NomorAduan::first();
         return view('frontend.kenaikan', compact('ews', 'aduan'));
     }

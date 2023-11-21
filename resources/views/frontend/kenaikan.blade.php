@@ -9,29 +9,29 @@
 @include('frontend.cssaduan')
 @endpush
 @section('content')
+
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body table-responsive">
 
                 <div class="col-xl-12 border-right">
-                    <h4 class="mt-0 header-title mb-2">Early Warning system (EWS) Formula</h4>
+                    <h4 class="mt-0 header-title mb-2">DEDIKASI BAIMAN</h4>
                     <h4 class="mt-0 header-title mb-2">Tanggal Hari ini : {{\Carbon\Carbon::now()->format('d-m-Y')}}</h4>
                     
                 </div>
-                
+                <div class="col-xl-12 border-left">
+                    
+                </div>
                 <table class="table table-striped table-bordered mb-0">
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Pasar</th>
                         <th>Komoditi</th>
-                        <th>Harga Acuan</th>
-                        <th>Batas Kenaikan Toleransi</th>
-                        <th>H+1</th>
-                        <th>H+2</th>
-                        <th>H+3</th>
-                        <th>H+4</th>
+                        <th>Harga Acuan (awal bulan)</th>
+                        <th>Harga Hari ini</th>
+                        <th>Persentase Kenaikan</th>
                         <th>Kesimpulan</th>
                     </tr>
                     </thead>
@@ -44,11 +44,8 @@
                             <td>{{$item->pasar->nama}}</td>
                             <td>{{$item->bahan->nama}}</td>
                             <td>{{number_format($item->acuan)}}</td>
-                            <td>{{number_format($item->batas)}}</td>
-                            <td>{{number_format($item->h1)}}</td>
-                            <td>{{number_format($item->h2)}}</td>
-                            <td>{{number_format($item->h3)}}</td>
-                            <td>{{number_format($item->h4)}}</td>
+                            <td>{{number_format($item->harga)}}</td>
+                            <td>{{number_format($item->kenaikan,2)}} %</td>
                             <td><button type="button" class="btn btn-sm btn-danger">NAIK</button></td>
 
                         </tr>
@@ -59,6 +56,7 @@
             
         </div>
     </div>
+    
 </div>
 @include('frontend.aduan')
 @endsection
