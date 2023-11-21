@@ -77,7 +77,8 @@
                         <th>Pasar</th>
                         <th>Komoditi</th>
                         <th>Harga Acuan (awal bulan)</th>
-                        <th>Batas Kenaikan Toleransi (5%)</th>
+                        <th>Harga Hari ini</th>
+                        <th>Persentase Kenaikan</th>
                         <th>Kesimpulan</th>
                     </tr>
                     </thead>
@@ -90,6 +91,8 @@
                             <td>{{$item->pasar->nama}}</td>
                             <td>{{$item->bahan->nama}}</td>
                             <td>{{number_format($item->acuan)}}</td>
+                            <td>{{number_format($item->harga)}}</td>
+                            <td>{{$item->kenaikan}} %</td>
                             <td><button type="button" class="btn btn-sm btn-danger">NAIK</button></td>
 
                         </tr>

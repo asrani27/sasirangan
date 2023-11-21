@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\EWS;
 use App\Pasar;
 use App\Traffic;
+use App\Kenaikan;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class HomeController extends Controller
         $totalPengunjung = Traffic::count();
         $pengunjungHariIni = Traffic::where('tanggal', Carbon::now()->format('Y-m-d'))->count();
 
-        $ews = EWS::where('tanggal', Carbon::now()->format('Y-m-d'))->get();
+        $ews = Kenaikan::where('tanggal', Carbon::now()->format('Y-m-d'))->get();
+
         return view('admin.home', compact('data', 'pasar', 'tahun2021', 'pengunjungHariIni', 'totalPengunjung', 'ews'));
     }
 }
