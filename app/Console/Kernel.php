@@ -28,20 +28,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('ews');
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             DB::beginTransaction();
-            try{
+            try {
                 $tglKemarin = Carbon::today()->subDay(1)->format('Y-m-d');
                 $tglSekarang = Carbon::today()->format('Y-m-d');
                 $pasar_id = Pasar::get()->pluck('id');
-                foreach($pasar_id as $pasar){
+                foreach ($pasar_id as $pasar) {
                     $dataCronJob = Harga::where('pasar_id', $pasar)->where('tanggal', $tglKemarin)->get();
-                    foreach($dataCronJob as $item)
-                    {
+                    foreach ($dataCronJob as $item) {
                         $check = Harga::where('tanggal', $tglSekarang)->where('pasar_id', $item->pasar_id)->where('bahan_id', $item->bahan_id)->first();
-                        
-                        if($check == null){
+
+                        if ($check == null) {
                             //simpan data
                             $n = new Harga;
                             $n->tanggal  = $tglSekarang;
@@ -49,13 +49,12 @@ class Kernel extends ConsoleKernel
                             $n->pasar_id = $item->pasar_id;
                             $n->bahan_id = $item->bahan_id;
                             $n->save();
-            
-                        }else{
+                        } else {
                         }
                     }
                 }
                 DB::commit();
-            }catch(\Exception $e){
+            } catch (\Exception $e) {
                 DB::rollback();
             }
         });
@@ -68,7 +67,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
