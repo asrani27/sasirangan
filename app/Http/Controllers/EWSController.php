@@ -72,24 +72,8 @@ class EWSController extends Controller
             return $item;
         });
 
-        // if (Kenaikan::where('tanggal', Carbon::now()->format('Y-m-d'))->count() != 0) {
-        //     dispatch(new SendNotif)->delay(now()->addSeconds(10));
-        // }
-        $nomor = Notifikasi::get();
-        foreach ($nomor as $key => $item) {
-            dd($item);
-        }
-        $pesan = [
-            "phoneNumber" => $nomor,
-            "content" => [
-                "text" => Carbon::now()->translatedFormat('d F Y') .
-                    " \nEarly Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n",
-            ]
-        ];
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlMTE4NmUzLWJkZTEtNDhlYi05MzAxLTY1ZGQ5MzIzNjdiNiIsImlhdCI6MTY4NjI3MjY3M30.KvyD0cCvAQNFC8V4e0ZsZ3eR4M6nKZeC5JCov_yhHXI',
-        ])->withBody(json_encode($pesan), 'application/json')->post('https://api.wa.banjarmasinkota.go.id/whatsapp/8e1186e3-bde1-48eb-9301-65dd932367b6/messages');
+
 
         toastr()->success(' Berhasil Digenerate');
         return back();

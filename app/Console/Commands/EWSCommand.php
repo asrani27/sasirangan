@@ -8,7 +8,9 @@ use App\Kenaikan;
 use Carbon\Carbon;
 use App\BulanTahun;
 use App\HargaAcuan;
+use App\Notifikasi;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 
 class EWSCommand extends Command
 {
@@ -92,14 +94,29 @@ class EWSCommand extends Command
             }
             return $item;
         });
-        // for ($x = 1; $x <= 10; $x++) {
-        //     $n = new Cronjob;
-        //     $n->cronjob = Carbon::now()->format('Y-m-d H:i:s');
-        //     $n->save();
-        //     sleep(5);
-        // }
-        // ProcessPodcast::dispatch($podcast)
-        //             ->delay(now()->addMinutes(10));
+
+        $n = new Cronjob;
+        $n->cronjob = Carbon::now()->format('Y-m-d H:i:s');
+        $n->save();
+
+        if (Kenaikan::where('tanggal', Carbon::now()->format('Y-m-d'))->count() != 0) {
+            $nomor = Notifikasi::get();
+            foreach ($nomor as $key => $item) {
+                $pesan = [
+                    "phoneNumber" => $item->nomor,
+                    "content" => [
+                        "text" => Carbon::now()->translatedFormat('d F Y') .
+                            " \nEarly Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n Link : https://dedikasibaiman.banjarmasinkota.go.id/kenaikan \n",
+                    ]
+                ];
+
+                Http::withHeaders([
+                    'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlMTE4NmUzLWJkZTEtNDhlYi05MzAxLTY1ZGQ5MzIzNjdiNiIsImlhdCI6MTY4NjI3MjY3M30.KvyD0cCvAQNFC8V4e0ZsZ3eR4M6nKZeC5JCov_yhHXI',
+                ])->withBody(json_encode($pesan), 'application/json')->post('https://api.wa.banjarmasinkota.go.id/whatsapp/8e1186e3-bde1-48eb-9301-65dd932367b6/messages');
+
+                sleep(5);
+            }
+        }
         $this->info('Berhasil di simpan ' . Carbon::now()->format('Y-m-d H:i:s'));
     }
 }
