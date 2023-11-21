@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('ews');
-        // $schedule->command('inspire')->hourly();
+        //$schedule->command('ews');
+
         $schedule->call(function () {
             DB::beginTransaction();
             try {
