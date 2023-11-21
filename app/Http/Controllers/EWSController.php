@@ -7,6 +7,7 @@ use App\Bahan;
 use App\BulanTahun;
 use App\Harga;
 use App\HargaAcuan;
+use App\Jobs\SendNotif;
 use App\Kenaikan;
 use App\Pasar;
 use Carbon\Carbon;
@@ -65,6 +66,9 @@ class EWSController extends Controller
             }
             return $item;
         });
+
+        dispatch(new SendNotif);
+
         toastr()->success(' Berhasil Digenerate');
         return back();
     }

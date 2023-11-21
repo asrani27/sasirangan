@@ -43,20 +43,13 @@ class EWSCommand extends Command
      */
     public function handle()
     {
-        //EWS dan notif ke wa
-        for ($x = 1; $x <= 10; $x++) {
-            $n = new Cronjob;
-            $n->cronjob = Carbon::now()->format('Y-m-d H:i:s');
-            $n->save();
-            $n->delay(5);
-        }
         $year = Carbon::now()->year;
         $month = Carbon::now()->month;
 
         $now = Carbon::now()->format('Y-m-d');
         $hargaToday = Harga::where('tanggal', $now)->get()->map(function ($item) use ($month, $year, $now) {
             $bulantahun_id = BulanTahun::where('bulan', $month)->where('tahun', $year)->where('pasar_id', $item->pasar_id)->first();
-            dd($item);
+
             if ($bulantahun_id == null) {
             } else {
                 $hargaAcuan = HargaAcuan::where('bulan_tahun_id', $bulantahun_id->id)->where('pasar_id', $item->pasar_id)->where('bahan_id', $item->bahan_id)->first();
@@ -99,7 +92,10 @@ class EWSCommand extends Command
             }
             return $item;
         });
-
+        $n = new Cronjob;
+        $n->cronjob = Carbon::now()->format('Y-m-d H:i:s');
+        $n->save();
+        $n->delay(5);
         // ProcessPodcast::dispatch($podcast)
         //             ->delay(now()->addMinutes(10));
         $this->info('Berhasil di simpan ' . Carbon::now()->format('Y-m-d H:i:s'));
