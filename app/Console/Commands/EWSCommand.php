@@ -123,8 +123,9 @@ class EWSCommand extends Command
                 ],
             ];
             //dd($nomor);
-            //$nomor = Notifikasi::get();
-            foreach (collect($nomor) as $key => $item) {
+            $nomor = Notifikasi::get();
+            foreach ($nomor as $key => $item) {
+
                 $pesan = [
                     "phoneNumber" => $item['nomor'],
                     "content" => [
