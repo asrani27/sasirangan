@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //$schedule->command('ews');
-        $schedule->command('test')->everyFiveSeconds();
+        $schedule->command('coba')->everyFiveSeconds();
 
         $schedule->call(function () {
             DB::beginTransaction();

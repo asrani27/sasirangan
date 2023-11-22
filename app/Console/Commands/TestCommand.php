@@ -13,7 +13,7 @@ class TestCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'test';
+    protected $signature = 'coba';
 
     /**
      * The console command description.
@@ -42,5 +42,6 @@ class TestCommand extends Command
         $n = new Cronjob;
         $n->cronjob = Carbon::now()->format('Y-m-d H:i:s');
         $n->save();
+        $this->info('sukses');
     }
 }
