@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //$schedule->command('ews');
+        $schedule->command('test')->everyFiveSeconds();
 
         $schedule->call(function () {
             DB::beginTransaction();
@@ -57,7 +58,7 @@ class Kernel extends ConsoleKernel
             } catch (\Exception $e) {
                 DB::rollback();
             }
-        });
+        })->dailyAt('01:10');;
     }
 
     /**

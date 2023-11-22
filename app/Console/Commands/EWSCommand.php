@@ -45,20 +45,6 @@ class EWSCommand extends Command
      */
     public function handle()
     {
-        // $nomor = [
-        //     [
-        //         'nomor' => '081294252730',
-        //     ],
-        //     [
-        //         'nomor' => '087715996555',
-        //     ],
-        // ];
-
-
-        // foreach (collect($nomor) as $key => $item) {
-        //     dd($item['nomor']);
-        // }
-
         $year = Carbon::now()->year;
         $month = Carbon::now()->month;
 
