@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EWS;
+use App\Stok;
 use App\Bahan;
 use App\Harga;
 use App\Pasar;
@@ -11,6 +12,7 @@ use App\Slider;
 use App\Kenaikan;
 use Carbon\Carbon;
 use App\NomorAduan;
+use App\Stok_kota;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,55 +92,45 @@ class FrontEndController extends Controller
     public function info_stok()
     {
         $data = [];
-        $pasar = Pasar::get();
+        $pasar = Pasar::where('tampil_stok', 'Y')->get();
         $aduan = NomorAduan::first();
-        return view('frontend.info_stok', compact('data', 'aduan', 'pasar'));
+
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+        return view('frontend.info_stok', compact('data', 'aduan', 'pasar', 'month', 'year'));
     }
 
     public function info_stok_search()
     {
         $pasar_id = request()->get('pasar_id');
-        $tanggal = request()->get('tanggal');
-        $tanggal_sekarang = Carbon::parse($tanggal);
-        $bulan_lalu = Carbon::parse($tanggal)->subMonth()->endOfMonth();
+        $month = request()->get('bulan');
+        $year = request()->get('tahun');
 
+        $daysCount = Carbon::parse($month . '/01/' . $year)->daysInMonth;
+        $week      =  Carbon::parse($month . '/' . $daysCount . '/' . $year)->weekOfMonth;
         $bahan = Pasar::find($pasar_id)->bahan;
-        $data = $bahan->map(function ($item) use ($tanggal_sekarang, $bulan_lalu, $pasar_id) {
-            $item->stok_terkini = $item->stok->where('tanggal', $tanggal_sekarang->format('Y-m-d'))->where('pasar_id', $pasar_id)->first();
-            $item->bulan_lalu = $item->stok->where('tanggal', $bulan_lalu->format('Y-m-d'))->where('pasar_id', $pasar_id)->first();
-
-            if ($item->stok_terkini == null) {
-                $item->stok_terkini = 0;
+        $data = $bahan->map(function ($item) use ($pasar_id, $month, $year) {
+            $check = Stok_kota::where('bulan', $month)->where('tahun', $year)->where('bahan_id', $item->id)->where('pasar_id', $pasar_id)->first();
+            if ($check == null) {
+                $item->minggu_1 = 0;
+                $item->minggu_2 = 0;
+                $item->minggu_3 = 0;
+                $item->minggu_4 = 0;
+                $item->minggu_5 = 0;
             } else {
-                $item->stok_terkini = $item->stok_terkini->stok;
-            }
-            if ($item->bulan_lalu == null) {
-                $item->bulan_lalu = 0;
-            } else {
-                $item->bulan_lalu = $item->bulan_lalu->stok;
-            }
-
-            if ($item->stok_terkini == $item->bulan_lalu) {
-                $item->perubahan = 0;
-            } elseif ($item->stok_terkini > $item->bulan_lalu) {
-                $item->perubahan = $item->stok_terkini - $item->bulan_lalu;
-            } elseif ($item->stok_terkini < $item->bulan_lalu) {
-                $item->perubahan = $item->stok_terkini - $item->bulan_lalu;
+                $item->minggu_1 = $check->minggu_1;
+                $item->minggu_2 = $check->minggu_2;
+                $item->minggu_3 = $check->minggu_3;
+                $item->minggu_4 = $check->minggu_4;
+                $item->minggu_5 = $check->minggu_5;
             }
 
-            // if($item->bulan_lalu == 0){
-            //     $item->persen = 100;
-            // }elseif($item->stok_terkini - $item->bulan_lalu == 0){
-            //     $item->persen = 0;
-            // }else{
-            //     ($item->terkini / $item->bulan_lalu) * 100 -100;
-            // }
             return $item;
         });
-        //        dd($data);
-        $pasar = Pasar::get();
+
+        $pasar = Pasar::where('tampil_stok', 'Y')->get();
         $aduan = NomorAduan::first();
-        return view('frontend.info_stok', compact('data', 'pasar', 'aduan', 'pasar_id', 'tanggal'));
+        return view('frontend.info_stok', compact('data', 'pasar', 'aduan', 'pasar_id', 'month', 'year', 'week'));
     }
 
     public function grafik_harga()

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('visit')->group(function () {
     Route::get('/', 'FrontEndController@beranda');
     Route::get('/info-harga', 'FrontEndController@info_harga');
+    Route::get('/info-stok', 'FrontEndController@info_stok');
     Route::get('/info-harga/search', 'FrontEndController@info_harga_search');
     Route::get('/info-stok', 'FrontEndController@info_stok');
     Route::get('/info-stok/search', 'FrontEndController@info_stok_search');

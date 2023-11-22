@@ -19,7 +19,7 @@
             <div class="btn-toolbar p-3" role="toolbar">
                 <form method="get" action="/info-stok/search">
                     <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="btn-group">
                             <select class="form-control" name="pasar_id" required>
                                 <option value="">--Pilih Pasar--</option>
@@ -27,13 +27,34 @@
                                 <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
                             </select>
+                            
+                            <select class="form-control" name="bulan" required>
+                            <option value="">-Bulan-</option>
+                            <option value="01" {{$month == '01' ? 'selected' : ''}}>Januari</option>
+                            <option value="02" {{$month == '02' ? 'selected' : ''}}>Februari</option>
+                            <option value="03" {{$month == '03' ? 'selected' : ''}}>Maret</option>
+                            <option value="04" {{$month == '04' ? 'selected' : ''}}>April</option>
+                            <option value="05" {{$month == '05' ? 'selected' : ''}}>Mei</option>
+                            <option value="06" {{$month == '06' ? 'selected' : ''}}>Juni</option>
+                            <option value="07" {{$month == '07' ? 'selected' : ''}}>Juli</option>
+                            <option value="08" {{$month == '08' ? 'selected' : ''}}>Agustus</option>
+                            <option value="09" {{$month == '09' ? 'selected' : ''}}>September</option>
+                            <option value="10" {{$month == '10' ? 'selected' : ''}}>Oktober</option>
+                            <option value="11" {{$month == '11' ? 'selected' : ''}}>November</option>
+                            <option value="12" {{$month == '12' ? 'selected' : ''}}>Desember</option>
+                            </select>
+                            
+                            <select class="form-control" name="tahun" required>
+                            <option value="">-Tahun-</option>
+                            <option value="2021" {{$year == '2021' ? 'selected' : ''}}>2021</option>
+                            <option value="2022" {{$year == '2022' ? 'selected' : ''}}>2022</option>
+                            <option value="2023" {{$year == '2023' ? 'selected' : ''}}>2023</option>
+                            </select>
+                            
+                            <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="btn-group">
-                            <input type="date" class="form-control" name="tanggal" value="{{\Carbon\Carbon::today()->format('Y-m-d')}}" placeholder="Cari"> &nbsp; <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
+                    
                     </div>
                 </form>
             </div>
@@ -65,7 +86,7 @@
             <div class="btn-toolbar p-3" role="toolbar">
                 <form method="get" action="/info-stok/search">
                     <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="btn-group">
                             <select class="form-control" name="pasar_id" required>
                                 <option value="">--Pilih Pasar--</option>
@@ -73,12 +94,33 @@
                                 <option value="{{$item->id}}" {{$pasar_id == $item->id ? 'selected':''}}>{{$item->nama}}</option>
                                 @endforeach
                             </select>
+                            <select class="form-control" name="bulan" required>
+                            <option value="">-Bulan-</option>
+                            <option value="01" {{$month == '01' ? 'selected' : ''}}>Januari</option>
+                            <option value="02" {{$month == '02' ? 'selected' : ''}}>Februari</option>
+                            <option value="03" {{$month == '03' ? 'selected' : ''}}>Maret</option>
+                            <option value="04" {{$month == '04' ? 'selected' : ''}}>April</option>
+                            <option value="05" {{$month == '05' ? 'selected' : ''}}>Mei</option>
+                            <option value="06" {{$month == '06' ? 'selected' : ''}}>Juni</option>
+                            <option value="07" {{$month == '07' ? 'selected' : ''}}>Juli</option>
+                            <option value="08" {{$month == '08' ? 'selected' : ''}}>Agustus</option>
+                            <option value="09" {{$month == '09' ? 'selected' : ''}}>September</option>
+                            <option value="10" {{$month == '10' ? 'selected' : ''}}>Oktober</option>
+                            <option value="11" {{$month == '11' ? 'selected' : ''}}>November</option>
+                            <option value="12" {{$month == '12' ? 'selected' : ''}}>Desember</option>
+                            </select>
+                            &nbsp;
+                            <select class="form-control" name="tahun" required>
+                            <option value="">-Tahun-</option>
+                            <option value="2021" {{$year == '2021' ? 'selected' : ''}}>2021</option>
+                            <option value="2022" {{$year == '2022' ? 'selected' : ''}}>2022</option>
+                            <option value="2023" {{$year == '2023' ? 'selected' : ''}}>2023</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
+                            
+                            
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="btn-group">
-                            <input type="date" class="form-control" name="tanggal" value="{{$tanggal}}" placeholder="Cari"> &nbsp; <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
-                        </div>
+                        
                     </div>
                     </div>
                 </form>
@@ -86,38 +128,48 @@
             <div class="card-body table-responsive">
                 <table class="table table-striped table-bordered mb-0">
                     <thead>
-                        <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Bahan Pokok</th>
-                            <th class="text-center">Satuan</th>
-                            <th class="text-center">Stok Bulan Lalu <br />{{\Carbon\Carbon::parse($tanggal)->subMonth()->endOfMonth()->format('d-M-Y')}}</th>
-                            <th class="text-center">Stok Terkini <br /> {{\Carbon\Carbon::parse($tanggal)->format('d-M-Y')}}</th>
-                            <th class="text-center">Perubahan</th>
-                            <th class="text-center">Perubahan (%)</th>                            
-                        </tr>
+                    <tr class="text-center">
+                        <th rowspan=2>No</th>
+                        <th rowspan=2>Nama Bahan</th>
+                        <th rowspan=2>Satuan</th>     
+                        @if ($week == 5)
+                        <th colspan=5>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>  
+                        @else
+                        <th colspan=4>Bulan {{\Carbon\Carbon::CreateFromFormat('m-Y', $month.'-'.$year)->format('M Y')}}</th>  
+                        @endif                         
+                    </tr>
+                    <tr class="text-center">
+                        <th>Minggu Ke 1</th>
+                        <th>Minggu Ke 2</th>
+                        <th>Minggu Ke 3</th>
+                        <th>Minggu Ke 4</th>
+                        @if ($week == 5)
+                        <th>Minggu Ke 5.</th>
+                        @endif
+                    </tr>
                     </thead>
                     @php
                         $no =1;
                     @endphp
                     <tbody>
-                        @foreach ($data as $item)
-                        <tr>
-                            <td class="text-center">{{$no++}}</td>
-                            <td>{{$item->nama}}</td>
-                            <td>{{$item->satuan->nama}}</td>
-                            <td class="text-center">{{$item->bulan_lalu}}</td>
-                            <td class="text-center">{{$item->stok_terkini}}</td>
-                            <td class="text-center">{{$item->perubahan}}</td>
-                            <td>
-                                @if ($item->bulan_lalu == 0 AND $item->stok_terkini != 0) 
-                                    100 %
-                                @elseif($item->stok_terkini == 0 AND $item->bulan_lalu == 0)
-                                0 %
-                                @else
-                                {{($item->stok_terkini / $item->bulan_lalu) * 100 - 100}} %
+                        
+                        @foreach ($data as $b)
+                            <tr style="padding:5px 12px;">
+                                <td style="padding:5px 12px;">{{$no++}}</td>
+                                <td style="padding:5px 12px;">{{$b->nama}}</td>
+                                <td style="padding:5px 12px;">{{$b->satuan->nama}}</td>
+                                <td style="padding:5px 12px;"><a href="#" data-type="text">{{$b->minggu_1}}</a></td>
+                                <td style="padding:5px 12px;"><a href="#" data-type="text">{{$b->minggu_2}}</a></td>
+                                <td style="padding:5px 12px;"><a href="#" data-type="text">{{$b->minggu_3}}</a></td>
+                                <td style="padding:5px 12px;"><a href="#" data-type="text">{{$b->minggu_4}}</a></td>
+                                @if ($week == 5)
+
+                                <td style="padding:5px 12px;"><a href="#" class="inline-username2" data-type="text">{{$b->minggu_5}}</a></td>
+                            
                                 @endif
-                            </td>
-                        </tr>
+                                
+                                
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
