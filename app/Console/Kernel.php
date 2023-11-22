@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //$schedule->command('ews');
+        $schedule->command('ews')->dailyAt('12:10');
         $schedule->command('coba')->everyMinute();
 
         $schedule->call(function () {
@@ -58,7 +58,7 @@ class Kernel extends ConsoleKernel
             } catch (\Exception $e) {
                 DB::rollback();
             }
-        })->dailyAt('01:10');;
+        })->dailyAt('01:10');
     }
 
     /**
