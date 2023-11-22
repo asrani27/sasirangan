@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('ews')->dailyAt('13:10');
+        $schedule->command('ews')->dailyAt('13:45');
         $schedule->command('coba')->everyMinute();
 
         $schedule->call(function () {
