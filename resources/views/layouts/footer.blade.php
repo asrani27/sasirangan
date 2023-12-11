@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="col-12">
-                2021 © Diskominfotik <span class="d-none d-sm-inline-block"> - <i class="mdi mdi-heart text-danger"></i></span>
+                2023 © Disperdagin <span class="d-none d-sm-inline-block"> - <i class="mdi mdi-heart text-danger"></i></span>
             </div>
         </div>
     </div>
