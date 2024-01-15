@@ -72,9 +72,9 @@
                 <li class="has-submenu">
                     <a href="/info-harga"><i class="fas fa-money-bill-wave"></i>Info Harga</a>
                 </li>
-                <li class="has-submenu">
+                {{-- <li class="has-submenu">
                     <a href="/info-stok"><i class="fas fa-th"></i>Info Stok</a>
-                </li>
+                </li> --}}
                 <li class="has-submenu">
                     <a href="#"><i class="mdi mdi-finance"></i>Grafik</a>
                     <ul class="submenu">
