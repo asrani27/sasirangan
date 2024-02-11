@@ -113,6 +113,7 @@
                                 <option value="2021" {{$tahun == '2021' ? 'selected':''}}>2021</option>
                                 <option value="2022" {{$tahun == '2022' ? 'selected':''}}>2022</option>
                                 <option value="2023" {{$tahun == '2023' ? 'selected':''}}>2023</option>
+                                <option value="2024" {{$tahun == '2024' ? 'selected':''}}>2024</option>
                             </select>
                     </div>
                     <div class="col-md-3">
