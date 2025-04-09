@@ -13,82 +13,89 @@
 @section('content')
 
 @if (count($data) == 0)
-    
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card m-b-20">
             <div class="btn-toolbar p-3" role="toolbar">
                 <form method="get" action="/grafik/stok/search">
                     <div class="row">
-                    <div class="col-md-5">
-                        <div class="btn-group">
-                            <select class="form-control" name="pasar_id" required>
-                                <option value="">--Pilih Pasar--</option>
-                                @foreach ($pasar as $item)                                    
-                                <option value="{{$item->id}}">{{$item->nama}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-5">
+                            <div class="btn-group">
+                                <select class="form-control" name="pasar_id" required>
+                                    <option value="">--Pilih Pasar--</option>
+                                    @foreach ($pasar as $item)
+                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-7">
-                        <div class="btn-group">
-                            <select class="form-control" name="tahun" required>
-                                <option value="">--Tahun--</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                            </select>&nbsp;
-                            <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
+
+                        <div class="col-md-7">
+                            <div class="btn-group">
+                                <select class="form-control" name="tahun" required>
+                                    <option value="">--Tahun--</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>&nbsp;
+                                <button type="submit" class="btn btn-primary">Tampilkan <i
+                                        class="fas fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </form>
             </div>
-            
+
             <div class="card-body table-responsive">
-                
+
             </div>
         </div>
     </div>
 </div>
 @else
-    
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card m-b-20">
             <div class="btn-toolbar p-3" role="toolbar">
                 <form method="get" action="/grafik/stok/search">
                     <div class="row">
-                    <div class="col-md-5">
-                        <div class="btn-group">
-                            <select class="form-control" name="pasar_id" required>
-                                <option value="">--Pilih Pasar--</option>
-                                @foreach ($pasar as $item)                                    
-                                <option value="{{$item->id}}" {{$pasar_id == $item->id ? 'selected':''}}>{{$item->nama}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-5">
+                            <div class="btn-group">
+                                <select class="form-control" name="pasar_id" required>
+                                    <option value="">--Pilih Pasar--</option>
+                                    @foreach ($pasar as $item)
+                                    <option value="{{$item->id}}" {{$pasar_id==$item->id ?
+                                        'selected':''}}>{{$item->nama}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-7">
-                        <div class="btn-group">
-                            <select class="form-control" name="tahun" required>
-                                <option value="">--Tahun--</option>
-                                <option value="2021" {{$tahun == '2021' ? 'selected':''}}>2021</option>
-                                <option value="2022" {{$tahun == '2022' ? 'selected':''}}>2022</option>
-                                <option value="2023" {{$tahun == '2023' ? 'selected':''}}>2023</option>
-                            </select>&nbsp;
-                            <button type="submit" class="btn btn-primary">Tampilkan <i class="fas fa-search"></i></button>
+
+                        <div class="col-md-7">
+                            <div class="btn-group">
+                                <select class="form-control" name="tahun" required>
+                                    <option value="">--Tahun--</option>
+                                    <option value="2021" {{$tahun=='2021' ? 'selected' :''}}>2021</option>
+                                    <option value="2022" {{$tahun=='2022' ? 'selected' :''}}>2022</option>
+                                    <option value="2023" {{$tahun=='2023' ? 'selected' :''}}>2023</option>
+                                    <option value="2024" {{$tahun=='2024' ? 'selected' :''}}>2024</option>
+                                    <option value="2025" {{$tahun=='2025' ? 'selected' :''}}>2025</option>
+                                </select>&nbsp;
+                                <button type="submit" class="btn btn-primary">Tampilkan <i
+                                        class="fas fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </form>
             </div>
             <div class="card-body table-responsive">
                 <canvas id="myChart" width="500" height="120"></canvas>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -97,7 +104,7 @@
 @endsection
 
 @push('js')
-    
+
 @if (count($data) == 0)
 
 @else
