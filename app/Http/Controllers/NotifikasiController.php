@@ -15,7 +15,7 @@ class NotifikasiController extends Controller
     {
         $nomor = Notifikasi::find($id)->nomor;
         $pesan = [
-            "phoneNumber" => $nomor,
+            "sendTo" => $nomor,
             "content" => [
                 "text" => Carbon::now()->translatedFormat('d F Y') .
                     " \nEarly Warning system (EWS), \n Harga Bahan Pokok Yang mengalami Kenaikan : \n Link : https://dedikasi.banjarmasinkota.go.id/kenaikan \n",
@@ -23,8 +23,8 @@ class NotifikasiController extends Controller
         ];
 
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUzODVmODJiLWI5ZmMtNDdlYy05MWEwLWJkZDkzYzQ5Njc2NyIsImlhdCI6MTY5NTYxODU0M30.ks-dSXCKtB-aeigPwFZVPJ4b9gP_QculLQmw25Ypey4',
-        ])->withBody(json_encode($pesan), 'application/json')->post('https://api.wa.banjarmasinkota.go.id/whatsapp/e385f82b-b9fc-47ec-91a0-bdd93c496767/messages');
+            'Authorization' => 'Bearer IjF-1UCnC-Vf0iOkYU568oKL0YY_FET7tSCmh5VsnIZeuB6Pyy9_QvP0Uc5z0Z7amQG8s6uTecVSS1czxgBcF2IzQxfROxsgHHtGnRH1bjVXUpPuuZX8C9KkB8GsJFFZ0_R3qsLntIhfdR_V-RlFo-rCI2U9sjDk-Q5QqI6pe_efBaEGAx4ZuCp6sCAIIhO29grFy2gkTwbd0ZLJabhM4UPLKJihkrvebmhGR3e6BOrWBEsEqIni11yFNSOZnhbG5Hwy0S84kgah03QGo9pLEhw3HTR4tLQ8VWy2EMn_6u6QwF6jnTln8I_ddFCgn4cvkvPmh464cEzUUvHbIlRuow',
+        ])->withBody(json_encode($pesan), 'application/json')->post('https://whatsapp.banjarmasinkota.go.id/api/service/send');
 
         toastr()->success(' Berhasil Di Kirim');
         return back();
