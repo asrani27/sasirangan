@@ -50,6 +50,7 @@
                                 <option value="2023" {{$year=='2023' ? 'selected' : '' }}>2023</option>
                                 <option value="2024" {{$year=='2024' ? 'selected' : '' }}>2024</option>
                                 <option value="2025" {{$year=='2025' ? 'selected' : '' }}>2025</option>
+                                <option value="2026" {{$year=='2026' ? 'selected' : '' }}>2026</option>
                             </select>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
