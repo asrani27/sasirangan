@@ -22,3 +22,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/komoditi/update', [RestController::class, 'updateKomoditi']);
 });
 Route::post('/login', [RestController::class, 'login']);
+
+// Info Harga API - Public endpoints
+Route::get('/info-harga/pasar', [RestController::class, 'listPasar']);
+Route::get('/info-harga', [RestController::class, 'infoHarga']);
+
+// Pasar API - Public endpoint
+Route::get('/pasar', [RestController::class, 'pasar']);
