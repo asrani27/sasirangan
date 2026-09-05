@@ -26,9 +26,12 @@ class EWSController extends Controller
         $month = Carbon::now()->month;
 
         $now = Carbon::now()->format('Y-m-d');
-        $hargaToday = Harga::where('tanggal', $now)->get()->map(function ($item) use ($month, $year, $now) {
+
+        $hargaToday = Harga::where('tanggal', $now)->where('harga', '>', 0)->get()->map(function ($item) use ($month, $year, $now) {
+
             $bulantahun_id = BulanTahun::where('bulan', $month)->where('tahun', $year)->where('pasar_id', $item->pasar_id)->first();
-            //dd($item);
+
+            // dd($bulantahun_id, $item);
             if ($bulantahun_id == null) {
             } else {
                 $hargaAcuan = HargaAcuan::where('bulan_tahun_id', $bulantahun_id->id)->where('pasar_id', $item->pasar_id)->where('bahan_id', $item->bahan_id)->first();
@@ -38,11 +41,11 @@ class EWSController extends Controller
                     //jika acuan 0 kasih notif
                     if ($hargaAcuan->harga == 0) {
                         toastr()->error(' Harga Acuan Tidak Boleh 0, Pasar : ' . $hargaAcuan->pasar->nama);
-                        return back();
+                        //return back();
                     } else {
                         $acuan = $hargaAcuan->harga;
-                        //dd($acuan, $item->harga);
                         $kenaikan = (($item->harga - $acuan) / $acuan) * 100;
+
                         //dd($kenaikan, $now, $item->pasar_id, $item->bahan_id, $acuan, $item->harga);
                         //simpan jika kenaik lebih dari 5 %
                         if ($kenaikan > 5) {
@@ -71,7 +74,7 @@ class EWSController extends Controller
             }
             return $item;
         });
-
+        //dd($hargaToday);
         toastr()->success(' Berhasil Digenerate');
         return back();
     }
