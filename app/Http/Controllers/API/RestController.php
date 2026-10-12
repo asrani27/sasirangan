@@ -125,11 +125,17 @@ class RestController extends Controller
      * - pasar_id: optional (if omitted/null, returns all markets)
      * - tanggal: optional (default: today)
      * 
+     * If tanggal_mulai/tanggal_berakhir or bahan_id are present, routes to infoHargaTanggal
+     * 
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function infoHarga(Request $request)
     {
+        if ($request->hasAny(['tanggal_mulai', 'tanggal_berakhir', 'bahan_id'])) {
+            return $this->infoHargaTanggal($request);
+        }
+
         $request->validate([
             'pasar_id' => 'nullable|exists:pasar,id',
             'tanggal' => 'nullable|date',
@@ -289,5 +295,74 @@ class RestController extends Controller
                 'perubahan_persen' => round($perubahan_persen, 2) . ' %',
             ];
         });
+    }
+
+    /**
+     * Get info harga berdasarkan rentang tanggal
+     * 
+     * Query params:
+     * - pasar_id: required (exists:pasar,id)
+     * - bahan_id: required (exists:bahan,id)
+     * - tanggal_mulai: required (date)
+     * - tanggal_berakhir: required (date, after_or_equal:tanggal_mulai)
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function infoHargaTanggal(Request $request)
+    {
+        $request->validate([
+            'pasar_id' => 'required|exists:pasar,id',
+            'bahan_id' => 'required|exists:bahan,id',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
+        ]);
+
+        $pasar = Pasar::find($request->pasar_id);
+        $bahan = Bahan::with('satuan')->find($request->bahan_id);
+
+        $start = Carbon::parse($request->tanggal_mulai)->startOfDay();
+        $end = Carbon::parse($request->tanggal_berakhir)->startOfDay();
+
+        $hargas = Harga::where('pasar_id', $pasar->id)
+            ->where('bahan_id', $bahan->id)
+            ->whereBetween('tanggal', [$start->format('Y-m-d'), $end->format('Y-m-d')])
+            ->orderBy('id', 'asc')
+            ->get()
+            ->keyBy('tanggal');
+
+        $data = [];
+        $current = $start->copy();
+        while ($current->lte($end)) {
+            $dateStr = $current->format('Y-m-d');
+            $hargaItem = $hargas->get($dateStr);
+            $hargaVal = $hargaItem ? (int) $hargaItem->harga : 0;
+
+            $data[] = [
+                'tanggal' => $dateStr,
+                'harga' => $hargaVal,
+                'formatted' => 'Rp ' . number_format($hargaVal),
+            ];
+
+            $current->addDay();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Harga Berdasarkan Tanggal Ditemukan',
+            'pasar' => [
+                'id' => $pasar->id,
+                'nama' => $pasar->nama,
+            ],
+            'bahan' => [
+                'id' => $bahan->id,
+                'nama' => $bahan->nama,
+                'satuan' => $bahan->satuan ? $bahan->satuan->nama : null,
+            ],
+            'tanggal_mulai' => $start->format('Y-m-d'),
+            'tanggal_berakhir' => $end->format('Y-m-d'),
+            'total_data' => count($data),
+            'data' => $data,
+        ]);
     }
 }

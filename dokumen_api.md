@@ -237,6 +237,93 @@ GET /api/info-harga?tanggal=2026-07-23
 
 ---
 
+### 5. Informasi Harga Berdasarkan Rentang Tanggal
+
+Mendapatkan semua data harga harian suatu bahan pokok pada pasar tertentu berdasarkan rentang tanggal (`tanggal_mulai` s/d `tanggal_berakhir`).
+
+**Endpoint:**
+- `GET /api/info-harga/tanggal`
+- Atau `GET /api/info-harga/periode`
+- Atau `GET /api/info-harga` (dengan parameter `tanggal_mulai` dan `tanggal_berakhir`)
+
+**Headers:**
+```
+Accept: application/json
+```
+
+**Query Parameters:**
+
+| Parameter | Tipe | Required | Deskripsi |
+|-----------|------|----------|-----------|
+| pasar_id | integer | Ya | ID pasar (harus terdaftar di tabel pasar) |
+| bahan_id | integer | Ya | ID bahan pokok (harus terdaftar di tabel bahan) |
+| tanggal_mulai | date | Ya | Tanggal awal rentang (format: Y-m-d) |
+| tanggal_berakhir | date | Ya | Tanggal akhir rentang (format: Y-m-d, >= tanggal_mulai) |
+
+**Contoh Request:**
+```
+GET /api/info-harga/tanggal?pasar_id=1&bahan_id=11&tanggal_mulai=2026-07-01&tanggal_berakhir=2026-07-20
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "message": "Data Harga Berdasarkan Tanggal Ditemukan",
+    "pasar": {
+        "id": 1,
+        "nama": "Pasar Teluk Dalam"
+    },
+    "bahan": {
+        "id": 11,
+        "nama": "Unus Mutiara",
+        "satuan": "Liter"
+    },
+    "tanggal_mulai": "2026-07-01",
+    "tanggal_berakhir": "2026-07-20",
+    "total_data": 20,
+    "data": [
+        {
+            "tanggal": "2026-07-01",
+            "harga": 15000,
+            "formatted": "Rp 15,000"
+        },
+        {
+            "tanggal": "2026-07-02",
+            "harga": 15000,
+            "formatted": "Rp 15,000"
+        },
+        ...
+        {
+            "tanggal": "2026-07-20",
+            "harga": 15500,
+            "formatted": "Rp 15,500"
+        }
+    ]
+}
+```
+
+*Catatan:*
+- Jika rentang tanggal adalah 1 s/d 20 (20 hari), maka `data` akan menghasilkan 20 item tanggal secara berurutan.
+- Jika pada tanggal tertentu belum ada data harga yang diinputkan di database, `harga` akan bernilai `0` dan `formatted` bernilai `"Rp 0"`.
+
+**Error Response (validasi gagal):**
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "pasar_id": [
+            "The selected pasar id is invalid."
+        ],
+        "tanggal_berakhir": [
+            "The tanggal berakhir must be a date after or equal to tanggal mulai."
+        ]
+    }
+}
+```
+
+---
+
 ## Endpoints Terproteksi (Requires Auth)
 
 Endpoint berikut memerlukan autentikasi Sanctum dengan header:
