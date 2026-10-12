@@ -457,6 +457,80 @@ GET /api/info-harga/pasar?bahan_id=11&tanggal=2026-10-11
 
 ---
 
+### 7. Daftar Bahan (Info Bahan)
+
+Mendapatkan data bahan pokok dari model `Bahan`, hanya menampilkan kolom `id` dan `nama`.
+
+**Endpoint:**
+- `GET /api/info-bahan`
+- Atau `GET /api/bahan`
+
+**Headers:**
+```
+Accept: application/json
+```
+
+**Query Parameters:**
+
+| Parameter | Tipe | Required | Deskripsi |
+|-----------|------|----------|-----------|
+| id / bahan_id | integer | Tidak | ID bahan (opsional, jika ingin mengambil 1 bahan saja) |
+
+**Contoh Request (Semua Bahan):**
+```
+GET /api/info-bahan
+```
+Atau:
+```
+GET /api/bahan
+```
+
+**Response (Semua Bahan):**
+```json
+{
+    "success": true,
+    "message": "Data Bahan Ditemukan",
+    "total_data": 41,
+    "data": [
+        {
+            "id": 32,
+            "nama": "Bawang Merah"
+        },
+        {
+            "id": 34,
+            "nama": "Bawang Prei"
+        },
+        {
+            "id": 33,
+            "nama": "Bawang Putih"
+        },
+        {
+            "id": 48,
+            "nama": "Beras"
+        }
+    ]
+}
+```
+
+**Contoh Request (Spesifik Bahan):**
+```
+GET /api/info-bahan?id=11
+```
+
+**Response (Spesifik Bahan):**
+```json
+{
+    "success": true,
+    "message": "Data Bahan Ditemukan",
+    "data": {
+        "id": 11,
+        "nama": "Unus Mutiara"
+    }
+}
+```
+
+---
+
 ## Endpoints Terproteksi (Requires Auth)
 
 Endpoint berikut memerlukan autentikasi Sanctum dengan header:
@@ -466,7 +540,7 @@ Authorization: Bearer {api_token}
 Accept: application/json
 ```
 
-### 7. Data User
+### 8. Data User
 
 Mendapatkan informasi user yang sedang login.
 
@@ -487,7 +561,7 @@ Mendapatkan informasi user yang sedang login.
 
 ---
 
-### 8. Ganti Password
+### 9. Ganti Password
 
 Mengubah password user yang sedang login.
 
@@ -510,7 +584,7 @@ Mengubah password user yang sedang login.
 
 ---
 
-### 9. Data Komoditi
+### 10. Data Komoditi
 
 Mendapatkan data bahan pokok berdasarkan pasar dan tanggal.
 
@@ -543,7 +617,7 @@ Mendapatkan data bahan pokok berdasarkan pasar dan tanggal.
 
 ---
 
-### 10. Update Komoditi
+### 11. Update Komoditi
 
 Mengupdate harga bahan pokok.
 

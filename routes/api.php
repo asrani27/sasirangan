@@ -32,3 +32,7 @@ Route::get('/info-harga', [RestController::class, 'infoHarga']);
 
 // Pasar API - Public endpoint
 Route::get('/pasar', [RestController::class, 'pasar']);
+
+// Bahan API - Public endpoint
+Route::get('/info-bahan', [RestController::class, 'infoBahan']);
+Route::get('/bahan', [RestController::class, 'infoBahan']);

@@ -103,6 +103,46 @@ class RestController extends Controller
     }
 
     /**
+     * Get bahan data from Bahan model (id and nama only)
+     * 
+     * Query params:
+     * - id / bahan_id: optional (if provided, returns single bahan)
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function infoBahan(Request $request)
+    {
+        if ($request->filled('id') || $request->filled('bahan_id')) {
+            $id = $request->id ?? $request->bahan_id;
+            $bahan = Bahan::select('id', 'nama')->find($id);
+
+            if (!$bahan) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Bahan Tidak Ditemukan',
+                    'data' => null,
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Bahan Ditemukan',
+                'data' => $bahan,
+            ]);
+        }
+
+        $bahan = Bahan::select('id', 'nama')->orderBy('nama')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Bahan Ditemukan',
+            'total_data' => $bahan->count(),
+            'data' => $bahan,
+        ]);
+    }
+
+    /**
      * Get all pasar list or a specific pasar by pasar_id, along with their bahan (id and nama only)
      * 
      * Query params:
