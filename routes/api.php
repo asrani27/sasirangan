@@ -25,6 +25,7 @@ Route::post('/login', [RestController::class, 'login']);
 
 // Info Harga API - Public endpoints
 Route::get('/info-harga/pasar', [RestController::class, 'listPasar']);
+Route::get('/info-harga/bahan', [RestController::class, 'infoHargaBahan']);
 Route::get('/info-harga/tanggal', [RestController::class, 'infoHargaTanggal']);
 Route::get('/info-harga/periode', [RestController::class, 'infoHargaTanggal']);
 Route::get('/info-harga', [RestController::class, 'infoHarga']);

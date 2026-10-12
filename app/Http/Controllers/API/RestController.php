@@ -113,6 +113,10 @@ class RestController extends Controller
      */
     public function listPasar(Request $request)
     {
+        if ($request->filled('bahan_id')) {
+            return $this->infoHargaBahan($request);
+        }
+
         if ($request->filled('pasar_id')) {
             $pasar = Pasar::select('id', 'nama')->with(['bahan' => function ($query) {
                 $query->select('bahan.id', 'bahan.nama');
@@ -164,8 +168,12 @@ class RestController extends Controller
      */
     public function infoHarga(Request $request)
     {
-        if ($request->hasAny(['tanggal_mulai', 'tanggal_berakhir', 'bahan_id'])) {
+        if ($request->hasAny(['tanggal_mulai', 'tanggal_berakhir'])) {
             return $this->infoHargaTanggal($request);
+        }
+
+        if ($request->filled('bahan_id')) {
+            return $this->infoHargaBahan($request);
         }
 
         $request->validate([
@@ -394,6 +402,66 @@ class RestController extends Controller
             'tanggal_mulai' => $start->format('Y-m-d'),
             'tanggal_berakhir' => $end->format('Y-m-d'),
             'total_data' => count($data),
+            'data' => $data,
+        ]);
+    }
+
+    /**
+     * Get info harga of a specific bahan across all markets that have the commodity,
+     * on a specific date, sorted by highest price.
+     * 
+     * Query params:
+     * - bahan_id: required (exists:bahan,id)
+     * - tanggal: optional (date, default: today)
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function infoHargaBahan(Request $request)
+    {
+        $request->validate([
+            'bahan_id' => 'required|exists:bahan,id',
+            'tanggal' => 'nullable|date',
+        ]);
+
+        $bahan = Bahan::with(['satuan', 'pasar'])->find($request->bahan_id);
+        $tanggal = $request->tanggal ? Carbon::parse($request->tanggal)->format('Y-m-d') : Carbon::today()->format('Y-m-d');
+
+        $hargas = [];
+        foreach (Harga::where('bahan_id', $bahan->id)->where('tanggal', $tanggal)->orderBy('id', 'desc')->get() as $h) {
+            if (!isset($hargas[$h->pasar_id])) {
+                $hargas[$h->pasar_id] = $h;
+            }
+        }
+
+        $data = $bahan->pasar->map(function ($pasar) use ($hargas) {
+            $h = $hargas[$pasar->id] ?? null;
+            $hargaVal = $h ? (int) $h->harga : 0;
+
+            return [
+                'id' => $pasar->id,
+                'nama' => $pasar->nama,
+                'harga' => $hargaVal,
+                'formatted' => 'Rp ' . number_format($hargaVal),
+            ];
+        })->sort(function ($a, $b) {
+            if ($a['harga'] === $b['harga']) {
+                return strcmp($a['nama'], $b['nama']);
+            }
+            return $b['harga'] <=> $a['harga'];
+        })->values();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Harga Bahan Berdasarkan Pasar Ditemukan',
+            'nama_bahan' => $bahan->nama,
+            'bahan' => [
+                'id' => $bahan->id,
+                'nama' => $bahan->nama,
+                'satuan' => $bahan->satuan ? $bahan->satuan->nama : null,
+            ],
+            'tanggal' => $tanggal,
+            'total_pasar' => $data->count(),
             'data' => $data,
         ]);
     }

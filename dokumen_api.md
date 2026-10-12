@@ -373,6 +373,90 @@ GET /api/info-harga/tanggal?pasar_id=1&bahan_id=11&tanggal_mulai=2026-07-01&tang
 
 ---
 
+### 6. Informasi Harga Bahan Pokok Berdasarkan Pasar (Per Bahan)
+
+Mendapatkan informasi harga suatu bahan pokok pada setiap pasar yang memiliki bahan tersebut berdasarkan `bahan_id` dan `tanggal`, disortir berdasarkan harga tertinggi (descending).
+
+**Endpoint:**
+- `GET /api/info-harga/bahan`
+- Atau `GET /api/info-harga/pasar` (dengan parameter `bahan_id`)
+- Atau `GET /api/info-harga` (dengan parameter `bahan_id`)
+
+**Headers:**
+```
+Accept: application/json
+```
+
+**Query Parameters:**
+
+| Parameter | Tipe | Required | Deskripsi |
+|-----------|------|----------|-----------|
+| bahan_id | integer | Ya | ID bahan pokok (harus terdaftar di tabel bahan) |
+| tanggal | date | Tidak | Tanggal pencarian (format: Y-m-d). Default: hari ini |
+
+**Contoh Request:**
+```
+GET /api/info-harga/bahan?bahan_id=11&tanggal=2026-10-11
+```
+Atau:
+```
+GET /api/info-harga/pasar?bahan_id=11&tanggal=2026-10-11
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "message": "Data Harga Bahan Berdasarkan Pasar Ditemukan",
+    "nama_bahan": "Unus Mutiara",
+    "bahan": {
+        "id": 11,
+        "nama": "Unus Mutiara",
+        "satuan": "Liter"
+    },
+    "tanggal": "2026-10-11",
+    "total_pasar": 40,
+    "data": [
+        {
+            "id": 2,
+            "nama": "Pasar Lama",
+            "harga": 19000,
+            "formatted": "Rp 19,000"
+        },
+        {
+            "id": 10,
+            "nama": "Pasar Pandu",
+            "harga": 18000,
+            "formatted": "Rp 18,000"
+        },
+        {
+            "id": 1,
+            "nama": "Pasar Teluk Dalam",
+            "harga": 15000,
+            "formatted": "Rp 15,000"
+        }
+    ]
+}
+```
+
+*Catatan:*
+- Data pasar di dalam `data` secara otomatis disortir dari harga tertinggi ke harga terendah.
+- Jika pasar memiliki bahan tersebut namun belum ada data harga pada tanggal yang diminta, nilai `harga` adalah `0` dan `formatted` bernilai `"Rp 0"`.
+
+**Error Response (validasi gagal):**
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "bahan_id": [
+            "The selected bahan id is invalid."
+        ]
+    }
+}
+```
+
+---
+
 ## Endpoints Terproteksi (Requires Auth)
 
 Endpoint berikut memerlukan autentikasi Sanctum dengan header:
@@ -382,7 +466,7 @@ Authorization: Bearer {api_token}
 Accept: application/json
 ```
 
-### 5. Data User
+### 7. Data User
 
 Mendapatkan informasi user yang sedang login.
 
@@ -403,7 +487,7 @@ Mendapatkan informasi user yang sedang login.
 
 ---
 
-### 6. Ganti Password
+### 8. Ganti Password
 
 Mengubah password user yang sedang login.
 
@@ -426,7 +510,7 @@ Mengubah password user yang sedang login.
 
 ---
 
-### 7. Data Komoditi
+### 9. Data Komoditi
 
 Mendapatkan data bahan pokok berdasarkan pasar dan tanggal.
 
@@ -459,7 +543,7 @@ Mendapatkan data bahan pokok berdasarkan pasar dan tanggal.
 
 ---
 
-### 8. Update Komoditi
+### 10. Update Komoditi
 
 Mengupdate harga bahan pokok.
 
