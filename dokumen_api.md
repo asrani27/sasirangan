@@ -118,7 +118,7 @@ Accept: application/json
 
 ### 4. Informasi Harga Bahan Pokok
 
-Mendapatkan informasi harga bahan pokok berdasarkan pasar dan tanggal.
+Mendapatkan informasi harga bahan pokok berdasarkan pasar dan tanggal. Jika `pasar_id` tidak disertakan, API akan menampilkan data seluruh pasar.
 
 **Endpoint:** `GET /api/info-harga`
 
@@ -131,15 +131,15 @@ Accept: application/json
 
 | Parameter | Tipe | Required | Deskripsi |
 |-----------|------|----------|-----------|
-| pasar_id | integer | Ya | ID pasar |
+| pasar_id | integer | Tidak | ID pasar (jika dikosongkan, menampilkan semua pasar) |
 | tanggal | date | Tidak | Tanggal pencarian (format: Y-m-d). Default: hari ini |
 
-**Contoh Request:**
+**Contoh Request (Satu Pasar):**
 ```
 GET /api/info-harga?pasar_id=1&tanggal=2026-07-23
 ```
 
-**Response:**
+**Response (Satu Pasar):**
 ```json
 {
     "success": true,
@@ -176,13 +176,60 @@ GET /api/info-harga?pasar_id=1&tanggal=2026-07-23
 }
 ```
 
+**Contoh Request (Semua Pasar - hanya tanggal atau tanpa parameter):**
+```
+GET /api/info-harga?tanggal=2026-07-23
+```
+
+**Response (Semua Pasar):**
+```json
+{
+    "success": true,
+    "message": "Data Harga Semua Pasar Ditemukan",
+    "tanggal": "2026-07-23",
+    "tanggal_kemarin": "2026-07-22",
+    "total_pasar": 47,
+    "data": [
+        {
+            "pasar": {
+                "id": 1,
+                "nama": "Pasar Teluk Dalam"
+            },
+            "total_data": 32,
+            "data": [
+                {
+                    "no": null,
+                    "bahan_pokok": "Unus Mutiara",
+                    "satuan": "Liter",
+                    "harga_kemarin": {
+                        "tanggal": "22-Jul-2026",
+                        "harga": 15000,
+                        "formatted": "Rp 15,000"
+                    },
+                    "harga_terkini": {
+                        "tanggal": "23-Jul-2026",
+                        "harga": 15000,
+                        "formatted": "Rp 15,000"
+                    },
+                    "perubahan": {
+                        "harga": 0,
+                        "formatted": "Rp 0"
+                    },
+                    "perubahan_persen": "0 %"
+                }
+            ]
+        }
+    ]
+}
+```
+
 **Error Response (validasi gagal):**
 ```json
 {
     "message": "The given data was invalid.",
     "errors": {
         "pasar_id": [
-            "validation.required"
+            "The selected pasar id is invalid."
         ]
     }
 }

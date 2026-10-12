@@ -189,7 +189,7 @@ class RestController extends Controller
         }
 
         // Jika pasar_id tidak dikirim, tampilkan semua pasar
-        $semuaPasar = Pasar::with('bahan.satuan')->orderBy('nama')->get();
+        $semuaPasar = Pasar::with('bahan.satuan')->orderBy('id', 'ASC')->get();
 
         $hargas = Harga::whereIn('tanggal', [$tanggal_sekarang->format('Y-m-d'), $tanggal_kemarin->format('Y-m-d')])
             ->get();
