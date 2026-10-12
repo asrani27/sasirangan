@@ -47,7 +47,7 @@ Content-Type: application/json
 
 ### 2. Daftar Pasar (Simple)
 
-Mendapatkan daftar ID dan nama pasar beserta data bahan pokok yang dimiliki oleh masing-masing pasar.
+Mendapatkan daftar ID dan nama pasar beserta data bahan pokok (id dan nama) yang dimiliki oleh pasar. Mendukung filter `pasar_id` opsional.
 
 **Endpoint:** `GET /api/info-harga/pasar`
 
@@ -56,7 +56,18 @@ Mendapatkan daftar ID dan nama pasar beserta data bahan pokok yang dimiliki oleh
 Accept: application/json
 ```
 
-**Response:**
+**Query Parameters:**
+
+| Parameter | Tipe | Required | Deskripsi |
+|-----------|------|----------|-----------|
+| pasar_id | integer | Tidak | ID pasar (jika diisi menampilkan data pasar tersebut, jika dikosongkan menampilkan semua pasar) |
+
+**Contoh Request (Semua Pasar):**
+```
+GET /api/info-harga/pasar
+```
+
+**Response (Semua Pasar):**
 ```json
 {
     "message": "Data Pasar Ditemukan",
@@ -68,18 +79,11 @@ Accept: application/json
             "bahan": [
                 {
                     "id": 11,
-                    "nama": "Unus Mutiara",
-                    "satuan_id": 5,
-                    "kelompok_id": 10,
-                    "created_at": "2021-04-08T03:48:42.000000Z",
-                    "updated_at": "2023-09-24T23:09:55.000000Z",
-                    "batas_harga": null,
-                    "acuan": 22000,
-                    "batas": 24000,
-                    "pivot": {
-                        "pasar_id": 1,
-                        "bahan_id": 11
-                    }
+                    "nama": "Unus Mutiara"
+                },
+                {
+                    "id": 12,
+                    "nama": "Siam Pandak"
                 }
             ]
         },
@@ -89,6 +93,33 @@ Accept: application/json
             "bahan": [ ... ]
         }
     ]
+}
+```
+
+**Contoh Request (Filter Satu Pasar):**
+```
+GET /api/info-harga/pasar?pasar_id=1
+```
+
+**Response (Filter Satu Pasar):**
+```json
+{
+    "message": "Data Pasar Ditemukan",
+    "success": true,
+    "data": {
+        "id": 1,
+        "nama": "Pasar Teluk Dalam",
+        "bahan": [
+            {
+                "id": 11,
+                "nama": "Unus Mutiara"
+            },
+            {
+                "id": 12,
+                "nama": "Siam Pandak"
+            }
+        ]
+    }
 }
 ```
 

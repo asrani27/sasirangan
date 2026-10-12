@@ -103,13 +103,45 @@ class RestController extends Controller
     }
 
     /**
-     * Get all pasar list along with their bahan
+     * Get all pasar list or a specific pasar by pasar_id, along with their bahan (id and nama only)
      * 
+     * Query params:
+     * - pasar_id: optional (if omitted/null, returns all markets)
+     * 
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function listPasar()
+    public function listPasar(Request $request)
     {
-        $pasar = Pasar::select('id', 'nama')->with('bahan')->get();
+        if ($request->filled('pasar_id')) {
+            $pasar = Pasar::select('id', 'nama')->with(['bahan' => function ($query) {
+                $query->select('bahan.id', 'bahan.nama');
+            }])->find($request->pasar_id);
+
+            if (!$pasar) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Pasar Tidak Ditemukan',
+                    'data' => null,
+                ], 404);
+            }
+
+            $pasar->bahan->makeHidden('pivot');
+
+            $data['message'] = 'Data Pasar Ditemukan';
+            $data['success'] = true;
+            $data['data'] = $pasar;
+
+            return response()->json($data);
+        }
+
+        $pasar = Pasar::select('id', 'nama')->with(['bahan' => function ($query) {
+            $query->select('bahan.id', 'bahan.nama');
+        }])->get();
+
+        $pasar->each(function ($item) {
+            $item->bahan->makeHidden('pivot');
+        });
 
         $data['message'] = 'Data Pasar Ditemukan';
         $data['success'] = true;

@@ -115,5 +115,61 @@ class InfoHargaTest extends TestCase
                     ],
                 ],
             ]);
+
+        // Verifikasi bahwa field pada bahan hanya 'id' dan 'nama'
+        $firstPasar = $response->json('data.0');
+        if (!empty($firstPasar['bahan'])) {
+            $firstBahanKeys = array_keys($firstPasar['bahan'][0]);
+            sort($firstBahanKeys);
+            $this->assertEquals(['id', 'nama'], $firstBahanKeys);
+        }
+    }
+
+    public function testListPasarFilterWithValidPasarId()
+    {
+        $response = $this->getJson('/api/info-harga/pasar?pasar_id=1');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Data Pasar Ditemukan',
+                'data' => [
+                    'id' => 1,
+                ],
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    'id',
+                    'nama',
+                    'bahan' => [
+                        '*' => [
+                            'id',
+                            'nama',
+                        ],
+                    ],
+                ],
+            ]);
+
+        // Verifikasi bahwa field pada bahan hanya 'id' dan 'nama'
+        $bahan = $response->json('data.bahan');
+        if (!empty($bahan)) {
+            $firstBahanKeys = array_keys($bahan[0]);
+            sort($firstBahanKeys);
+            $this->assertEquals(['id', 'nama'], $firstBahanKeys);
+        }
+    }
+
+    public function testListPasarFilterWithInvalidPasarIdReturnsNotFound()
+    {
+        $response = $this->getJson('/api/info-harga/pasar?pasar_id=999999');
+
+        $response->assertStatus(404)
+            ->assertJson([
+                'success' => false,
+                'message' => 'Data Pasar Tidak Ditemukan',
+                'data' => null,
+            ]);
     }
 }
