@@ -89,4 +89,31 @@ class InfoHargaTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['tanggal']);
     }
+
+    public function testListPasarReturnsPasarWithBahan()
+    {
+        $response = $this->getJson('/api/info-harga/pasar');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Data Pasar Ditemukan',
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'nama',
+                        'bahan' => [
+                            '*' => [
+                                'id',
+                                'nama',
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+    }
 }

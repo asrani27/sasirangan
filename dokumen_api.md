@@ -47,7 +47,7 @@ Content-Type: application/json
 
 ### 2. Daftar Pasar (Simple)
 
-Mendapatkan daftar ID dan nama pasar saja.
+Mendapatkan daftar ID dan nama pasar beserta data bahan pokok yang dimiliki oleh masing-masing pasar.
 
 **Endpoint:** `GET /api/info-harga/pasar`
 
@@ -64,11 +64,29 @@ Accept: application/json
     "data": [
         {
             "id": 1,
-            "nama": "Pasar Teluk Dalam"
+            "nama": "Pasar Teluk Dalam",
+            "bahan": [
+                {
+                    "id": 11,
+                    "nama": "Unus Mutiara",
+                    "satuan_id": 5,
+                    "kelompok_id": 10,
+                    "created_at": "2021-04-08T03:48:42.000000Z",
+                    "updated_at": "2023-09-24T23:09:55.000000Z",
+                    "batas_harga": null,
+                    "acuan": 22000,
+                    "batas": 24000,
+                    "pivot": {
+                        "pasar_id": 1,
+                        "bahan_id": 11
+                    }
+                }
+            ]
         },
         {
             "id": 2,
-            "nama": "Pasar Lama"
+            "nama": "Pasar Lama",
+            "bahan": [ ... ]
         }
     ]
 }

@@ -103,13 +103,13 @@ class RestController extends Controller
     }
 
     /**
-     * Get all pasar list
+     * Get all pasar list along with their bahan
      * 
      * @return \Illuminate\Http\JsonResponse
      */
     public function listPasar()
     {
-        $pasar = Pasar::select('id', 'nama')->get();
+        $pasar = Pasar::select('id', 'nama')->with('bahan')->get();
 
         $data['message'] = 'Data Pasar Ditemukan';
         $data['success'] = true;
